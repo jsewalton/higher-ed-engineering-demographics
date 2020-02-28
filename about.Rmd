@@ -1,0 +1,129 @@
+---
+title: "About"
+author: "Jessica Edwards"
+date: "2/27/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rvest)
+library(janitor)
+```
+
+Schools to compare:
+
+Start with Ivy Leagues first, then hope to add more schools as I continue the project.
+
+Brown University*
+```{r brown, echo=FALSE}
+
+brown_race_ugrad_degrees_2018 <-
+  read_html("http://profiles.asee.org/profiles/8107/screen/21?school_name=Brown+University") %>% html_nodes("table")
+
+brown_race_ugrad_degrees_2018 <- brown_race_ugrad_degrees_2018[[2]] %>%
+  html_table(fill = TRUE)
+
+brown_race_ugrad_degrees_2018
+```
+
+Columbia University*
+```{r columbia, echo=FALSE}
+
+columbia_race_ugrad_degrees_2018 <-
+  read_html("http://profiles.asee.org/profiles/8224/screen/21?school_name=Columbia+University") %>% html_nodes("table")
+
+columbia_race_ugrad_degrees_2018 <- columbia_race_ugrad_degrees_2018[[2]] %>%
+  html_table(fill = TRUE)
+
+columbia_race_ugrad_degrees_2018
+```
+
+Cornell University*
+```{r cornell, echo=FALSE}
+
+cornell_race_ugrad_degrees_2018 <-
+  read_html("http://profiles.asee.org/profiles/8046/screen/21?school_name=Cornell+University") %>% html_nodes("table")
+
+cornell_race_ugrad_degrees_2018 <- cornell_race_ugrad_degrees_2018[[2]] %>%
+  html_table(fill = TRUE)
+
+cornell_race_ugrad_degrees_2018
+```
+
+Dartmouth College*
+```{r dartmouth, echo=FALSE}
+
+dartmouth_race_ugrad_degrees_2018 <-
+  read_html("http://profiles.asee.org/profiles/8085/screen/21?school_name=Dartmouth+College") %>% html_nodes("table")
+
+dartmouth_race_ugrad_degrees_2018 <- dartmouth_race_ugrad_degrees_2018[[2]] %>%
+  html_table(fill = TRUE)
+
+dartmouth_race_ugrad_degrees_2018
+```
+
+Harvard University*
+```{r harvard, echo=FALSE}
+
+harvard_race_ugrad_degrees_2018 <-
+  read_html("http://profiles.asee.org/profiles/8130/screen/21?school_name=Harvard+University") %>% html_nodes("table")
+
+harvard_race_ugrad_degrees_2018 <- harvard_race_ugrad_degrees_2018[[2]] %>%
+  html_table(fill = TRUE)
+
+harvard_race_ugrad_degrees_2018
+```
+
+University of Pennsylvania*
+```{r penn, echo=FALSE}
+
+penn_race_ugrad_degrees_2018 <-
+  read_html("http://profiles.asee.org/profiles/8116/screen/21?school_name=University+of+Pennsylvania") %>% html_nodes("table")
+
+penn_race_ugrad_degrees_2018 <- penn_race_ugrad_degrees_2018[[2]] %>%
+  html_table(fill = TRUE)
+
+penn_race_ugrad_degrees_2018
+```
+
+Princeton University*
+```{r princeton, echo=FALSE}
+
+princeton_race_ugrad_degrees_2018 <-
+  read_html("http://profiles.asee.org/profiles/8068/screen/21?school_name=Princeton+University") %>% html_nodes("table")
+
+princeton_race_ugrad_degrees_2018 <- princeton_race_ugrad_degrees_2018[[2]] %>%
+  html_table(fill = TRUE)
+
+princeton_race_ugrad_degrees_2018
+```
+
+Yale School of Engineering & Applied Science*
+```{r yale, echo=FALSE}
+
+yale_race_ugrad_degrees_2018 <-
+  read_html("http://profiles.asee.org/profiles/8218/screen/21?school_name=Yale+School+of+Engineering+%26+Applied+Science") %>% html_nodes("table")
+
+yale_race_ugrad_degrees_2018 <- yale_race_ugrad_degrees_2018[[2]] %>%
+  html_table(fill = TRUE)
+
+yale_race_ugrad_degrees_2018
+```
+
+
+Other schools I'd like to consider:
+Boston University
+California Institute of Technology
+University of California, Berkeley
+Carnegie Mellon University
+Duke University
+Georgia Institute of Technology
+Harvey Mudd College
+Johns Hopkins University
+Massachusetts Institute of Technology
+Northwestern University
+Tufts University
+Vanderbilt University
+University of Virginia
+Washington University in St. Louis
