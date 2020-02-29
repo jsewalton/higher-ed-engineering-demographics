@@ -369,34 +369,41 @@ summary {
 </div>
 
 
-<p>Schools to compare:</p>
-<p>Start with Ivy Leagues first, then hope to add more schools as I continue the project.</p>
-<p>Brown University*</p>
+<div id="summary-and-goals" class="section level2">
+<h2>Summary and Goals:</h2>
+<p>This project’s goal is to analyze students studying STEM at the university level and to break down and compare racial and gender demographics between highly ranked institutions within the United States. This data is collected from the <a href="https://www.asee.org/">American Society for Engineering Education (ASEE)</a>.</p>
+<p>This investigation hopes to critique the current demographic breakdown of STEM fields and encourage higher institutions to think more about how they can help encourage underrepresented minorities to enter and remain interested in STEM fields.</p>
+<p>So far in my project, I have currently found and cleaned data tables on Degrees Awarded by Program in 2018 for the eight Ivy League Schools. These tables provide the racial and gender breakdowns within STEM degrees awarded at each school.</p>
+<p>In the future weeks, I would also like to process data from other schools including the following:</p>
+<p>Boston University, California Institute of Technology, University of California, Berkeley, Carnegie Mellon University, Duke University, Georgia Institute of Technology, Harvey Mudd College, Johns Hopkins University, Massachusetts Institute of Technology, Northwestern University, Tufts University, Vanderbilt University, University of Virginia, Washington University in St. Louis</p>
+<p>I would also like to analyze the number of students studying each field in total over a longer time span to see if the racial and gender breakdowns changes significantly over time.</p>
+<p>Additionally, there are tables on the ASEE website that break down each field based on how many students identify as male or female within each race which may be interesting to incorporate in my project.</p>
+<p>Finally, I may consider including data about K-12 STEM programs and career paths in my project in order to analyze if racial and gender breakdowns before and after college are similar.</p>
+</div>
+<div id="the-data" class="section level2">
+<h2>The Data:</h2>
+<p>Brown University</p>
 <pre><code>##                   Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk Pac Wht
 ## 1                Biomedical Engineering (B.S.)   6   1   8   0   7   1   0  10
 ## 2  Chemical and Biochemical Engineering (B.S.)   1   0   1   0   2   1   0   6
 ## 3                  Computer Engineering (B.S.)   1   0   0   0   1   0   0   5
 ## 4                Electrical Engineering (B.S.)   2   0   4   0   3   1   0   4
 ## 5                           Engineering (B.A.)   0   1   1   0   1   2   0   5
-## 6                           Engineering (B.S.)   0   0   0   0   0   0   0   0
 ## 7                    Engineering Physics (B.S)   2   0   0   0   0   0   0   6
 ## 8             Environmental Engineering (B.S.)   0   0   0   0   1   0   0   2
 ## 9                  MaterialsEngineering (B.S.)   0   0   1   0   1   1   0   2
 ## 10               Mechanical Engineering (B.S.)   3   1   3   0   2   1   1  19
-## 11                                     Totals:  15   3  18   0  18   7   1  59
-##    Two Tot Male Female
-## 1    1  34   18     16
-## 2    0  11    6      5
-## 3    0   7    6      1
-## 4    2  16   12      4
-## 5    0  10    6      4
-## 6    0   0    0      0
-## 7    0   8    7      1
-## 8    1   4    1      3
-## 9    0   5    3      2
-## 10   7  37   22     15
-## 11  11 132   81     51</code></pre>
-<p>Columbia University*</p>
+##    Two Male Female
+## 1    1   18     16
+## 2    0    6      5
+## 3    0    6      1
+## 4    2   12      4
+## 5    0    6      4
+## 7    0    7      1
+## 8    1    1      3
+## 9    0    3      2
+## 10   7   22     15</code></pre>
+<p>Columbia University</p>
 <pre><code>##                Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk Pac Wht Two
 ## 1                Applied Mathematics (B.S.)   8   2   1   0   8   0   0   4   1
 ## 2                    Applied Physics (B.S.)   4   0   1   0   4   0   0   3   0
@@ -413,561 +420,89 @@ summary {
 ## 13   Materials Science &amp; Engineering (B.S.)   0   0   0   0   0   0   0   2   0
 ## 14            Mechanical Engineering (B.S.)   4   5  10   0   7   1   0  25   3
 ## 15               Operations Research (B.S.)   8   3   3   0   3   0   0   6   1
-## 16                         Undeclared Major   0   0   0   0   0   0   0   0   0
-## 17                                  Totals: 100  42  53   1 101  25   0 135  16
-##    Tot Male Female
-## 1   24   16      8
-## 2   12    8      4
-## 3   43   16     27
-## 4   39   20     19
-## 5   29   15     14
-## 6   29   20      9
-## 7  120   75     45
-## 8   15    3     12
-## 9   25   18      7
-## 10  26   17      9
-## 11  20   13      7
-## 12  10    4      6
-## 13   2    2      0
-## 14  55   40     15
-## 15  24   12     12
-## 16   0    0      0
-## 17 473  279    194</code></pre>
-<p>Cornell University*</p>
-<pre><code>##                                                                                                                                                                  Bachelor&#39;s Degree Program(s)
-## 1                                                                                                                                                                                            
-## 2                                                                                                                                                               Biological Engineering (B.S.)
-## 3                                                                                                                                                               Biomedical Engineering (B.S.)
-## 4                                                                                                                                                                 Chemical Engineering (B.S.)
-## 5                                                                                                                                                                    Civil Engineering (B.S.)
-## 6                                                                                                                                                                     Computer Science (B.S.)
-## 7                                                                                                                                                       Earth and Atmospheric Sciences (B.S.)
-## 8                                                                                                                                                  Electrical and Computer Engineering (B.S.)
-## 9                                                                                                                                                                  Engineering Physics (B.S.)
-## 10                                                                                                                                                            Environmental Engineering (B.S)
-## 11 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 12                                                                                                                                                            Environmental Engineering (B.S)
-## 13 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 14                                                                                                                                                                   Independent Major (B.S.)
-## 15                                                                                                                                         Information Science, Systems and Technology (B.S.)
-## 16                                                                                                                                                   Materials Science and Engineering (B.S.)
-## 17                                                                                                                                                              Mechanical Engineering (B.S.)
-## 18                                                                                                                                                 Operations Research and Engineering (B.S.)
-## 19                                                                                                                                                                 Undecided until affiliated
-## 20                                                                                                                                                                                    Totals:
-##                                                                                                                                                                                           Nra
-## 1                                                                                                                                                                                           0
-## 2                                                                                                                                                                                           9
-## 3                                                                                                                                                                                           0
-## 4                                                                                                                                                                                           7
-## 5                                                                                                                                                                                           6
-## 6                                                                                                                                                                                          31
-## 7                                                                                                                                                                                           0
-## 8                                                                                                                                                                                          12
-## 9                                                                                                                                                                                           3
-## 10                                                                                                                                                                                          0
-## 11 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 12                                                                                                                                                                                          2
-## 13 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 14                                                                                                                                                                                          0
-## 15                                                                                                                                                                                          3
-## 16                                                                                                                                                                                          4
-## 17                                                                                                                                                                                          7
-## 18                                                                                                                                                                                         16
-## 19                                                                                                                                                                                          0
-## 20                                                                                                                                                                                        100
-##                                                                                                                                                                                           Unk
-## 1                                                                                                                                                                                           0
-## 2                                                                                                                                                                                           5
-## 3                                                                                                                                                                                           1
-## 4                                                                                                                                                                                           5
-## 5                                                                                                                                                                                           0
-## 6                                                                                                                                                                                           8
-## 7                                                                                                                                                                                           0
-## 8                                                                                                                                                                                           6
-## 9                                                                                                                                                                                           0
-## 10                                                                                                                                                                                          0
-## 11 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 12                                                                                                                                                                                          1
-## 13 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 14                                                                                                                                                                                          1
-## 15                                                                                                                                                                                          1
-## 16                                                                                                                                                                                          2
-## 17                                                                                                                                                                                         12
-## 18                                                                                                                                                                                          6
-## 19                                                                                                                                                                                          0
-## 20                                                                                                                                                                                         48
-##                                                                                                                                                                                           His
-## 1                                                                                                                                                                                           0
-## 2                                                                                                                                                                                           8
-## 3                                                                                                                                                                                           0
-## 4                                                                                                                                                                                           8
-## 5                                                                                                                                                                                           4
-## 6                                                                                                                                                                                          14
-## 7                                                                                                                                                                                           0
-## 8                                                                                                                                                                                           8
-## 9                                                                                                                                                                                           1
-## 10                                                                                                                                                                                          0
-## 11 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 12                                                                                                                                                                                          4
-## 13 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 14                                                                                                                                                                                          7
-## 15                                                                                                                                                                                          1
-## 16                                                                                                                                                                                          0
-## 17                                                                                                                                                                                         20
-## 18                                                                                                                                                                                          8
-## 19                                                                                                                                                                                          0
-## 20                                                                                                                                                                                         83
-##                                                                                                                                                                                           Ind
-## 1                                                                                                                                                                                           0
-## 2                                                                                                                                                                                           0
-## 3                                                                                                                                                                                           0
-## 4                                                                                                                                                                                           0
-## 5                                                                                                                                                                                           0
-## 6                                                                                                                                                                                           0
-## 7                                                                                                                                                                                           0
-## 8                                                                                                                                                                                           0
-## 9                                                                                                                                                                                           0
-## 10                                                                                                                                                                                          0
-## 11 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 12                                                                                                                                                                                          0
-## 13 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 14                                                                                                                                                                                          0
-## 15                                                                                                                                                                                          0
-## 16                                                                                                                                                                                          0
-## 17                                                                                                                                                                                          1
-## 18                                                                                                                                                                                          1
-## 19                                                                                                                                                                                          0
-## 20                                                                                                                                                                                          2
-##                                                                                                                                                                                           Asi
-## 1                                                                                                                                                                                           0
-## 2                                                                                                                                                                                          22
-## 3                                                                                                                                                                                           3
-## 4                                                                                                                                                                                          36
-## 5                                                                                                                                                                                           7
-## 6                                                                                                                                                                                          91
-## 7                                                                                                                                                                                           0
-## 8                                                                                                                                                                                          31
-## 9                                                                                                                                                                                           6
-## 10                                                                                                                                                                                          0
-## 11 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 12                                                                                                                                                                                          1
-## 13 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 14                                                                                                                                                                                          4
-## 15                                                                                                                                                                                          7
-## 16                                                                                                                                                                                          1
-## 17                                                                                                                                                                                         15
-## 18                                                                                                                                                                                         27
-## 19                                                                                                                                                                                          0
-## 20                                                                                                                                                                                        251
-##                                                                                                                                                                                           Blk
-## 1                                                                                                                                                                                           0
-## 2                                                                                                                                                                                           3
-## 3                                                                                                                                                                                           2
-## 4                                                                                                                                                                                           3
-## 5                                                                                                                                                                                           1
-## 6                                                                                                                                                                                           3
-## 7                                                                                                                                                                                           0
-## 8                                                                                                                                                                                           1
-## 9                                                                                                                                                                                           0
-## 10                                                                                                                                                                                          0
-## 11 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 12                                                                                                                                                                                          2
-## 13 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 14                                                                                                                                                                                          0
-## 15                                                                                                                                                                                          1
-## 16                                                                                                                                                                                          1
-## 17                                                                                                                                                                                          3
-## 18                                                                                                                                                                                          3
-## 19                                                                                                                                                                                          0
-## 20                                                                                                                                                                                         23
-##                                                                                                                                                                                           Pac
-## 1                                                                                                                                                                                           0
-## 2                                                                                                                                                                                           1
-## 3                                                                                                                                                                                           0
-## 4                                                                                                                                                                                           0
-## 5                                                                                                                                                                                           0
-## 6                                                                                                                                                                                           0
-## 7                                                                                                                                                                                           0
-## 8                                                                                                                                                                                           0
-## 9                                                                                                                                                                                           0
-## 10                                                                                                                                                                                          0
-## 11 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 12                                                                                                                                                                                          1
-## 13 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 14                                                                                                                                                                                          0
-## 15                                                                                                                                                                                          0
-## 16                                                                                                                                                                                          0
-## 17                                                                                                                                                                                          0
-## 18                                                                                                                                                                                          0
-## 19                                                                                                                                                                                          0
-## 20                                                                                                                                                                                          2
-##                                                                                                                                                                                           Wht
-## 1                                                                                                                                                                                           0
-## 2                                                                                                                                                                                          21
-## 3                                                                                                                                                                                          13
-## 4                                                                                                                                                                                          32
-## 5                                                                                                                                                                                          18
-## 6                                                                                                                                                                                          89
-## 7                                                                                                                                                                                           1
-## 8                                                                                                                                                                                          17
-## 9                                                                                                                                                                                          13
-## 10                                                                                                                                                                                          0
-## 11 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 12                                                                                                                                                                                         13
-## 13 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 14                                                                                                                                                                                          5
-## 15                                                                                                                                                                                          4
-## 16                                                                                                                                                                                         14
-## 17                                                                                                                                                                                         65
-## 18                                                                                                                                                                                         40
-## 19                                                                                                                                                                                          0
-## 20                                                                                                                                                                                        345
-##                                                                                                                                                                                           Two
-## 1                                                                                                                                                                                           0
-## 2                                                                                                                                                                                           3
-## 3                                                                                                                                                                                           0
-## 4                                                                                                                                                                                           2
-## 5                                                                                                                                                                                           2
-## 6                                                                                                                                                                                          11
-## 7                                                                                                                                                                                           0
-## 8                                                                                                                                                                                           1
-## 9                                                                                                                                                                                           2
-## 10                                                                                                                                                                                          0
-## 11 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 12                                                                                                                                                                                          0
-## 13 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 14                                                                                                                                                                                          2
-## 15                                                                                                                                                                                          0
-## 16                                                                                                                                                                                          1
-## 17                                                                                                                                                                                          4
-## 18                                                                                                                                                                                          2
-## 19                                                                                                                                                                                          0
-## 20                                                                                                                                                                                         30
-##                                                                                                                                                                                           Tot
-## 1                                                                                                                                                                                           0
-## 2                                                                                                                                                                                          72
-## 3                                                                                                                                                                                          19
-## 4                                                                                                                                                                                          93
-## 5                                                                                                                                                                                          38
-## 6                                                                                                                                                                                         247
-## 7                                                                                                                                                                                           1
-## 8                                                                                                                                                                                          76
-## 9                                                                                                                                                                                          25
-## 10                                                                                                                                                                                          0
-## 11 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 12                                                                                                                                                                                         24
-## 13 Note: Environmental Engineering (B.S.) is a joint program offered by the Department of Biological and Environmental Engineering and the Department of Civil and Environmental Engineering.
-## 14                                                                                                                                                                                         19
-## 15                                                                                                                                                                                         17
-## 16                                                                                                                                                                                         23
-## 17                                                                                                                                                                                        127
-## 18                                                                                                                                                                                        103
-## 19                                                                                                                                                                                          0
-## 20                                                                                                                                                                                        884
 ##    Male Female
-## 1     0      0
-## 2    27     45
-## 3     5     14
-## 4    43     50
-## 5    20     18
-## 6   177     70
-## 7     1      0
-## 8    51     25
-## 9    23      2
-## 10    0      0
-## 11   NA     NA
-## 12   14     10
-## 13   NA     NA
-## 14   11      8
-## 15    6     11
-## 16    7     16
-## 17   88     39
-## 18   51     52
-## 19    0      0
-## 20  524    360</code></pre>
-<p>Dartmouth College*</p>
-<pre><code>##                                                                                                                                                             Bachelor&#39;s Degree Program(s)
-## 1                                                                                                                                                               Computer Science (A.B.)1
-## 2                                                                                                                                                               Engineering (A.B., B.E.)
-## 3 Note: Average length of A.B. program: 4 years. Average length of combined AB/BE (ABET accredited) program: 4.5 years. Note: Students encouraged to do at least one internship (Co-Op).
-## 4                                                                                                                                                                                Totals:
-##                                                                                                                                                                                      Nra
-## 1                                                                                                                                                                                     12
-## 2                                                                                                                                                                                     30
-## 3 Note: Average length of A.B. program: 4 years. Average length of combined AB/BE (ABET accredited) program: 4.5 years. Note: Students encouraged to do at least one internship (Co-Op).
-## 4                                                                                                                                                                                     30
-##                                                                                                                                                                                      Unk
-## 1                                                                                                                                                                                      5
-## 2                                                                                                                                                                                     10
-## 3 Note: Average length of A.B. program: 4 years. Average length of combined AB/BE (ABET accredited) program: 4.5 years. Note: Students encouraged to do at least one internship (Co-Op).
-## 4                                                                                                                                                                                     10
-##                                                                                                                                                                                      His
-## 1                                                                                                                                                                                      5
-## 2                                                                                                                                                                                     18
-## 3 Note: Average length of A.B. program: 4 years. Average length of combined AB/BE (ABET accredited) program: 4.5 years. Note: Students encouraged to do at least one internship (Co-Op).
-## 4                                                                                                                                                                                     18
-##                                                                                                                                                                                      Ind
-## 1                                                                                                                                                                                      0
-## 2                                                                                                                                                                                      2
-## 3 Note: Average length of A.B. program: 4 years. Average length of combined AB/BE (ABET accredited) program: 4.5 years. Note: Students encouraged to do at least one internship (Co-Op).
-## 4                                                                                                                                                                                      2
-##                                                                                                                                                                                      Asi
-## 1                                                                                                                                                                                     27
-## 2                                                                                                                                                                                     15
-## 3 Note: Average length of A.B. program: 4 years. Average length of combined AB/BE (ABET accredited) program: 4.5 years. Note: Students encouraged to do at least one internship (Co-Op).
-## 4                                                                                                                                                                                     15
-##                                                                                                                                                                                      Blk
-## 1                                                                                                                                                                                      2
-## 2                                                                                                                                                                                     16
-## 3 Note: Average length of A.B. program: 4 years. Average length of combined AB/BE (ABET accredited) program: 4.5 years. Note: Students encouraged to do at least one internship (Co-Op).
-## 4                                                                                                                                                                                     16
-##                                                                                                                                                                                      Pac
-## 1                                                                                                                                                                                      0
-## 2                                                                                                                                                                                      0
-## 3 Note: Average length of A.B. program: 4 years. Average length of combined AB/BE (ABET accredited) program: 4.5 years. Note: Students encouraged to do at least one internship (Co-Op).
-## 4                                                                                                                                                                                      0
-##                                                                                                                                                                                      Wht
-## 1                                                                                                                                                                                     40
-## 2                                                                                                                                                                                    107
-## 3 Note: Average length of A.B. program: 4 years. Average length of combined AB/BE (ABET accredited) program: 4.5 years. Note: Students encouraged to do at least one internship (Co-Op).
-## 4                                                                                                                                                                                    107
-##                                                                                                                                                                                      Two
-## 1                                                                                                                                                                                      4
-## 2                                                                                                                                                                                      1
-## 3 Note: Average length of A.B. program: 4 years. Average length of combined AB/BE (ABET accredited) program: 4.5 years. Note: Students encouraged to do at least one internship (Co-Op).
-## 4                                                                                                                                                                                      1
-##                                                                                                                                                                                      Tot
-## 1                                                                                                                                                                                     95
-## 2                                                                                                                                                                                    199
-## 3 Note: Average length of A.B. program: 4 years. Average length of combined AB/BE (ABET accredited) program: 4.5 years. Note: Students encouraged to do at least one internship (Co-Op).
-## 4                                                                                                                                                                                    199
-##   Male Female
-## 1   63     32
-## 2  121     78
-## 3   NA     NA
-## 4  121     78</code></pre>
-<p>Harvard University*</p>
-<pre><code>##                                                                                                                                                                       Bachelor&#39;s Degree Program(s)
-## 1                                                                                                                                                                       Applied Mathematics (A.B.)
-## 2                                                                                                                                                                    Biomedical Engineering (A.B.)
-## 3                                                                                                                                                                          Computer Science (A.B.)
-## 4                                                                                                                                                                    Electrical Engineering (S.B.)
-## 5                                                                                                                                                                      Engineering Sciences (A.B.)
-## 6                                                                                                                                                                      Engineering Sciences (S.B.)
-## 7                                                                                                                                                     Engineering Sciences - Bioengineering (S.B.)
-## 8                         Note: The Engineering Sciences - Bioengineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 9                                                                                                                                Engineering Sciences - Biomedical Sciences and Engineering (A.B.)
-## 10                                                                                                                               Engineering Sciences - Electrical and Computer Engineering (A.B.)
-## 11                                                                                                                             Engineering Sciences - Environmental Science and Engineering (A.B.)
-## 12                                                                                                                             Engineering Sciences - Environmental Science and Engineering (S.B.)
-## 13 Note: The Engineering Sciences - Environmental Science and Engineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 14                                                                                                                  Engineering Sciences - Mechanical and Materials Science and Engineering (A.B.)
-## 15                                                                                                                                                    Environmental Science and Engineering (A.B.)
-## 16                                                                                                                                                                   Mechanical Engineering (S.B.)
-## 17                                                                                                                                                                                         Totals:
-##                                                                                                                                                                                                Nra
-## 1                                                                                                                                                                                               11
-## 2                                                                                                                                                                                                2
-## 3                                                                                                                                                                                               31
-## 4                                                                                                                                                                                                2
-## 5                                                                                                                                                                                                1
-## 6                                                                                                                                                                                                0
-## 7                                                                                                                                                                                                1
-## 8                         Note: The Engineering Sciences - Bioengineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 9                                                                                                                                                                                                1
-## 10                                                                                                                                                                                               1
-## 11                                                                                                                                                                                               0
-## 12                                                                                                                                                                                               0
-## 13 Note: The Engineering Sciences - Environmental Science and Engineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 14                                                                                                                                                                                               0
-## 15                                                                                                                                                                                               0
-## 16                                                                                                                                                                                               1
-## 17                                                                                                                                                                                              51
-##                                                                                                                                                                                                Unk
-## 1                                                                                                                                                                                                3
-## 2                                                                                                                                                                                                0
-## 3                                                                                                                                                                                                3
-## 4                                                                                                                                                                                                0
-## 5                                                                                                                                                                                                0
-## 6                                                                                                                                                                                                0
-## 7                                                                                                                                                                                                0
-## 8                         Note: The Engineering Sciences - Bioengineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 9                                                                                                                                                                                                0
-## 10                                                                                                                                                                                               0
-## 11                                                                                                                                                                                               0
-## 12                                                                                                                                                                                               0
-## 13 Note: The Engineering Sciences - Environmental Science and Engineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 14                                                                                                                                                                                               0
-## 15                                                                                                                                                                                               0
-## 16                                                                                                                                                                                               0
-## 17                                                                                                                                                                                               6
-##                                                                                                                                                                                                His
-## 1                                                                                                                                                                                                6
-## 2                                                                                                                                                                                                2
-## 3                                                                                                                                                                                                8
-## 4                                                                                                                                                                                                2
-## 5                                                                                                                                                                                                0
-## 6                                                                                                                                                                                                0
-## 7                                                                                                                                                                                                1
-## 8                         Note: The Engineering Sciences - Bioengineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 9                                                                                                                                                                                                0
-## 10                                                                                                                                                                                               0
-## 11                                                                                                                                                                                               0
-## 12                                                                                                                                                                                               0
-## 13 Note: The Engineering Sciences - Environmental Science and Engineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 14                                                                                                                                                                                               0
-## 15                                                                                                                                                                                               0
-## 16                                                                                                                                                                                               3
-## 17                                                                                                                                                                                              22
-##                                                                                                                                                                                                Ind
-## 1                                                                                                                                                                                                0
-## 2                                                                                                                                                                                                0
-## 3                                                                                                                                                                                                0
-## 4                                                                                                                                                                                                0
-## 5                                                                                                                                                                                                0
-## 6                                                                                                                                                                                                0
-## 7                                                                                                                                                                                                0
-## 8                         Note: The Engineering Sciences - Bioengineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 9                                                                                                                                                                                                0
-## 10                                                                                                                                                                                               0
-## 11                                                                                                                                                                                               0
-## 12                                                                                                                                                                                               0
-## 13 Note: The Engineering Sciences - Environmental Science and Engineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 14                                                                                                                                                                                               0
-## 15                                                                                                                                                                                               0
-## 16                                                                                                                                                                                               0
-## 17                                                                                                                                                                                               0
-##                                                                                                                                                                                                Asi
-## 1                                                                                                                                                                                               30
-## 2                                                                                                                                                                                                3
-## 3                                                                                                                                                                                               42
-## 4                                                                                                                                                                                                1
-## 5                                                                                                                                                                                                0
-## 6                                                                                                                                                                                                0
-## 7                                                                                                                                                                                                3
-## 8                         Note: The Engineering Sciences - Bioengineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 9                                                                                                                                                                                                0
-## 10                                                                                                                                                                                               1
-## 11                                                                                                                                                                                               1
-## 12                                                                                                                                                                                               1
-## 13 Note: The Engineering Sciences - Environmental Science and Engineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 14                                                                                                                                                                                               0
-## 15                                                                                                                                                                                               0
-## 16                                                                                                                                                                                               1
-## 17                                                                                                                                                                                              83
-##                                                                                                                                                                                                Blk
-## 1                                                                                                                                                                                                5
-## 2                                                                                                                                                                                                2
-## 3                                                                                                                                                                                                6
-## 4                                                                                                                                                                                                0
-## 5                                                                                                                                                                                                0
-## 6                                                                                                                                                                                                0
-## 7                                                                                                                                                                                                1
-## 8                         Note: The Engineering Sciences - Bioengineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 9                                                                                                                                                                                                1
-## 10                                                                                                                                                                                               0
-## 11                                                                                                                                                                                               1
-## 12                                                                                                                                                                                               0
-## 13 Note: The Engineering Sciences - Environmental Science and Engineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 14                                                                                                                                                                                               0
-## 15                                                                                                                                                                                               0
-## 16                                                                                                                                                                                               1
-## 17                                                                                                                                                                                              17
-##                                                                                                                                                                                                Pac
-## 1                                                                                                                                                                                                0
-## 2                                                                                                                                                                                                0
-## 3                                                                                                                                                                                                0
-## 4                                                                                                                                                                                                0
-## 5                                                                                                                                                                                                0
-## 6                                                                                                                                                                                                0
-## 7                                                                                                                                                                                                0
-## 8                         Note: The Engineering Sciences - Bioengineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 9                                                                                                                                                                                                0
-## 10                                                                                                                                                                                               0
-## 11                                                                                                                                                                                               0
-## 12                                                                                                                                                                                               0
-## 13 Note: The Engineering Sciences - Environmental Science and Engineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 14                                                                                                                                                                                               0
-## 15                                                                                                                                                                                               0
-## 16                                                                                                                                                                                               0
-## 17                                                                                                                                                                                               0
-##                                                                                                                                                                                                Wht
-## 1                                                                                                                                                                                               25
-## 2                                                                                                                                                                                                3
-## 3                                                                                                                                                                                               47
-## 4                                                                                                                                                                                                2
-## 5                                                                                                                                                                                                0
-## 6                                                                                                                                                                                                1
-## 7                                                                                                                                                                                                3
-## 8                         Note: The Engineering Sciences - Bioengineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 9                                                                                                                                                                                                0
-## 10                                                                                                                                                                                               3
-## 11                                                                                                                                                                                               0
-## 12                                                                                                                                                                                               1
-## 13 Note: The Engineering Sciences - Environmental Science and Engineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 14                                                                                                                                                                                               1
-## 15                                                                                                                                                                                               0
-## 16                                                                                                                                                                                               6
-## 17                                                                                                                                                                                              92
-##                                                                                                                                                                                                Two
-## 1                                                                                                                                                                                                1
-## 2                                                                                                                                                                                                2
-## 3                                                                                                                                                                                                4
-## 4                                                                                                                                                                                                0
-## 5                                                                                                                                                                                                0
-## 6                                                                                                                                                                                                0
-## 7                                                                                                                                                                                                1
-## 8                         Note: The Engineering Sciences - Bioengineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 9                                                                                                                                                                                                0
-## 10                                                                                                                                                                                               1
-## 11                                                                                                                                                                                               1
-## 12                                                                                                                                                                                               2
-## 13 Note: The Engineering Sciences - Environmental Science and Engineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 14                                                                                                                                                                                               1
-## 15                                                                                                                                                                                               0
-## 16                                                                                                                                                                                               0
-## 17                                                                                                                                                                                              13
-##                                                                                                                                                                                                Tot
-## 1                                                                                                                                                                                               81
-## 2                                                                                                                                                                                               14
-## 3                                                                                                                                                                                              141
-## 4                                                                                                                                                                                                7
-## 5                                                                                                                                                                                                1
-## 6                                                                                                                                                                                                1
-## 7                                                                                                                                                                                               10
-## 8                         Note: The Engineering Sciences - Bioengineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 9                                                                                                                                                                                                2
-## 10                                                                                                                                                                                               6
-## 11                                                                                                                                                                                               3
-## 12                                                                                                                                                                                               4
-## 13 Note: The Engineering Sciences - Environmental Science and Engineering (S.B.) degree program is a track contained under the general ABET accredited Engineering Sciences (S.B.) degree program.
-## 14                                                                                                                                                                                               2
-## 15                                                                                                                                                                                               0
-## 16                                                                                                                                                                                              12
-## 17                                                                                                                                                                                             284
-##    Male Female
-## 1    52     29
-## 2     8      6
-## 3   104     37
-## 4     7      0
-## 5     1      0
-## 6     0      1
-## 7     5      5
-## 8    NA     NA
-## 9     2      0
-## 10    5      1
-## 11    2      1
-## 12    2      2
-## 13   NA     NA
-## 14    0      2
-## 15    0      0
-## 16    8      4
-## 17  196     88</code></pre>
-<p>University of Pennsylvania*</p>
+## 1    16      8
+## 2     8      4
+## 3    16     27
+## 4    20     19
+## 5    15     14
+## 6    20      9
+## 7    75     45
+## 8     3     12
+## 9    18      7
+## 10   17      9
+## 11   13      7
+## 12    4      6
+## 13    2      0
+## 14   40     15
+## 15   12     12</code></pre>
+<p>Cornell University</p>
+<pre><code>##                          Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk
+## 2                       Biological Engineering (B.S.)   9   5   8   0  22   3
+## 3                       Biomedical Engineering (B.S.)   0   1   0   0   3   2
+## 4                         Chemical Engineering (B.S.)   7   5   8   0  36   3
+## 5                            Civil Engineering (B.S.)   6   0   4   0   7   1
+## 6                             Computer Science (B.S.)  31   8  14   0  91   3
+## 7               Earth and Atmospheric Sciences (B.S.)   0   0   0   0   0   0
+## 8          Electrical and Computer Engineering (B.S.)  12   6   8   0  31   1
+## 9                          Engineering Physics (B.S.)   3   0   1   0   6   0
+## 12                    Environmental Engineering (B.S)   2   1   4   0   1   2
+## 14                           Independent Major (B.S.)   0   1   7   0   4   0
+## 15 Information Science, Systems and Technology (B.S.)   3   1   1   0   7   1
+## 16           Materials Science and Engineering (B.S.)   4   2   0   0   1   1
+## 17                      Mechanical Engineering (B.S.)   7  12  20   1  15   3
+## 18         Operations Research and Engineering (B.S.)  16   6   8   1  27   3
+##    Pac Wht Two Male Female
+## 2    1  21   3   27     45
+## 3    0  13   0    5     14
+## 4    0  32   2   43     50
+## 5    0  18   2   20     18
+## 6    0  89  11  177     70
+## 7    0   1   0    1      0
+## 8    0  17   1   51     25
+## 9    0  13   2   23      2
+## 12   1  13   0   14     10
+## 14   0   5   2   11      8
+## 15   0   4   0    6     11
+## 16   0  14   1    7     16
+## 17   0  65   4   88     39
+## 18   0  40   2   51     52</code></pre>
+<p>Dartmouth College</p>
+<pre><code>##   Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk Pac Wht Two Male Female
+## 1      Computer Science (A.B.)  12   5   5   0  27   2   0  40   4   63     32
+## 2     Engineering (A.B., B.E.)  30  10  18   2  15  16   0 107   1  121     78</code></pre>
+<p>Harvard University</p>
+<pre><code>##                                                      Bachelor&#39;s Degree Program(s)
+## 1                                                      Applied Mathematics (A.B.)
+## 2                                                   Biomedical Engineering (A.B.)
+## 3                                                         Computer Science (A.B.)
+## 4                                                   Electrical Engineering (S.B.)
+## 5                                                     Engineering Sciences (A.B.)
+## 6                                                     Engineering Sciences (S.B.)
+## 7                                    Engineering Sciences - Bioengineering (S.B.)
+## 9               Engineering Sciences - Biomedical Sciences and Engineering (A.B.)
+## 10              Engineering Sciences - Electrical and Computer Engineering (A.B.)
+## 11            Engineering Sciences - Environmental Science and Engineering (A.B.)
+## 12            Engineering Sciences - Environmental Science and Engineering (S.B.)
+## 14 Engineering Sciences - Mechanical and Materials Science and Engineering (A.B.)
+## 16                                                  Mechanical Engineering (S.B.)
+##    Nra Unk His Ind Asi Blk Pac Wht Two Male Female
+## 1   11   3   6   0  30   5   0  25   1   52     29
+## 2    2   0   2   0   3   2   0   3   2    8      6
+## 3   31   3   8   0  42   6   0  47   4  104     37
+## 4    2   0   2   0   1   0   0   2   0    7      0
+## 5    1   0   0   0   0   0   0   0   0    1      0
+## 6    0   0   0   0   0   0   0   1   0    0      1
+## 7    1   0   1   0   3   1   0   3   1    5      5
+## 9    1   0   0   0   0   1   0   0   0    2      0
+## 10   1   0   0   0   1   0   0   3   1    5      1
+## 11   0   0   0   0   1   1   0   0   1    2      1
+## 12   0   0   0   0   1   0   0   1   2    2      2
+## 14   0   0   0   0   0   0   0   1   1    0      2
+## 16   1   0   3   0   1   1   0   6   0    8      4</code></pre>
+<p>University of Pennsylvania</p>
 <pre><code>##                            Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk
 ## 1        Applied Science in Biomedical Science (B.A.S.)   1   0   0   0   3   3
-## 2     Applied Science in Computational Biology (B.A.S.)   0   0   0   0   0   0
 ## 3    Applied Science in Computer and Cog. Sci. (B.A.S.)   0   0   0   0   1   0
 ## 4          Applied Science in Computer Science (B.A.S.)  12   0   2   0  20   0
 ## 5               Applied Science-Individualized (B.A.S.)   0   0   0   0   1   0
@@ -975,56 +510,51 @@ summary {
 ## 7        Chemical and Biomolecular Engineering (B.S.E.)   3   0   3   0   6   2
 ## 8                         Computer Engineering (B.S.E.)   4   0   0   2   5   0
 ## 9                             Computer Science (B.S.E.)  16   1   3   0  36   3
-## 10                                  Curriculum Deferred   0   0   0   0   0   0
 ## 11                        Digital Media Design (B.S.E.)   1   0   1   0   7   0
 ## 12                      Electrical Engineering (B.S.E.)   8   0   0   0   6   4
 ## 13           Materials Science and Engineering (B.S.E.)   1   0   1   0   3   0
 ## 14 Mechanical Engineering and Applied Mechanics (B.S.E)   8   2   8   1  11   4
 ## 15    Networked and Social Systems Engineering (B.S.E.)   2   1   0   0   5   0
 ## 16             Systems Science and Engineering (B.S.E.)   8   1   5   0  10   3
-## 17                                              Totals:  65   5  25   3 132  20
-##    Pac Wht Two Tot Male Female
-## 1    0   7   0  14    8      6
-## 2    0   0   0   0    0      0
-## 3    0   1   0   2    2      0
-## 4    0   7   0  41   30     11
-## 5    0   0   0   1    1      0
-## 6    0  24   0  46   22     24
-## 7    0  21   0  35   19     16
-## 8    0   5   0  16   14      2
-## 9    0  32   0  91   67     24
-## 10   0   0   0   0    0      0
-## 11   0   7   0  16    6     10
-## 12   0   7   0  25   20      5
-## 13   0  10   0  15    8      7
-## 14   0  48   0  82   64     18
-## 15   0   7   0  15    9      6
-## 16   0  12   0  39   26     13
-## 17   0 188   0 438  296    142</code></pre>
-<p>Princeton University*</p>
+##    Pac Wht Two Male Female
+## 1    0   7   0    8      6
+## 3    0   1   0    2      0
+## 4    0   7   0   30     11
+## 5    0   0   0    1      0
+## 6    0  24   0   22     24
+## 7    0  21   0   19     16
+## 8    0   5   0   14      2
+## 9    0  32   0   67     24
+## 11   0   7   0    6     10
+## 12   0   7   0   20      5
+## 13   0  10   0    8      7
+## 14   0  48   0   64     18
+## 15   0   7   0    9      6
+## 16   0  12   0   26     13</code></pre>
+<p>Princeton University</p>
 <pre><code>##                            Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk
-## 1            Chemical and Biological Engineering (B.S.)   5   0   7   0  11   2
-## 2             Civil and Environmental Engineering (B.S)   0   0   0   0   0   0
-## 3            Civil and Environmental Engineering (B.S.)   1   0   2   0   2   2
-## 4                      Computer Science (B.S. and B.A.)  30   3   9   0  63   9
-## 5                         Electrical Engineering (B.S.)   6   1   3   0  14   2
-## 6                                  Freshman Engineering   0   0   0   0   0   0
-## 7           Mechanical and Aerospace Engineering (B.S.)   0   0   0   0   0   0
-## 8           Mechanical and Aerospace Engineering (B.S.)  10   2   1   0   9   1
-## 9  Operations Research and Financial Engineering (B.S.)   6   1   4   0  20   4
-## 10                                              Totals:  58   7  26   0 119  20
-##    Pac Wht Two Tot Male Female
-## 1    0  21   3  49   19     30
-## 2    0   0   0   0    0      0
-## 3    0   7   2  16    7      9
-## 4    0  50   2 166  111     55
-## 5    0  15   2  43   31     12
-## 6    0   0   0   0    0      0
-## 7    0   0   0   0    0      0
-## 8    0  26   0  49   34     15
-## 9    0  18   2  55   40     15
-## 10   0 137  11 378  242    136</code></pre>
-<p>Yale School of Engineering &amp; Applied Science*</p>
+## 1        Applied Science in Biomedical Science (B.A.S.)   1   0   0   0   3   3
+## 4          Applied Science in Computer Science (B.A.S.)  12   0   2   0  20   0
+## 5               Applied Science-Individualized (B.A.S.)   0   0   0   0   1   0
+## 6                               Bioengineering (B.S.E.)   1   0   2   0  18   1
+## 9                             Computer Science (B.S.E.)  16   1   3   0  36   3
+## 11                        Digital Media Design (B.S.E.)   1   0   1   0   7   0
+## 12                      Electrical Engineering (B.S.E.)   8   0   0   0   6   4
+## 14 Mechanical Engineering and Applied Mechanics (B.S.E)   8   2   8   1  11   4
+## 15    Networked and Social Systems Engineering (B.S.E.)   2   1   0   0   5   0
+## 16             Systems Science and Engineering (B.S.E.)   8   1   5   0  10   3
+##    Pac Wht Two Male Female
+## 1    0   7   0    8      6
+## 4    0   7   0   30     11
+## 5    0   0   0    1      0
+## 6    0  24   0   22     24
+## 9    0  32   0   67     24
+## 11   0   7   0    6     10
+## 12   0   7   0   20      5
+## 14   0  48   0   64     18
+## 15   0   7   0    9      6
+## 16   0  12   0   26     13</code></pre>
+<p>Yale School of Engineering &amp; Applied Science</p>
 <pre><code>##                                                                  Bachelor&#39;s Degree Program(s)
 ## 1                                                                 Biomedical Engineering (BS)
 ## 2                             Chemical Engineering (BS); Engineering Sciences (Chemical) (BS)
@@ -1032,16 +562,14 @@ summary {
 ## 4      Electrical Eng (BS); Eng. Sciences (Electrical) (BS/ BA); Electrical Eng/Comp Sci (BS)
 ## 5                          Environmental Engineering (BS); Eng. Sciences (Environmental) (BA)
 ## 6                             Mechanical Engineering (BS); Eng. Sciences (Mechanical)(BS/ BA)
-## 7                                                                                     Totals:
-##   Nra Unk His Ind Asi Blk Pac Wht Two Tot Male Female
-## 1   0  26   0   0   0   0   0   0   0  26   13     13
-## 2   0  13   0   0   0   0   0   0   0  13    9      4
-## 3   0  85   0   0   0   0   0   0   0  85   68     17
-## 4   0  19   0   0   0   0   0   0   0  19   15      4
-## 5   0   5   0   0   0   0   0   0   0   5    1      4
-## 6   0  32   0   0   0   0   0   0   0  32   16     16
-## 7   0 180   0   0   0   0   0   0   0 180  122     58</code></pre>
-<p>Other schools I’d like to consider: Boston University California Institute of Technology University of California, Berkeley Carnegie Mellon University Duke University Georgia Institute of Technology Harvey Mudd College Johns Hopkins University Massachusetts Institute of Technology Northwestern University Tufts University Vanderbilt University University of Virginia Washington University in St. Louis</p>
+##   Nra Unk His Ind Asi Blk Pac Wht Two Male Female
+## 1   0  26   0   0   0   0   0   0   0   13     13
+## 2   0  13   0   0   0   0   0   0   0    9      4
+## 3   0  85   0   0   0   0   0   0   0   68     17
+## 4   0  19   0   0   0   0   0   0   0   15      4
+## 5   0   5   0   0   0   0   0   0   0    1      4
+## 6   0  32   0   0   0   0   0   0   0   16     16</code></pre>
+</div>
 
 
 
