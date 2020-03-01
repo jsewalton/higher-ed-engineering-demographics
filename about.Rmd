@@ -12,7 +12,7 @@ library(rvest)
 library(janitor)
 ```
 
-## Summary and Goals:
+## Summary and Goals
 
 This project's goal is to analyze students studying STEM at the university level and to break down and compare racial and gender demographics between highly ranked institutions within the United States. This data is collected from the [American Society for Engineering Education (ASEE)](https://www.asee.org/). 
 
@@ -43,26 +43,34 @@ Additionally, there are tables on the ASEE website that break down each field ba
 
 Finally, I may consider including data about K-12 STEM programs and career paths in my project in order to analyze if racial and gender breakdowns before and after college are similar.
 
-## The Data:
+#### Github Link: https://github.com/jessie9111/gov1005-final-project
+
+## The Data
 
 Brown University
 ```{r brown, echo=FALSE}
 
-# Demographics for Brown Engineering degrees awarded by program in 2018. Used
-# the rvest package to read the table with racial and gender breakdowns. Removed
-# the Totals row at the end of the table and the "Tot" column in the table. Also
-# removed empty rows (all zeros)
+# Demographics for Brown Engineering degrees awarded by program in 2018.
 
 brown_ugrad_degrees_2018 <-
   read_html("http://profiles.asee.org/profiles/8107/screen/21?school_name=Brown+University") %>% html_nodes("table")
 
+# Used the rvest package to read the table with racial and gender breakdowns.
+# Removed the "Tot" column in the table and rows with NA values.
+
 brown_ugrad_degrees_2018 <- brown_ugrad_degrees_2018[[2]] %>%
   html_table(fill = TRUE) %>%
-  select(-Tot)
+  select(-Tot) %>%
+  drop_na()
+
+# Used the number of rows to remove the last row of the table (the Totals row)
   
 cnt = nrow(brown_ugrad_degrees_2018)
   
 brown_ugrad_degrees_2018 <- brown_ugrad_degrees_2018[-c(cnt),]
+
+# Removed rows that had all zero values, or no students receiving degrees in a
+# certain field in 2018
 
 brown_ugrad_degrees_2018 <- brown_ugrad_degrees_2018[!(brown_ugrad_degrees_2018$Male==0 
                                                      & brown_ugrad_degrees_2018$Female==0),]
@@ -73,21 +81,27 @@ brown_ugrad_degrees_2018
 Columbia University
 ```{r columbia, echo=FALSE}
 
-# Demographics for Columbia Engineering degrees awarded by program in 2018. Used
-# the rvest package to read the table with racial and gender breakdowns. Removed
-# the Totals row at the end of the table and the "Tot" column in the table as
-# well as the empty Undeclared Major row. Also removed empty rows (all zeros)
+# Demographics for Columbia Engineering degrees awarded by program in 2018.
 
 columbia_ugrad_degrees_2018 <-
   read_html("http://profiles.asee.org/profiles/8224/screen/21?school_name=Columbia+University") %>% html_nodes("table")
 
+# Used the rvest package to read the table with racial and gender breakdowns.
+# Removed the "Tot" column in the table and rows with NA values.
+
 columbia_ugrad_degrees_2018 <- columbia_ugrad_degrees_2018[[2]] %>%
   html_table(fill = TRUE) %>%
-  select(-Tot)
+  select(-Tot) %>%
+  drop_na()
+
+# Used the number of rows to remove the last row of the table (the Totals row)
 
 cnt = nrow(columbia_ugrad_degrees_2018)
   
-columbia_ugrad_degrees_2018 <- columbia_ugrad_degrees_2018[-c(cnt-1, cnt),]
+columbia_ugrad_degrees_2018 <- columbia_ugrad_degrees_2018[-c(cnt),]
+
+# Removed rows that had all zero values, or no students receiving degrees in a
+# certain field in 2018
 
 columbia_ugrad_degrees_2018 <- columbia_ugrad_degrees_2018[!(columbia_ugrad_degrees_2018$Male==0 
                                                           & columbia_ugrad_degrees_2018$Female==0),]
@@ -98,24 +112,27 @@ columbia_ugrad_degrees_2018
 Cornell University
 ```{r cornell, echo=FALSE}
 
-# Demographics for Cornell Engineering degrees awarded by program in 2018. Used
-# the rvest package to read the table with racial and gender breakdowns. Removed
-# the Totals row at the end of the table and the "Tot" column in the table.
-# Removed the first column and the second to last column because they were empty
-# and removed notes within the table using drop_na(). Also removed empty rows
-# (all zeros)
+# Demographics for Cornell Engineering degrees awarded by program in 2018. 
 
 cornell_ugrad_degrees_2018 <-
   read_html("http://profiles.asee.org/profiles/8046/screen/21?school_name=Cornell+University") %>% html_nodes("table")
+
+# Used the rvest package to read the table with racial and gender breakdowns.
+# Removed the "Tot" column in the table and rows with NA values.
 
 cornell_ugrad_degrees_2018 <- cornell_ugrad_degrees_2018[[2]] %>%
   html_table(fill = TRUE) %>%
   select(-Tot) %>%
   drop_na()
 
+# Used the number of rows to remove the last row of the table (the Totals row)
+
 cnt = nrow(cornell_ugrad_degrees_2018)
   
-cornell_ugrad_degrees_2018 <- cornell_ugrad_degrees_2018[-c(1,cnt-1, cnt),]
+cornell_ugrad_degrees_2018 <- cornell_ugrad_degrees_2018[-c(cnt),]
+
+# Removed rows that had all zero values, or no students receiving degrees in a
+# certain field in 2018
 
 cornell_ugrad_degrees_2018 <- cornell_ugrad_degrees_2018[!(cornell_ugrad_degrees_2018$Male==0 
                                                         & cornell_ugrad_degrees_2018$Female==0),]
@@ -127,24 +144,30 @@ Dartmouth College
 ```{r dartmouth, echo=FALSE}
 
 # Demographics for Dartmouth Engineering degrees awarded by program in 2018.
-# Used the rvest package to read the table with racial and gender breakdowns.
-# Removed the Totals row at the end of the table and the "Tot" column in the
-# table. Also changed the name of "Computer Science (A.B.) from "Computer
-# Science (A.B.)1"
 
 dartmouth_ugrad_degrees_2018 <-
   read_html("http://profiles.asee.org/profiles/8085/screen/21?school_name=Dartmouth+College") %>% html_nodes("table")
+
+# Used the rvest package to read the table with racial and gender breakdowns.
+# Removed the "Tot" column in the table and rows with NA values.
 
 dartmouth_ugrad_degrees_2018 <- dartmouth_ugrad_degrees_2018[[2]] %>%
   html_table(fill = TRUE) %>%
   select(-Tot) %>%
   drop_na()
 
+# Used the number of rows to remove the last row of the table (the Totals row)
+
 cnt = nrow(dartmouth_ugrad_degrees_2018)
 
 dartmouth_ugrad_degrees_2018 <- dartmouth_ugrad_degrees_2018[-c(cnt),]
+
+# Renamed the first row of the table to "Computer Science (A.B.)" from "Computer Science (A.B.)1"
   
 dartmouth_ugrad_degrees_2018[1, 1] <- "Computer Science (A.B.)"
+
+# Removed rows that had all zero values, or no students receiving degrees in a
+# certain field in 2018
 
 dartmouth_ugrad_degrees_2018 <- dartmouth_ugrad_degrees_2018[!(dartmouth_ugrad_degrees_2018$Male==0 
                                                             & dartmouth_ugrad_degrees_2018$Female==0),]
@@ -155,22 +178,27 @@ dartmouth_ugrad_degrees_2018
 Harvard University
 ```{r harvard, echo=FALSE}
 
-# Demographics for Harvard Engineering degrees awarded by program in 2018. Used
-# the rvest package to read the table with racial and gender breakdowns. Removed
-# the Totals row at the end of the table and the "Tot" column in the table.
-# Removed notes in the table using drop_na().
+# Demographics for Harvard Engineering degrees awarded by program in 2018.
 
 harvard_ugrad_degrees_2018 <-
   read_html("http://profiles.asee.org/profiles/8130/screen/21?school_name=Harvard+University") %>% html_nodes("table")
+
+# Used the rvest package to read the table with racial and gender breakdowns.
+# Removed the "Tot" column in the table and rows with NA values.
 
 harvard_ugrad_degrees_2018 <- harvard_ugrad_degrees_2018[[2]] %>%
   html_table(fill = TRUE) %>%
   select(-Tot) %>%
   drop_na()
 
+# Used the number of rows to remove the last row of the table (the Totals row)
+
 cnt = nrow(harvard_ugrad_degrees_2018)
   
 harvard_ugrad_degrees_2018 <- harvard_ugrad_degrees_2018[-c(cnt),]
+
+# Removed rows that had all zero values, or no students receiving degrees in a
+# certain field in 2018
 
 harvard_ugrad_degrees_2018 <- harvard_ugrad_degrees_2018[!(harvard_ugrad_degrees_2018$Male==0 
                                                         & harvard_ugrad_degrees_2018$Female==0),]
@@ -181,23 +209,27 @@ harvard_ugrad_degrees_2018
 University of Pennsylvania
 ```{r penn, echo=FALSE}
 
-# Demographics for UPenn Engineering degrees awarded by program in 2018. Used
-# the rvest package to read the table with racial and gender breakdowns. Removed
-# the Totals row at the end of the table and the "Tot" column in the table.
-# Removed notes in the table using drop_na(). Also removed rows that were
-# entirely empty (all zero).
+# Demographics for UPenn Engineering degrees awarded by program in 2018. 
 
 penn_ugrad_degrees_2018 <-
   read_html("http://profiles.asee.org/profiles/8116/screen/21?school_name=University+of+Pennsylvania") %>% html_nodes("table")
+
+# Used the rvest package to read the table with racial and gender breakdowns.
+# Removed the "Tot" column in the table and rows with NA values.
 
 penn_ugrad_degrees_2018 <- penn_ugrad_degrees_2018[[2]] %>%
   html_table(fill = TRUE) %>%
   select(-Tot) %>%
   drop_na()
 
+# Used the number of rows to remove the last row of the table (the Totals row)
+
 cnt = nrow(penn_ugrad_degrees_2018)
-  
+
 penn_ugrad_degrees_2018 <- penn_ugrad_degrees_2018[-c(cnt),]
+
+# Removed rows that had all zero values, or no students receiving degrees in a
+# certain field in 2018
 
 penn_ugrad_degrees_2018 <- penn_ugrad_degrees_2018[!(penn_ugrad_degrees_2018$Male==0 
                                                      & penn_ugrad_degrees_2018$Female==0),]
@@ -208,17 +240,27 @@ penn_ugrad_degrees_2018
 Princeton University
 ```{r princeton, echo=FALSE}
 
+# Demographics for Princeton Engineering degrees awarded by program in 2018. 
+
 princeton_ugrad_degrees_2018 <-
   read_html("http://profiles.asee.org/profiles/8068/screen/21?school_name=Princeton+University") %>% html_nodes("table")
+
+# Used the rvest package to read the table with racial and gender breakdowns.
+# Removed the "Tot" column in the table and rows with NA values.
 
 princeton_ugrad_degrees_2018 <- princeton_ugrad_degrees_2018[[2]] %>%
   html_table(fill = TRUE) %>%
   select(-Tot) %>%
   drop_na()
 
+# Used the number of rows to remove the last row of the table (the Totals row)
+
 cnt = nrow(princeton_ugrad_degrees_2018)
   
 princeton_ugrad_degrees_2018 <- princeton_ugrad_degrees_2018[-c(cnt),]
+
+# Removed rows that had all zero values, or no students receiving degrees in a
+# certain field in 2018
 
 princeton_ugrad_degrees_2018 <- penn_ugrad_degrees_2018[!(princeton_ugrad_degrees_2018$Male==0 
                                                      & princeton_ugrad_degrees_2018$Female==0),]
@@ -232,19 +274,31 @@ Yale School of Engineering & Applied Science
 yale_ugrad_degrees_2018 <-
   read_html("http://profiles.asee.org/profiles/8218/screen/21?school_name=Yale+School+of+Engineering+%26+Applied+Science") %>% html_nodes("table")
 
+# Used the rvest package to read the table with racial and gender breakdowns.
+# Removed the "Tot" column in the table and rows with NA values.
+
 yale_ugrad_degrees_2018 <- yale_ugrad_degrees_2018[[2]] %>%
   html_table(fill = TRUE) %>%
   select(-Tot) %>%
   drop_na()
 
+# Used the number of rows to remove the last row of the table (the Totals row)
+
 cnt = nrow(yale_ugrad_degrees_2018)
   
 yale_ugrad_degrees_2018 <- yale_ugrad_degrees_2018[-c(cnt),]
+
+# Removed rows that had all zero values, or no students receiving degrees in a
+# certain field in 2018
 
 yale_ugrad_degrees_2018 <- yale_ugrad_degrees_2018[!(yale_ugrad_degrees_2018$Male==0 
                                                      & yale_ugrad_degrees_2018$Female==0),]
 
 yale_ugrad_degrees_2018
+
+# May want to consider writing a function for processing the tables, especially
+# as I add more schools to the analysis...
+
 ```
 
 
