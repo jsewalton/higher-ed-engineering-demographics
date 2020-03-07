@@ -369,13 +369,16 @@ summary {
 </div>
 
 
+<div id="milestone-4-update" class="section level2">
+<h2>Milestone 4 Update</h2>
+<p>I have found and cleaned data tables for more than twenty schools on Degrees Awarded by Program in 2018. These tables provide the racial and gender breakdowns within STEM degrees awarded at each school. The schools included are all eight Ivy Leagues as well as the following institutions:</p>
+<p>Boston University, California Institute of Technology, University of California, Berkeley, Carnegie Mellon University, Duke University, Georgia Institute of Technology, Harvey Mudd College, Johns Hopkins University, Massachusetts Institute of Technology, Northwestern University, Tufts University, Vanderbilt University, University of Virginia, Washington University in St. Louis</p>
+</div>
 <div id="summary-and-goals" class="section level2">
 <h2>Summary and Goals</h2>
 <p>This project’s goal is to analyze students studying STEM at the university level and to break down and compare racial and gender demographics between highly ranked institutions within the United States. This data is collected from the <a href="https://www.asee.org/">American Society for Engineering Education (ASEE)</a>.</p>
 <p>This investigation hopes to critique the current demographic breakdown of STEM fields and encourage higher institutions to think more about how they can help encourage underrepresented minorities to enter and remain interested in STEM fields.</p>
-<p>So far in my project, I have currently found and cleaned data tables on Degrees Awarded by Program in 2018 for the eight Ivy League Schools. These tables provide the racial and gender breakdowns within STEM degrees awarded at each school.</p>
-<p>In the future weeks, I would also like to process data from other schools including the following:</p>
-<p>Boston University, California Institute of Technology, University of California, Berkeley, Carnegie Mellon University, Duke University, Georgia Institute of Technology, Harvey Mudd College, Johns Hopkins University, Massachusetts Institute of Technology, Northwestern University, Tufts University, Vanderbilt University, University of Virginia, Washington University in St. Louis</p>
+<p>So far in my project, I have currently found and cleaned data tables on Degrees Awarded by Program in 2018. These tables provide the racial and gender breakdowns within STEM degrees awarded at each school.</p>
 <p>I would also like to analyze the number of students studying each field in total over a longer time span to see if the racial and gender breakdowns changes significantly over time.</p>
 <p>Additionally, there are tables on the ASEE website that break down each field based on how many students identify as male or female within each race which may be interesting to incorporate in my project.</p>
 <p>Finally, I may consider including data about K-12 STEM programs and career paths in my project in order to analyze if racial and gender breakdowns before and after college are similar.</p>
@@ -472,7 +475,7 @@ summary {
 ## 18   0  40   2   51     52</code></pre>
 <p>Dartmouth College</p>
 <pre><code>##   Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk Pac Wht Two Male Female
-## 1      Computer Science (A.B.)  12   5   5   0  27   2   0  40   4   63     32
+## 1     Computer Science (A.B.)1  12   5   5   0  27   2   0  40   4   63     32
 ## 2     Engineering (A.B., B.E.)  30  10  18   2  15  16   0 107   1  121     78</code></pre>
 <p>Harvard University</p>
 <pre><code>##                                                      Bachelor&#39;s Degree Program(s)
@@ -535,28 +538,20 @@ summary {
 ## 15   0   7   0    9      6
 ## 16   0  12   0   26     13</code></pre>
 <p>Princeton University</p>
-<pre><code>##                            Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk
-## 1        Applied Science in Biomedical Science (B.A.S.)   1   0   0   0   3   3
-## 4          Applied Science in Computer Science (B.A.S.)  12   0   2   0  20   0
-## 5               Applied Science-Individualized (B.A.S.)   0   0   0   0   1   0
-## 6                               Bioengineering (B.S.E.)   1   0   2   0  18   1
-## 9                             Computer Science (B.S.E.)  16   1   3   0  36   3
-## 11                        Digital Media Design (B.S.E.)   1   0   1   0   7   0
-## 12                      Electrical Engineering (B.S.E.)   8   0   0   0   6   4
-## 14 Mechanical Engineering and Applied Mechanics (B.S.E)   8   2   8   1  11   4
-## 15    Networked and Social Systems Engineering (B.S.E.)   2   1   0   0   5   0
-## 16             Systems Science and Engineering (B.S.E.)   8   1   5   0  10   3
-##    Pac Wht Two Male Female
-## 1    0   7   0    8      6
-## 4    0   7   0   30     11
-## 5    0   0   0    1      0
-## 6    0  24   0   22     24
-## 9    0  32   0   67     24
-## 11   0   7   0    6     10
-## 12   0   7   0   20      5
-## 14   0  48   0   64     18
-## 15   0   7   0    9      6
-## 16   0  12   0   26     13</code></pre>
+<pre><code>##                           Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk
+## 1           Chemical and Biological Engineering (B.S.)   5   0   7   0  11   2
+## 3           Civil and Environmental Engineering (B.S.)   1   0   2   0   2   2
+## 4                     Computer Science (B.S. and B.A.)  30   3   9   0  63   9
+## 5                        Electrical Engineering (B.S.)   6   1   3   0  14   2
+## 8          Mechanical and Aerospace Engineering (B.S.)  10   2   1   0   9   1
+## 9 Operations Research and Financial Engineering (B.S.)   6   1   4   0  20   4
+##   Pac Wht Two Male Female
+## 1   0  21   3   19     30
+## 3   0   7   2    7      9
+## 4   0  50   2  111     55
+## 5   0  15   2   31     12
+## 8   0  26   0   34     15
+## 9   0  18   2   40     15</code></pre>
 <p>Yale School of Engineering &amp; Applied Science</p>
 <pre><code>##                                                                  Bachelor&#39;s Degree Program(s)
 ## 1                                                                 Biomedical Engineering (BS)
@@ -572,6 +567,326 @@ summary {
 ## 4   0  19   0   0   0   0   0   0   0   15      4
 ## 5   0   5   0   0   0   0   0   0   0    1      4
 ## 6   0  32   0   0   0   0   0   0   0   16     16</code></pre>
+<p>Boston University</p>
+<pre><code>##    Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk Pac Wht Two Male Female
+## 1                                 1   0   0   0   0   0   0   0   0    1      0
+## 2 Biomedical Engineering (B.S.)  19   6   8   0  36   4   0  70   6   75     74
+## 3   Computer Engineering (B.S.)  17   2  11   0  25   2   0  21   3   62     19
+## 4      Computer Science (B.A.)1  45   8   7   0  38   5   0  38   4  105     40
+## 5 Electrical Engineering (B.S.)  10   0   5   1   7   0   0  11   3   32      5
+## 6 Mechanical Engineering (B.S.)  30   6  24   0  21   2   0  56   6  112     33</code></pre>
+<p>California Institute of Technology</p>
+<pre><code>##                    Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk Pac Wht
+## 3                                                 0   1   0   0   0   0   0   0
+## 4  Applied and Computational Mathematics (B.S.)   0   2   0   0   0   0   0   0
+## 5                        Applied Physics (B.S.)   0   1   0   0   0   0   0   0
+## 6                   Chemical Engineering (B.S.)   0  21   0   0   0   0   0   0
+## 7                       Computer Science (B.S.)   0  57   0   0   0   0   0   0
+## 9                 Electrical Engineering (B.S.)   0  31   0   0   0   0   0   0
+## 10       Engineering and Applied Science (B.S.)   0   2   0   0   0   0   0   0
+## 12                Mechanical Engineering (B.S.)   0  19   0   0   0   0   0   0
+##    Two Male Female
+## 3    0    1      0
+## 4    0    0      2
+## 5    0    1      0
+## 6    0   11     10
+## 7    0   38     19
+## 9    0   17     14
+## 10   0    1      1
+## 12   0   12      7</code></pre>
+<p>University of California, Berkeley</p>
+<pre><code>##                                                     Bachelor&#39;s Degree Program(s)
+## 1                                                          Bioengineering (B.S.)
+## 2                      Bioengineering and Materials Science &amp; Engineering (B.S.)
+## 3                                                    Chemical Engineering (B.S.)
+## 4                Chemical Engineering and Materials Science &amp; Engineering (B.S.)
+## 6                                       Civil &amp; Environmental Engineering (B.S.)
+## 7                                                        Computer Science (B.A.)
+## 8  Electrical Eng. &amp; Computer Science and Materials Science &amp; Engineering (B.S.)
+## 10                               Electrical Engineering &amp; Computer Science (B.S)
+## 11                                                     Energy Engineering (B.S.)
+## 12                                 Engineering Mathematics and Statistics (B.S.)
+## 13                                                    Engineering Physics (B.S.)
+## 15                                      Environmental Engineering Science (B.S.)
+## 16                           Industrial Engineering &amp; Operations Research (B.S.)
+## 18                                        Materials Science &amp; Engineering (B.S.)
+## 19             Materials Science &amp; Engineering and Mechanical Engineering (B.S.)
+## 20                Materials Science &amp; Engineering and Nuclear Engineering (B.S.)
+## 21                                                 Mechanical Engineering (B.S.)
+## 22                         Mechanical Engineering and Nuclear Engineering (B.S.)
+## 23                                                    Nuclear Engineering (B.S.)
+## 24                               Operations Research &amp; Management Science (B.A.)
+##    Nra Unk His Ind Asi Blk Pac Wht Two Male Female
+## 1    7   5   5   0  36   0   0  14   0   37     30
+## 2    1   0   2   0   2   0   0   0   0    5      0
+## 3   27   6   5   1  50   1   0  25   0   83     32
+## 4    1   0   0   0   0   0   0   0   0    1      0
+## 6   13   2  15   1  27   2   0  27   0   50     37
+## 7   91  23  12   1 298   1   0  83   0  363    146
+## 8    1   0   0   0   0   0   0   0   0    1      0
+## 10  34  21   8   3 192   6   1  61   0  273     53
+## 11   3   1   0   0   4   0   0   4   0    9      3
+## 12   2   0   0   0   3   1   0   2   0    5      3
+## 13   1   0   0   0   4   0   0   5   0    8      2
+## 15   1   0   0   0   0   0   0   1   0    1      1
+## 16  16   2   3   0  15   0   0  11   0   29     18
+## 18   7   0   1   0  12   1   0   8   0   19     10
+## 19   1   0   0   0   2   0   0   1   0    4      0
+## 20   0   0   0   0   1   0   0   0   0    1      0
+## 21  30   3  16   0  78   1   0  50   0  145     33
+## 22   0   0   0   0   2   0   0   0   0    2      0
+## 23   2   0   3   1   4   0   0   8   0   14      4
+## 24   3   0   0   0   0   0   0   1   0    2      2</code></pre>
+<p>Carnegie Mellon University</p>
+<pre><code>##                 Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk Pac Wht
+## 1                Chemical Engineering (B.S.)  15   6   9   0  26   4   0  20
+## 2                   Civil Engineering (B.S.)   3   1   7   0  10   2   0  12
+## 3                   Computer Science (B.S.)1  48   7   7   1  77   0   0  32
+## 4 Electrical and Computer Engineering (B.S.)  46   6   7   1  53   5   0  38
+## 5                        General Engineering   0   0   0   0   1   1   0   0
+## 6   Materials Science and Engineering (B.S.)   2   0   3   0  15   1   1   7
+## 7              Mechanical Engineering (B.S.)  10   2  15   0  20   9   0  39
+##   Two Male Female
+## 1   3   33     50
+## 2   1   16     20
+## 3   3  115     60
+## 4   5  120     41
+## 5   0    0      2
+## 6   2   13     18
+## 7   5   77     23</code></pre>
+<p>Duke University</p>
+<pre><code>##                   Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk Pac Wht
+## 1              Biomedical Engineering (B.S.E.)   7   2   5   0  41   2   0  43
+## 2                   Civil Engineering (B.S.E.)   2   0   1   0   1   1   0   6
+## 3               Computer Science (A.B., B.S.)1  20   5  10   1  49   6   0  61
+## 4 Electrical and Computer Engineering (B.S.E.)  23   0   2   1  31   2   0  26
+## 5           Environmental Engineering (B.S.E.)   1   0   0   0   2   1   0   2
+## 7              Mechanical Engineering (B.S.E.)  11   0   6   0  10   9   0  48
+##   Two Male Female
+## 1   0   57     43
+## 2   0    7      4
+## 3   0  101     51
+## 4   0   63     22
+## 5   0    3      3
+## 7   0   59     25</code></pre>
+<p>Georgia Institute of Technology</p>
+<pre><code>##                  Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk Pac Wht
+## 1                Aerospace Engineering (B.S.)  21   4  12   0  25   8   0  97
+## 2               Biomedical Engineering (B.S.)  14   7  19   0  61  11   0 126
+## 3  Chemical &amp; Biomolecular Engineering (B.S.)  24   2   9   0  42  11   0 115
+## 4                    Civil Engineering (B.S.)  20   0  12   0   6  18   0  63
+## 5                 Computer Engineering (B.S.)  24   2   9   0  41  18   0  53
+## 6                    Computer Science (B.S.)1  95  17  32   1 179  24   0 227
+## 7               Electrical Engineering (B.S.)  40   2  10   0  39  17   0  88
+## 8            Environmental Engineering (B.S.)   4   0   3   0   2   5   0  25
+## 9               Industrial Engineering (B.S.)  50   5  17   0  77  14   1 164
+## 10       Materials Science Engineering (B.S.)   2   1   3   0  14   3   1  41
+## 11              Mechanical Engineering (B.S.)  66   1  29   0  74  30   0 284
+## 12  Nuclear &amp; Radiological Engineering (B.S.)   0   0   5   0   3   2   0  20
+##    Two Male Female
+## 1    7  149     25
+## 2    7  118    127
+## 3   14  136     81
+## 4    6   78     47
+## 5    6  131     22
+## 6   22  471    126
+## 7    6  170     32
+## 8    0   15     24
+## 9    9  192    145
+## 10   5   41     29
+## 11  15  403     96
+## 12   0   24      6</code></pre>
+<p>Harvey Mudd College</p>
+<pre><code>##   Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk Pac Wht Two Male Female
+## 1           Engineering (B.S.)   7   4  10   0  16   2   0  18   7   39     25</code></pre>
+<p>Johns Hopkins University</p>
+<pre><code>##                     Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk Pac
+## 2  Applied Mathematics &amp; Statistics (B.S., B.A.)  16   1  10   0  10   2   0
+## 3            Biomedical Engineering (B.S., B.A.)  11   1   6   0  52   2   0
+## 4     Chemical &amp; Biomolecular Engineering (B.S.)  13   0  19   0  23   4   0
+## 5                       Civil Engineering (B.S.)   3   0   2   0   1   1   0
+## 6                    Computer Engineering (B.S.)   1   0   0   0   6   1   0
+## 7                  Computer Science (B.S., B.A.)  15   2   5   0  20   1   1
+## 8            Electrical Engineering (B.S., B.A.)   0   0   0   0   5   0   0
+## 9                    Engineering Mechanics (B.S)   1   0   0   0   0   0   0
+## 10              Environmental Engineering (B.S.)   2   1   2   0   1   0   0
+## 11                    General Engineering (B.A.)   0   0   0   0   0   0   0
+## 12      Materials Science and Engineering (B.S.)   1   2   1   0   5   2   0
+## 13                 Mechanical Engineering (B.S.)   4   0   9   0  15   3   0
+##    Wht Two Male Female
+## 2   33   2   35     39
+## 3   34   9   67     48
+## 4   19   2   53     27
+## 5    7   1   12      3
+## 6    4   1   11      2
+## 7   35   8   65     22
+## 8    8   1   12      2
+## 9    2   0    1      2
+## 10   3   0    2      7
+## 11   1   0    1      0
+## 12   5   1   13      4
+## 13  40   4   59     16</code></pre>
+<p>Massachusetts Institute of Technology</p>
+<pre><code>##                                      Bachelor&#39;s Degree Program(s) Nra Unk His
+## 1                                    Aerospace Engineering (S.B.)   3   0   6
+## 2        Aerospace Engineering with Information Technology (S.B.)   0   0   1
+## 4                                   Biological Engineering (S.B.)   2   0   5
+## 5                                     Chemical Engineering (S.B.)   1   0   6
+## 6                          Chemical-Biological Engineering (S.B.)   0   0   1
+## 7                      Civil and Environmental Engineering (S.B.)   0   0   0
+## 9                         Computer Science and Engineering (S.B.)  33   4  34
+## 10                  Computer Science and Molecular Biology (S.B.)   2   0   3
+## 11           Computer Science, Economics, and Data Science (S.B.)   0   0   0
+## 12             Electrical Engineering and Computer Science (S.B.)  17   0  14
+## 13                      Electrical Science and Engineering (S.B.)   1   0   8
+## 14       Engineering - Aeronautics and Astronautics 16 ENG (S.B.)   0   0   1
+## 15               Engineering - Chemical Engineering 10 ENG (S.B.)   0   0   0
+## 16 Engineering - Civil and Environmental Engineering 1 ENG (S.B.)   0   0   0
+## 17                 Engineering - Mechanical Engineering 2A (S.B.)   8   2  19
+## 19                       Materials Science and Engineering (S.B.)   1   0   2
+## 20                        Mechanical and Ocean Engineering (S.B.)   0   0   0
+## 21                                  Mechanical Engineering (S.B.)   2   1  14
+## 22                         Nuclear Science and Engineering (S.B.)   1   0   1
+##    Ind Asi Blk Pac Wht Two Male Female
+## 1    0   3   2   0  16   5   20     15
+## 2    0   0   0   0   0   0    1      0
+## 4    0  11   3   0  15   1    8     29
+## 5    0   5   7   0  13   3   15     20
+## 6    0   2   1   0   7   0    3      8
+## 7    1   0   0   0   1   0    0      2
+## 9    0  86  13   0  65  16  146    105
+## 10   0   3   2   0   7   3    8     12
+## 11   0   2   0   0   1   0    1      2
+## 12   0  40   4   0  37   4   67     49
+## 13   0   6   2   0   9   1   15     12
+## 14   0   2   0   0   4   1    6      2
+## 15   0   2   0   0   1   0    3      0
+## 16   0   0   0   0  10   0    2      8
+## 17   0  21   7   0  35   9   53     48
+## 19   0   9   2   0  12   3   11     18
+## 20   0   1   0   0   2   0    0      3
+## 21   0   8   8   0  36   4   48     25
+## 22   0   0   2   0   3   0    5      2</code></pre>
+<p>Northwestern University</p>
+<pre><code>##                   Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk Pac Wht
+## 1                   Applied Mathematics (B.S.)   1   0   0   0   7   0   0   7
+## 2                Biomedical Engineering (B.S.)   0   0   5   0  15   1   0  20
+## 3                  Chemical Engineering (B.S.)   2   1   4   0  14   3   0  19
+## 4                     Civil Engineering (B.S.)   1   0   2   0   1   1   0   7
+## 5                  Computer Engineering (B.S.)   3   0   3   0   5   1   0   8
+## 6                      Computer Science (B.S.)  16   0   6   0  24   5   0  33
+## 7                Electrical Engineering (B.S.)   1   0   2   0   7   3   0   6
+## 8             Environmental Engineering (B.S.)   0   0   1   0   1   0   0   4
+## 9                Industrial Engineering (B.S.)  23   1   5   0  23   2   0  30
+## 10             Integrated Engg. Studies (B.S.)   0   0   0   0   3   0   0   3
+## 11 Manufacturing and Design Engineering (B.S.)   1   0   4   0   3   0   0  11
+## 12    Materials Science and Engineering (B.S.)   1   0   3   0   2   0   0   4
+## 13               Mechanical Engineering (B.S.)   2   3   9   0  11   1   0  46
+##    Two Male Female
+## 1    0   11      4
+## 2    3   20     24
+## 3    1   24     20
+## 4    1    7      6
+## 5    1   18      3
+## 6    2   67     19
+## 7    2   19      2
+## 8    0    0      6
+## 9    3   57     30
+## 10   0    3      3
+## 11   0    9     10
+## 12   0    7      3
+## 13   1   49     24</code></pre>
+<p>Tufts University</p>
+<pre><code>##         Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk Pac Wht Two Male
+## 1     Biomedical Engineering (BSBME)   3   0   1   0   6   1   0  20   1   21
+## 2       Chemical Engineering (BSCHE)   4   2   0   0   2   1   0  17   2   17
+## 3           Civil Engineering (BSCE)   3   0   4   0   1   0   0   9   1   13
+## 4       Computer Engineering (BSCPE)   0   0   0   0   1   0   0   5   0    5
+## 5             Computer Science (BS)1  12   5   7   0  13   1   0  57   6   67
+## 6            Computer Science (BSCS)   2   1   0   0   8   0   0  24   2   30
+## 8      Electrical Engineering (BSEE)   2   0   0   0   2   0   0  12   0   12
+## 11       Engineering Physics ( BSEP)   0   1   0   0   0   0   0   0   0    1
+## 12       Engineering Psychology (BS)   2   2   3   0   0   0   0  16   2   10
+## 13       Engineering Sciences (BSES)   0   0   0   0   0   0   0   2   0    2
+## 14                  Engineering( BS)   1   0   0   0   1   0   0   2   0    4
+## 15 Environmental Engineering (BSEVE)   1   0   0   0   1   0   0   9   0    3
+## 16     Mechanical Engineering (BSME)   4   1   2   0   6   0   0  40   3   35
+##    Female
+## 1      11
+## 2      11
+## 3       5
+## 4       1
+## 5      34
+## 6       7
+## 8       4
+## 11      0
+## 12     15
+## 13      0
+## 14      0
+## 15      8
+## 16     21</code></pre>
+<p>Vanderbilt University</p>
+<pre><code>##    Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk Pac Wht Two Male Female
+## 1 Biomedical Engineering (B.E.)   4   1   4   0  13   4   0  28   2   28     28
+## 2   Chemical Engineering (B.E.)   8   2   3   0   8   0   0  33   1   30     25
+## 3      Civil Engineering (B.E.)   1   0   4   0   0   0   0  15   1   15      6
+## 4   Computer Engineering (B.E.)   3   0   0   0   1   1   0   7   0    9      3
+## 5       Computer Science (B.S.)  17   3   7   1  19   3   0  33   5   62     26
+## 6 Electrical Engineering (B.E.)   1   0   0   0   2   2   0  11   2   14      4
+## 7    Engineering Science (B.S.)   3   1   3   0   1   4   0  21   5   25     13
+## 8 Mechanical Engineering (B.E.)  19   1  10   1   6   2   0  32   2   59     14</code></pre>
+<p>University of Virginia</p>
+<pre><code>##     Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi Blk Pac Wht Two Male
+## 1   Aerospace Engineering (B.S.)   0   1   1   0   4   4   0  27   2   36
+## 2  Biomedical Engineering (B.S.)   0   6   6   0  14   3   0  53   4   41
+## 3    Chemical Engineering (B.S.)   3   0   2   0   8   1   0  30   2   23
+## 4       Civil Engineering (B.S.)   2   0   8   0   4   2   0  45   3   40
+## 5    Computer Engineering (B.S.)   2   2   2   0  11   0   0  20   1   32
+## 6       Computer Science (B.A.)1  10  10   9   0  64   6   0  66  12  115
+## 7        Computer Science (B.S.)   2   6   8   0  36   5   0  68   9  101
+## 8  Electrical Engineering (B.S.)   1   2   1   0   7   2   0  19   3   28
+## 9     Engineering Science (B.S.)   0   2   5   0   6   4   0  13   5   20
+## 10 Mechanical Engineering (B.S.)   1   6   5   0  10   2   0  60   4   68
+## 11    Systems Engineering (B.S.)   4   6   5   0  14   1   0  61   3   63
+##    Female
+## 1       3
+## 2      45
+## 3      23
+## 4      24
+## 5       6
+## 6      62
+## 7      33
+## 8       7
+## 9      15
+## 10     20
+## 11     31</code></pre>
+<p>Washington University in St. Louis</p>
+<pre><code>##                               Bachelor&#39;s Degree Program(s) Nra Unk His Ind Asi
+## 2             Applied Science- Chemical Engineering (B.S.)   0   0   0   0   0
+## 3                 Applied Science- Computer Science (B.S.)   3   0   0   0   1
+## 4           Applied Science- Electrical Engineering (B.S.)   1   0   0   0   1
+## 5  Applied Science- Systems Science and Engineering (B.S.)   0   0   1   0   4
+## 6                   Applied Science-Mechanical Engineering   0   0   0   0   0
+## 8                            Biomedical Engineering (B.S.)   6   2   1   0  15
+## 9                              Chemical Engineering (B.S.)   3   0   1   0   4
+## 10                             Computer Engineering (B.S.)   0   0   1   0   0
+## 11                                 Computer Science (B.S.)  18   2   4   0  19
+## 12                           Electrical Engineering (B.S.)   7   0   1   0   4
+## 14                           Mechanical Engineering (B.S.)   8   4   4   2   8
+## 15                  Systems Science and Engineering (B.S.)   5   0   0   0   4
+##    Blk Pac Wht Two Male Female
+## 2    0   0   1   0    1      0
+## 3    1   0   8   0   12      1
+## 4    0   0   1   0    2      1
+## 5    0   0  13   2   14      6
+## 6    0   0   3   2    4      1
+## 8    4   0  28   3   32     27
+## 9    0   0  26   2   21     15
+## 10   0   0   4   1    5      1
+## 11   3   0  44  11   76     25
+## 12   0   0  14   1   19      8
+## 14   4   0  47   4   68     13
+## 15   0   0  19   3   16     15</code></pre>
 </div>
 
 

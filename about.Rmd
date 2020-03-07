@@ -11,16 +11,9 @@ library(tidyverse)
 library(rvest)
 library(janitor)
 ```
+## Milestone 4 Update
 
-## Summary and Goals
-
-This project's goal is to analyze students studying STEM at the university level and to break down and compare racial and gender demographics between highly ranked institutions within the United States. This data is collected from the [American Society for Engineering Education (ASEE)](https://www.asee.org/). 
-
-This investigation hopes to critique the current demographic breakdown of STEM fields and encourage higher institutions to think more about how they can help encourage underrepresented minorities to enter and remain interested in STEM fields. 
-
-So far in my project, I have currently found and cleaned data tables on Degrees Awarded by Program in 2018 for the eight Ivy League Schools. These tables provide the racial and gender breakdowns within STEM degrees awarded at each school. 
-
-In the future weeks, I would also like to process data from other schools including the following: 
+I have found and cleaned data tables for more than twenty schools on Degrees Awarded by Program in 2018. These tables provide the racial and gender breakdowns within STEM degrees awarded at each school. The schools included are all eight Ivy Leagues as well as the following institutions: 
 
 Boston University,
 California Institute of Technology,
@@ -37,6 +30,14 @@ Vanderbilt University,
 University of Virginia,
 Washington University in St. Louis
 
+## Summary and Goals
+
+This project's goal is to analyze students studying STEM at the university level and to break down and compare racial and gender demographics between highly ranked institutions within the United States. This data is collected from the [American Society for Engineering Education (ASEE)](https://www.asee.org/). 
+
+This investigation hopes to critique the current demographic breakdown of STEM fields and encourage higher institutions to think more about how they can help encourage underrepresented minorities to enter and remain interested in STEM fields. 
+
+So far in my project, I have currently found and cleaned data tables on Degrees Awarded by Program in 2018. These tables provide the racial and gender breakdowns within STEM degrees awarded at each school. 
+
 I would also like to analyze the number of students studying each field in total over a longer time span to see if the racial and gender breakdowns changes significantly over time. 
 
 Additionally, there are tables on the ASEE website that break down each field based on how many students identify as male or female within each race which may be interesting to incorporate in my project. 
@@ -47,35 +48,48 @@ Finally, I may consider including data about K-12 STEM programs and career paths
 
 ## The Data
 
-Brown University
-```{r brown, echo=FALSE}
+```{r ugrad_degrees function, echo=FALSE}
 
-# Demographics for Brown Engineering degrees awarded by program in 2018.
+# Wrote a function to scrap all of the tables more efficiently. Function takes
+# in a url and scrapes that page for tables using function in the rvest package.
 
-brown_ugrad_degrees_2018 <-
-  read_html("http://profiles.asee.org/profiles/8107/screen/21?school_name=Brown+University") %>% html_nodes("table")
+ugrad_degrees_2018 <- function(url) {
+  table <- read_html(url) %>% 
+    html_nodes("table")
 
 # Used the rvest package to read the table with racial and gender breakdowns.
 # Removed the "Tot" column in the table and rows with NA values.
-
-brown_ugrad_degrees_2018 <- brown_ugrad_degrees_2018[[2]] %>%
-  html_table(fill = TRUE) %>%
-  select(-Tot) %>%
-  drop_na()
-
+  
+  table <- table[[2]] %>%
+    html_table(fill = TRUE) %>%
+    select(-Tot) %>%
+    drop_na()
+  
 # Used the number of rows to remove the last row of the table (the Totals row)
-  
-cnt = nrow(brown_ugrad_degrees_2018)
-  
-brown_ugrad_degrees_2018 <- brown_ugrad_degrees_2018[-c(cnt),]
 
+  cnt = nrow(table)
+  
+  table <- table[-c(cnt),]
+  
 # Removed rows that had all zero values, or no students receiving degrees in a
 # certain field in 2018
 
-brown_ugrad_degrees_2018 <- brown_ugrad_degrees_2018[!(brown_ugrad_degrees_2018$Male==0 
-                                                     & brown_ugrad_degrees_2018$Female==0),]
-  
-brown_ugrad_degrees_2018
+  table <- table[!(table$Male==0 & table$Female==0),]
+
+  return(table)
+}
+```
+
+Brown University
+```{r brown, echo=FALSE}
+
+# Demographics for Brown Engineering degrees awarded by program in 2018
+
+brown_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8107/screen/21?school_name=Brown+University")
+
+brown_ugrad_degrees_2018 
+
 ```
 
 Columbia University
@@ -84,28 +98,8 @@ Columbia University
 # Demographics for Columbia Engineering degrees awarded by program in 2018.
 
 columbia_ugrad_degrees_2018 <-
-  read_html("http://profiles.asee.org/profiles/8224/screen/21?school_name=Columbia+University") %>% html_nodes("table")
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8224/screen/21?school_name=Columbia+University")
 
-# Used the rvest package to read the table with racial and gender breakdowns.
-# Removed the "Tot" column in the table and rows with NA values.
-
-columbia_ugrad_degrees_2018 <- columbia_ugrad_degrees_2018[[2]] %>%
-  html_table(fill = TRUE) %>%
-  select(-Tot) %>%
-  drop_na()
-
-# Used the number of rows to remove the last row of the table (the Totals row)
-
-cnt = nrow(columbia_ugrad_degrees_2018)
-  
-columbia_ugrad_degrees_2018 <- columbia_ugrad_degrees_2018[-c(cnt),]
-
-# Removed rows that had all zero values, or no students receiving degrees in a
-# certain field in 2018
-
-columbia_ugrad_degrees_2018 <- columbia_ugrad_degrees_2018[!(columbia_ugrad_degrees_2018$Male==0 
-                                                          & columbia_ugrad_degrees_2018$Female==0),]
-  
 columbia_ugrad_degrees_2018
 ```
 
@@ -115,28 +109,8 @@ Cornell University
 # Demographics for Cornell Engineering degrees awarded by program in 2018. 
 
 cornell_ugrad_degrees_2018 <-
-  read_html("http://profiles.asee.org/profiles/8046/screen/21?school_name=Cornell+University") %>% html_nodes("table")
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8046/screen/21?school_name=Cornell+University")
 
-# Used the rvest package to read the table with racial and gender breakdowns.
-# Removed the "Tot" column in the table and rows with NA values.
-
-cornell_ugrad_degrees_2018 <- cornell_ugrad_degrees_2018[[2]] %>%
-  html_table(fill = TRUE) %>%
-  select(-Tot) %>%
-  drop_na()
-
-# Used the number of rows to remove the last row of the table (the Totals row)
-
-cnt = nrow(cornell_ugrad_degrees_2018)
-  
-cornell_ugrad_degrees_2018 <- cornell_ugrad_degrees_2018[-c(cnt),]
-
-# Removed rows that had all zero values, or no students receiving degrees in a
-# certain field in 2018
-
-cornell_ugrad_degrees_2018 <- cornell_ugrad_degrees_2018[!(cornell_ugrad_degrees_2018$Male==0 
-                                                        & cornell_ugrad_degrees_2018$Female==0),]
-  
 cornell_ugrad_degrees_2018
 ```
 
@@ -146,31 +120,7 @@ Dartmouth College
 # Demographics for Dartmouth Engineering degrees awarded by program in 2018.
 
 dartmouth_ugrad_degrees_2018 <-
-  read_html("http://profiles.asee.org/profiles/8085/screen/21?school_name=Dartmouth+College") %>% html_nodes("table")
-
-# Used the rvest package to read the table with racial and gender breakdowns.
-# Removed the "Tot" column in the table and rows with NA values.
-
-dartmouth_ugrad_degrees_2018 <- dartmouth_ugrad_degrees_2018[[2]] %>%
-  html_table(fill = TRUE) %>%
-  select(-Tot) %>%
-  drop_na()
-
-# Used the number of rows to remove the last row of the table (the Totals row)
-
-cnt = nrow(dartmouth_ugrad_degrees_2018)
-
-dartmouth_ugrad_degrees_2018 <- dartmouth_ugrad_degrees_2018[-c(cnt),]
-
-# Renamed the first row of the table to "Computer Science (A.B.)" from "Computer Science (A.B.)1"
-  
-dartmouth_ugrad_degrees_2018[1, 1] <- "Computer Science (A.B.)"
-
-# Removed rows that had all zero values, or no students receiving degrees in a
-# certain field in 2018
-
-dartmouth_ugrad_degrees_2018 <- dartmouth_ugrad_degrees_2018[!(dartmouth_ugrad_degrees_2018$Male==0 
-                                                            & dartmouth_ugrad_degrees_2018$Female==0),]
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8085/screen/21?school_name=Dartmouth+College")
 
 dartmouth_ugrad_degrees_2018
 ```
@@ -181,27 +131,7 @@ Harvard University
 # Demographics for Harvard Engineering degrees awarded by program in 2018.
 
 harvard_ugrad_degrees_2018 <-
-  read_html("http://profiles.asee.org/profiles/8130/screen/21?school_name=Harvard+University") %>% html_nodes("table")
-
-# Used the rvest package to read the table with racial and gender breakdowns.
-# Removed the "Tot" column in the table and rows with NA values.
-
-harvard_ugrad_degrees_2018 <- harvard_ugrad_degrees_2018[[2]] %>%
-  html_table(fill = TRUE) %>%
-  select(-Tot) %>%
-  drop_na()
-
-# Used the number of rows to remove the last row of the table (the Totals row)
-
-cnt = nrow(harvard_ugrad_degrees_2018)
-  
-harvard_ugrad_degrees_2018 <- harvard_ugrad_degrees_2018[-c(cnt),]
-
-# Removed rows that had all zero values, or no students receiving degrees in a
-# certain field in 2018
-
-harvard_ugrad_degrees_2018 <- harvard_ugrad_degrees_2018[!(harvard_ugrad_degrees_2018$Male==0 
-                                                        & harvard_ugrad_degrees_2018$Female==0),]
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8130/screen/21?school_name=Harvard+University")
 
 harvard_ugrad_degrees_2018
 ```
@@ -212,27 +142,7 @@ University of Pennsylvania
 # Demographics for UPenn Engineering degrees awarded by program in 2018. 
 
 penn_ugrad_degrees_2018 <-
-  read_html("http://profiles.asee.org/profiles/8116/screen/21?school_name=University+of+Pennsylvania") %>% html_nodes("table")
-
-# Used the rvest package to read the table with racial and gender breakdowns.
-# Removed the "Tot" column in the table and rows with NA values.
-
-penn_ugrad_degrees_2018 <- penn_ugrad_degrees_2018[[2]] %>%
-  html_table(fill = TRUE) %>%
-  select(-Tot) %>%
-  drop_na()
-
-# Used the number of rows to remove the last row of the table (the Totals row)
-
-cnt = nrow(penn_ugrad_degrees_2018)
-
-penn_ugrad_degrees_2018 <- penn_ugrad_degrees_2018[-c(cnt),]
-
-# Removed rows that had all zero values, or no students receiving degrees in a
-# certain field in 2018
-
-penn_ugrad_degrees_2018 <- penn_ugrad_degrees_2018[!(penn_ugrad_degrees_2018$Male==0 
-                                                     & penn_ugrad_degrees_2018$Female==0),]
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8116/screen/21?school_name=University+of+Pennsylvania")
 
 penn_ugrad_degrees_2018
 ```
@@ -243,27 +153,7 @@ Princeton University
 # Demographics for Princeton Engineering degrees awarded by program in 2018. 
 
 princeton_ugrad_degrees_2018 <-
-  read_html("http://profiles.asee.org/profiles/8068/screen/21?school_name=Princeton+University") %>% html_nodes("table")
-
-# Used the rvest package to read the table with racial and gender breakdowns.
-# Removed the "Tot" column in the table and rows with NA values.
-
-princeton_ugrad_degrees_2018 <- princeton_ugrad_degrees_2018[[2]] %>%
-  html_table(fill = TRUE) %>%
-  select(-Tot) %>%
-  drop_na()
-
-# Used the number of rows to remove the last row of the table (the Totals row)
-
-cnt = nrow(princeton_ugrad_degrees_2018)
-  
-princeton_ugrad_degrees_2018 <- princeton_ugrad_degrees_2018[-c(cnt),]
-
-# Removed rows that had all zero values, or no students receiving degrees in a
-# certain field in 2018
-
-princeton_ugrad_degrees_2018 <- penn_ugrad_degrees_2018[!(princeton_ugrad_degrees_2018$Male==0 
-                                                     & princeton_ugrad_degrees_2018$Female==0),]
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8068/screen/21?school_name=Princeton+University") 
 
 princeton_ugrad_degrees_2018
 ```
@@ -271,34 +161,171 @@ princeton_ugrad_degrees_2018
 Yale School of Engineering & Applied Science
 ```{r yale, echo=FALSE}
 
+# Demographics for Yale Engineering degrees awarded by program in 2018. 
+
 yale_ugrad_degrees_2018 <-
-  read_html("http://profiles.asee.org/profiles/8218/screen/21?school_name=Yale+School+of+Engineering+%26+Applied+Science") %>% html_nodes("table")
-
-# Used the rvest package to read the table with racial and gender breakdowns.
-# Removed the "Tot" column in the table and rows with NA values.
-
-yale_ugrad_degrees_2018 <- yale_ugrad_degrees_2018[[2]] %>%
-  html_table(fill = TRUE) %>%
-  select(-Tot) %>%
-  drop_na()
-
-# Used the number of rows to remove the last row of the table (the Totals row)
-
-cnt = nrow(yale_ugrad_degrees_2018)
-  
-yale_ugrad_degrees_2018 <- yale_ugrad_degrees_2018[-c(cnt),]
-
-# Removed rows that had all zero values, or no students receiving degrees in a
-# certain field in 2018
-
-yale_ugrad_degrees_2018 <- yale_ugrad_degrees_2018[!(yale_ugrad_degrees_2018$Male==0 
-                                                     & yale_ugrad_degrees_2018$Female==0),]
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8218/screen/21?school_name=Yale+School+of+Engineering+%26+Applied+Science") 
 
 yale_ugrad_degrees_2018
+```
 
-# May want to consider writing a function for processing the tables, especially
-# as I add more schools to the analysis...
+Boston University
+```{r boston, echo=FALSE}
 
+# Demographics for Boston University Engineering degrees awarded by program in 2018. 
+
+boston_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8150/screen/21?school_name=Boston+University")
+
+boston_ugrad_degrees_2018
+```
+
+California Institute of Technology
+```{r caltech, echo=FALSE}
+
+# Demographics for California Institute of Technology Engineering degrees
+# awarded by program in 2018.
+
+caltech_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8089/screen/21?school_name=California+Institute+of+Technology")
+
+caltech_ugrad_degrees_2018 
+```
+
+University of California, Berkeley
+```{r berkeley, echo=FALSE}
+
+# Demographics for UC Berkeley Engineering degrees awarded by program in 2018.
+
+berkeley_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8005/screen/21?school_name=University+of+California%2C+Berkeley")
+
+berkeley_ugrad_degrees_2018 
+```
+
+Carnegie Mellon University
+```{r cmu, echo=FALSE}
+
+# Demographics for Carnegie Mellon University Engineering degrees awarded by
+# program in 2018.
+
+cmu_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8163/screen/21?school_name=Carnegie+Mellon+University")
+
+cmu_ugrad_degrees_2018 
+```
+
+Duke University
+```{r duke, echo=FALSE}
+
+# Demographics for Duke Engineering degrees awarded by program in 2018.
+
+duke_ugrad_degrees_2018 <- 
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8113/screen/21?school_name=Duke+University+")
+
+duke_ugrad_degrees_2018
+```
+
+Georgia Institute of Technology
+```{r gt, echo=FALSE}
+
+# Demographics for Georgia Tech Engineering degrees awarded by program in 2018.
+
+gt_ugrad_degrees_2018 <- 
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8138/screen/21?school_name=Georgia+Institute+of+Technology")
+
+gt_ugrad_degrees_2018
+```
+
+Harvey Mudd College
+```{r harveymudd, echo=FALSE}
+
+# Demographics for Harvey Mudd College Engineering degrees awarded by program in
+# 2018.
+
+mudd_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8242/screen/21?school_name=Harvey+Mudd+College")
+
+mudd_ugrad_degrees_2018
+```
+
+Johns Hopkins University
+```{r jhu, echo=FALSE}
+
+# Demographics for Johns Hopkins University Engineering degrees awarded by
+# program in 2018.
+
+jhu_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8145/screen/21?school_name=The+Johns+Hopkins+University")
+
+jhu_ugrad_degrees_2018
+```
+
+Massachusetts Institute of Technology
+```{r mit, echo=FALSE}
+
+# Demographics for MIT Engineering degrees awarded by program in 2018.
+
+mit_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8024/screen/21?school_name=Massachusetts+Institute+of+Technology")
+
+mit_ugrad_degrees_2018
+```
+
+Northwestern University
+```{r northwestern, echo=FALSE}
+
+# Demographics for Northwestern Engineering degrees awarded by program in 2018.
+
+nw_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8194/screen/21?school_name=Northwestern+University")
+
+nw_ugrad_degrees_2018
+```
+
+Tufts University
+```{r tufts, echo=FALSE}
+
+# Demographics for Tufts Engineering degrees awarded by program in 2018.
+
+tufts_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8000/screen/21?school_name=Tufts+University")
+
+tufts_ugrad_degrees_2018
+```
+
+Vanderbilt University
+```{r vanderbilt, echo=FALSE}
+
+# Demographics for Vanderbilt Engineering degrees awarded by program in 2018.
+
+vanderbilt_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8048/screen/21?school_name=Vanderbilt+University")
+
+vanderbilt_ugrad_degrees_2018
+```
+
+University of Virginia
+```{r uva, echo=FALSE}
+
+# Demographics for UVA Engineering degrees awarded by program in 2018.
+
+uva_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8008/screen/21?school_name=University+of+Virginia")
+
+uva_ugrad_degrees_2018
+```
+
+Washington University in St. Louis
+```{r washu, echo=FALSE}
+
+# Demographics for Washington University in St. Louis Engineering degrees
+# awarded by program in 2018.
+
+washu_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8088/screen/21?school_name=Washington+University+in+St.+Louis")
+
+washu_ugrad_degrees_2018
 ```
 
 
