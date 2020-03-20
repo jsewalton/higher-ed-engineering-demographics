@@ -365,7 +365,8 @@ race_ivy_league <- rbind(
                     "Harvard", "UPenn", "Princeton", "Yale"))
 
 # Used ggplot() and geom_bar() to plot the Ivy League race data. Had to tidy the
-# data using pivot_longer() in order to use ggplot() to plot it
+# data using pivot_longer() in order to use ggplot() to plot it. Used
+# ColorBrewer to change the colors of the stacked bar chart.
 
 race_ivy_league %>%
   pivot_longer(c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"), 
@@ -378,7 +379,12 @@ race_ivy_league %>%
          Nra - Nonresident aliens, Asi - Asian American, Blk - Black, 
          His - Hispanic, Ind - American Indian, Pac - Pacific Islander, 
          Unk - Unknown, Wht - White, Tot - Program Totals, Two - Two or More") + 
-    scale_fill_discrete(name = "Race") + 
+    scale_fill_manual("Race", values = c("Nra" = "#a6cee3", "Unk" = "#1f78b4",
+                                         "His" = "#b2df8a", "Ind" = "#33a02c",
+                                         "Asi" = "#fb9a99", "Blk" = "#e31a1c",
+                                         "Pac" = "#fdbf6f", "Wht" = "#ff7f00",
+                                         "Two" = "#cab2d6"),
+                      breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two")) + 
   theme_classic()
 ```
 
