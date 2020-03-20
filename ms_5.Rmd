@@ -1,0 +1,213 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(rvest)
+library(janitor)
+```
+
+```{r ugrad_degrees function, echo=FALSE}
+
+# Wrote a function to scrap all of the tables more efficiently. Function takes
+# in a url and scrapes that page for tables using function in the rvest package.
+
+ugrad_degrees_2018 <- function(url) {
+  table <- read_html(url) %>% 
+    html_nodes("table")
+
+  # Used the rvest package to read the table with racial and gender breakdowns.
+  # Removed the "Tot" column in the table and rows with NA values.
+  
+  table <- table[[2]] %>%
+    html_table(fill = TRUE) %>%
+    select(-Tot) %>%
+    drop_na()
+  
+  # Used the number of rows to remove the last row of the table (the Totals row)
+
+  cnt = nrow(table)
+  
+  table <- table[-c(cnt),]
+  
+  # Removed rows that had all zero values, or no students receiving degrees in a
+  # certain field in 2018
+
+  table <- table[!(table$Male==0 & table$Female==0),]
+
+  # Make all columns except the first column numeric 
+  
+  table[, 2:ncol(table)] = apply(table[, 2:ncol(table)], 2, function(x) as.numeric(x))
+
+  return(table)
+}
+```
+
+```{r brown, echo=FALSE}
+
+# Demographics for Brown Engineering degrees awarded by program in 2018
+
+brown_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8107/screen/21?school_name=Brown+University")
+
+```
+
+```{r columbia, echo=FALSE}
+
+# Demographics for Columbia Engineering degrees awarded by program in 2018.
+
+columbia_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8224/screen/21?school_name=Columbia+University")
+
+```
+
+```{r cornell, echo=FALSE}
+
+# Demographics for Cornell Engineering degrees awarded by program in 2018. 
+
+cornell_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8046/screen/21?school_name=Cornell+University")
+
+```
+
+```{r dartmouth, echo=FALSE}
+
+# Demographics for Dartmouth Engineering degrees awarded by program in 2018.
+
+dartmouth_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8085/screen/21?school_name=Dartmouth+College")
+
+```
+
+```{r harvard, echo=FALSE}
+
+# Demographics for Harvard Engineering degrees awarded by program in 2018.
+
+harvard_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8130/screen/21?school_name=Harvard+University")
+
+```
+
+```{r penn, echo=FALSE}
+
+# Demographics for UPenn Engineering degrees awarded by program in 2018. 
+
+penn_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8116/screen/21?school_name=University+of+Pennsylvania")
+
+```
+
+```{r princeton, echo=FALSE}
+
+# Demographics for Princeton Engineering degrees awarded by program in 2018. 
+
+princeton_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8068/screen/21?school_name=Princeton+University") 
+
+```
+
+```{r yale, echo=FALSE}
+
+# Demographics for Yale Engineering degrees awarded by program in 2018. 
+
+yale_ugrad_degrees_2018 <-
+  ugrad_degrees_2018("http://profiles.asee.org/profiles/8218/screen/21?school_name=Yale+School+of+Engineering+%26+Applied+Science") 
+
+```
+
+# 1) 
+```{r race ivy league, echo=FALSE}
+
+# Made a function to get the total number of students of each race from each of
+# the tables
+
+race <- function(tibble) {
+  tibble %>%
+  select(Nra, Unk, His, Ind, Asi, Blk, Pac, Wht, Two) %>%
+  mutate(Nra = sum(Nra), Unk = sum(Unk), 
+         His = sum(His), Ind = sum(Ind), 
+         Asi = sum(Asi), Blk = sum(Blk), 
+         Pac = sum(Pac), Wht = sum(Wht), 
+         Two = sum(Two)) %>%
+  slice(1)
+}
+
+# Made a table with all of the Ivy League schools for race
+
+race_ivy_league <- rbind(
+  race(brown_ugrad_degrees_2018),
+  race(columbia_ugrad_degrees_2018),
+  race(cornell_ugrad_degrees_2018),
+  race(dartmouth_ugrad_degrees_2018),
+  race(harvard_ugrad_degrees_2018),
+  race(penn_ugrad_degrees_2018),
+  race(princeton_ugrad_degrees_2018),
+  race(yale_ugrad_degrees_2018)) %>%
+  mutate(school = c("Brown", "Columbia", "Cornell", "Dartmouth",
+                    "Harvard", "UPenn", "Princeton", "Yale"))
+
+# Used ggplot() and geom_bar() to plot the Ivy League race data. Had to tidy the
+# data using pivot_longer() in order to use ggplot() to plot it. Used
+# ColorBrewer to change the colors of the stacked bar chart.
+
+race_ivy_league %>%
+  pivot_longer(c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"), 
+               names_to = "race", values_to = "values") %>%
+  ggplot(aes(x = school, y = values, fill = race)) + 
+    geom_bar(position="stack", stat="identity") +
+    labs(title = "Total Students Receiving Engineering Degrees at Ivy League Schools in 2018", 
+         x = "Ivy League Schools", y = "Students",
+         caption = "Source: American Society for Engineering Education \n 
+         Nra - Nonresident aliens, Asi - Asian American, Blk - Black, 
+         His - Hispanic, Ind - American Indian, Pac - Pacific Islander, 
+         Unk - Unknown, Wht - White, Tot - Program Totals, Two - Two or More") + 
+    scale_fill_manual("Race", values = c("Nra" = "#a6cee3", "Unk" = "#1f78b4",
+                                         "His" = "#b2df8a", "Ind" = "#33a02c",
+                                         "Asi" = "#fb9a99", "Blk" = "#e31a1c",
+                                         "Pac" = "#fdbf6f", "Wht" = "#ff7f00",
+                                         "Two" = "#cab2d6"),
+                      breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two")) + 
+  theme_classic()
+```
+
+# 2) 
+```{r gender ivy league, echo = FALSE}
+# Made a function to get the total number of Male and Female students from each
+# of the tables
+
+male_female <- function(tibble) {
+  tibble %>%
+  select(Male, Female) %>%
+  mutate(Male = sum(Male), Female = sum(Female)) %>%
+  slice(1)
+}
+
+# Made a table with all of the Ivy League schools for gender
+
+gender_ivy_league <- rbind(
+  male_female(brown_ugrad_degrees_2018),
+  male_female(columbia_ugrad_degrees_2018),
+  male_female(cornell_ugrad_degrees_2018),
+  male_female(dartmouth_ugrad_degrees_2018),
+  male_female(harvard_ugrad_degrees_2018),
+  male_female(penn_ugrad_degrees_2018),
+  male_female(princeton_ugrad_degrees_2018),
+  male_female(yale_ugrad_degrees_2018)) %>%
+  mutate(school = c("Brown", "Columbia", "Cornell", "Dartmouth",
+                    "Harvard", "UPenn", "Princeton", "Yale"))
+
+# Used ggplot() and geom_bar() to plot the Ivy League race data. Made the data
+# tidy using pivot_longer() in order to use ggplot() to plot the data.
+
+gender_ivy_league %>%
+  pivot_longer(c("Male", "Female"), names_to = "gender", values_to = "values") %>%
+  ggplot(aes(x = school, y = values, fill = gender)) + 
+    geom_bar(position="dodge", stat="identity") +
+    labs(title = "Total Students Receiving Engineering Degrees at Ivy League Schools in 2018", 
+         x = "Ivy League Schools", y = "Students", 
+         caption = "Source: American Society for Engineering Education") + 
+    scale_fill_discrete(name = "Gender") +
+  theme_classic()
+```
