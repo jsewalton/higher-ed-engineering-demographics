@@ -1,20 +1,14 @@
 
 library(shiny)
 
-# Define UI for application that draws a histogram
+# Define UI for final project application
+
 ui <- navbarPage(
-    "Final Project Title",
-    tabPanel("Model",
+    "Investigating Demographics within Higher Education STEM Programs ",
+    tabPanel("Models",
              fluidPage(
-                 titlePanel("Model Title"),
-                 sidebarLayout(
-                     sidebarPanel(
-                         selectInput(
-                             "plot_type",
-                             "Plot Type",
-                             c("Option A" = "a", "Option B" = "b")
-                         )),
-                     mainPanel(plotOutput("line_plot")))
+                 titlePanel("Models"),
+                 mainPanel(imageOutput("gender_plot"))
              )),
     tabPanel("Discussion",
              titlePanel("Discussion Title"),
@@ -23,35 +17,34 @@ ui <- navbarPage(
     tabPanel("About", 
              titlePanel("About"),
              h3("Project Background and Motivations"),
-             p("Hello, this is where I talk about my project."),
+             p("This project's goal is to analyze students studying STEM at the university level 
+             and to break down and compare racial and gender demographics between highly 
+             ranked institutions within the United States. This data is collected from the 
+             American Society for Engineering Education."),
+             p("This investigation hopes to critique the current demographic breakdown of 
+               STEM fields and encourage higher institutions to think more about how they
+               can help encourage underrepresented minorities to enter and remain
+               interested in STEM fields."),
              h3("About Me"),
-             p("My name is ______ and I study ______. 
-             You can reach me at ______@college.harvard.edu.")))
+             p("My name is Jessica Edwards and I study Computer Science and Education. 
+             You can reach me at jedwards@college.harvard.edu.")))
 
-# Define server logic required to draw a histogram
+# Define server logic
+
 server <- function(input, output) {
-    output$line_plot <- renderPlot({
-        # Generate type based on input$plot_type from ui
+    
+    # Send a pre-rendered image, and don't delete the image after sending it
+    
+    output$gender_plot <- renderImage({
         
-        ifelse(
-            input$plot_type == "a",
-            
-            # If input$plot_type is "a", plot histogram of "waiting" column 
-            # from the faithful dataframe
-            
-            x   <- faithful[, 2],
-            
-            # If input$plot_type is "b", plot histogram of "eruptions" column
-            # from the faithful dataframe
-            
-            x   <- faithful[, 1]
-        )
+        # Return a list containing the filename and alt text
         
-        # Draw the histogram with the specified number of bins
+        list(src = 'gender_plot.png',
+             width = 750,
+             height = 600,
+             alt = "This is alternate text")
         
-        hist(x, col = 'darkgray', border = 'white')
-    })
+    }, deleteFile = FALSE)
 }
-
 # Run the application 
 shinyApp(ui = ui, server = server)

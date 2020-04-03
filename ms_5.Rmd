@@ -152,7 +152,7 @@ race_ivy_league <- rbind(
 # data using pivot_longer() in order to use ggplot() to plot it. Used
 # ColorBrewer to change the colors of the stacked bar chart.
 
-race_ivy_league %>%
+race_plot <- race_ivy_league %>%
   pivot_longer(c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"), 
                names_to = "race", values_to = "values") %>%
   ggplot(aes(x = school, y = values, fill = race)) + 
@@ -170,6 +170,8 @@ race_ivy_league %>%
                                          "Two" = "#cab2d6"),
                       breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two")) + 
   theme_classic()
+
+ggsave(filename = "final_project_shiny/race_plot.png", plot = race_plot)
 ```
 
 # 2) 
@@ -201,7 +203,7 @@ gender_ivy_league <- rbind(
 # Used ggplot() and geom_bar() to plot the Ivy League race data. Made the data
 # tidy using pivot_longer() in order to use ggplot() to plot the data.
 
-gender_ivy_league %>%
+gender_plot <- gender_ivy_league %>%
   pivot_longer(c("Male", "Female"), names_to = "gender", values_to = "values") %>%
   ggplot(aes(x = school, y = values, fill = gender)) + 
     geom_bar(position="dodge", stat="identity") +
@@ -210,4 +212,6 @@ gender_ivy_league %>%
          caption = "Source: American Society for Engineering Education") + 
     scale_fill_discrete(name = "Gender") +
   theme_classic()
+
+ggsave(filename = "final_project_shiny/gender_plot.png", plot = gender_plot)
 ```
