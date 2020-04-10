@@ -193,6 +193,7 @@ California Institute of Technology
 caltech_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8089/screen/21?school_name=California+Institute+of+Technology")
 
+
 caltech_ugrad_degrees_2018 
 ```
 
@@ -216,6 +217,7 @@ Carnegie Mellon University
 cmu_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8163/screen/21?school_name=Carnegie+Mellon+University")
 
+
 cmu_ugrad_degrees_2018 
 ```
 
@@ -227,6 +229,7 @@ Duke University
 duke_ugrad_degrees_2018 <- 
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8113/screen/21?school_name=Duke+University+")
 
+
 duke_ugrad_degrees_2018
 ```
 
@@ -237,6 +240,7 @@ Georgia Institute of Technology
 
 gt_ugrad_degrees_2018 <- 
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8138/screen/21?school_name=Georgia+Institute+of+Technology")
+
 
 gt_ugrad_degrees_2018
 ```
@@ -284,6 +288,7 @@ Northwestern University
 nw_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8194/screen/21?school_name=Northwestern+University")
 
+
 nw_ugrad_degrees_2018
 ```
 
@@ -294,6 +299,7 @@ Tufts University
 
 tufts_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8000/screen/21?school_name=Tufts+University")
+
 
 tufts_ugrad_degrees_2018
 ```
@@ -306,6 +312,7 @@ Vanderbilt University
 vanderbilt_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8048/screen/21?school_name=Vanderbilt+University")
 
+
 vanderbilt_ugrad_degrees_2018
 ```
 
@@ -316,6 +323,7 @@ University of Virginia
 
 uva_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8008/screen/21?school_name=University+of+Virginia")
+
 
 uva_ugrad_degrees_2018
 ```
@@ -332,7 +340,7 @@ washu_ugrad_degrees_2018 <-
 washu_ugrad_degrees_2018
 ```
 
-## Visualizations (Milestone 5)
+## Visualizations
 
 ```{r race ivy league, echo=FALSE}
 
@@ -346,11 +354,12 @@ race <- function(tibble) {
          His = sum(His), Ind = sum(Ind), 
          Asi = sum(Asi), Blk = sum(Blk), 
          Pac = sum(Pac), Wht = sum(Wht), 
-         Two = sum(Two)) %>%
+         Two = sum(Two), 
+         Total = Nra + Unk + His + Ind + Asi + Blk + Pac + Wht + Two) %>%
   slice(1)
 }
 
-# Made a table with all of the Ivy League schools for race
+# Made a table with all of the schools for race
 
 race_ivy_league <- rbind(
   race(brown_ugrad_degrees_2018),
@@ -364,17 +373,48 @@ race_ivy_league <- rbind(
   mutate(school = c("Brown", "Columbia", "Cornell", "Dartmouth",
                     "Harvard", "UPenn", "Princeton", "Yale"))
 
-# Used ggplot() and geom_bar() to plot the Ivy League race data. Had to tidy the
+race_all_schools <- rbind (
+  race(brown_ugrad_degrees_2018),
+  race(columbia_ugrad_degrees_2018),
+  race(cornell_ugrad_degrees_2018),
+  race(dartmouth_ugrad_degrees_2018),
+  race(harvard_ugrad_degrees_2018),
+  race(penn_ugrad_degrees_2018),
+  race(princeton_ugrad_degrees_2018),
+  race(yale_ugrad_degrees_2018),
+  race(boston_ugrad_degrees_2018),
+  race(caltech_ugrad_degrees_2018), 
+  race(berkeley_ugrad_degrees_2018), 
+  race(cmu_ugrad_degrees_2018), 
+  race(duke_ugrad_degrees_2018),
+  race(gt_ugrad_degrees_2018),
+  race(mudd_ugrad_degrees_2018),
+  race(jhu_ugrad_degrees_2018),
+  race(mit_ugrad_degrees_2018),
+  race(nw_ugrad_degrees_2018),
+  race(tufts_ugrad_degrees_2018),
+  race(vanderbilt_ugrad_degrees_2018),
+  race(uva_ugrad_degrees_2018),
+  race(washu_ugrad_degrees_2018)) %>%
+  mutate(school = c("Brown", "Columbia", "Cornell", "Dartmouth",
+                    "Harvard", "UPenn", "Princeton", "Yale", 
+                    "Boston University", "CalTech", "UC Berkeley", 
+                    "Carnegie Mellon", "Duke", "Georgia Tech", 
+                    "Harvey Mudd", "Johns Hopkins", "MIT", "Northwestern", 
+                    "Tufts", "Vanderbilt", "University of Virginia", 
+                    "Washington University in St. Louis"))
+
+# Used ggplot() and geom_bar() to plot the race data. Had to tidy the
 # data using pivot_longer() in order to use ggplot() to plot it. Used
 # ColorBrewer to change the colors of the stacked bar chart.
 
 race_ivy_league %>%
   pivot_longer(c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"), 
                names_to = "race", values_to = "values") %>%
-  ggplot(aes(x = school, y = values, fill = race)) + 
+  ggplot(aes(x = reorder(school, -values), y = values, fill = race)) + 
     geom_bar(position="stack", stat="identity") +
     labs(title = "Total Students Receiving Engineering Degrees at Ivy League Schools in 2018", 
-         x = "Ivy League Schools", y = "Students",
+         x = "Ivy League Schools", y = "Total Degree Earning Students",
          caption = "Source: American Society for Engineering Education \n 
          Nra - Nonresident aliens, Asi - Asian American, Blk - Black, 
          His - Hispanic, Ind - American Indian, Pac - Pacific Islander, 
@@ -386,6 +426,28 @@ race_ivy_league %>%
                                          "Two" = "#cab2d6"),
                       breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two")) + 
   theme_classic()
+
+
+race_all_schools %>%
+  pivot_longer(c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"), 
+               names_to = "race", values_to = "values") %>%
+  ggplot(aes(x = reorder(school, values), y = values, fill = race)) + 
+    geom_bar(position="stack", stat="identity") +
+    labs(title = "Total Students Receiving Engineering Degrees 
+    at Highly Ranked Institutions in 2018", 
+         x = "Schools", y = "Total Degree Earning Students",
+         caption = "Source: American Society for Engineering Education \n 
+         Nra - Nonresident aliens, Asi - Asian American, Blk - Black, 
+         His - Hispanic, Ind - American Indian, Pac - Pacific Islander, 
+         Unk - Unknown, Wht - White, Tot - Program Totals, Two - Two or More") + 
+    scale_fill_manual("Race", values = c("Nra" = "#a6cee3", "Unk" = "#1f78b4",
+                                         "His" = "#b2df8a", "Ind" = "#33a02c",
+                                         "Asi" = "#fb9a99", "Blk" = "#e31a1c",
+                                         "Pac" = "#fdbf6f", "Wht" = "#ff7f00",
+                                         "Two" = "#cab2d6"),
+                      breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two")) + 
+  theme_classic() + coord_flip()
+
 ```
 
 ```{r gender ivy league, echo = FALSE}
@@ -399,7 +461,7 @@ male_female <- function(tibble) {
   slice(1)
 }
 
-# Made a table with all of the Ivy League schools for gender
+# Made a table with all of the schools for gender
 
 gender_ivy_league <- rbind(
   male_female(brown_ugrad_degrees_2018),
@@ -413,20 +475,152 @@ gender_ivy_league <- rbind(
   mutate(school = c("Brown", "Columbia", "Cornell", "Dartmouth",
                     "Harvard", "UPenn", "Princeton", "Yale"))
 
-# Used ggplot() and geom_bar() to plot the Ivy League race data. Made the data
+gender_all_schools <- rbind (
+  male_female(brown_ugrad_degrees_2018),
+  male_female(columbia_ugrad_degrees_2018),
+  male_female(cornell_ugrad_degrees_2018),
+  male_female(dartmouth_ugrad_degrees_2018),
+  male_female(harvard_ugrad_degrees_2018),
+  male_female(penn_ugrad_degrees_2018),
+  male_female(princeton_ugrad_degrees_2018),
+  male_female(yale_ugrad_degrees_2018),
+  male_female(boston_ugrad_degrees_2018),
+  male_female(caltech_ugrad_degrees_2018), 
+  male_female(berkeley_ugrad_degrees_2018), 
+  male_female(cmu_ugrad_degrees_2018), 
+  male_female(duke_ugrad_degrees_2018),
+  male_female(gt_ugrad_degrees_2018),
+  male_female(mudd_ugrad_degrees_2018),
+  male_female(jhu_ugrad_degrees_2018),
+  male_female(mit_ugrad_degrees_2018),
+  male_female(nw_ugrad_degrees_2018),
+  male_female(tufts_ugrad_degrees_2018),
+  male_female(vanderbilt_ugrad_degrees_2018),
+  male_female(uva_ugrad_degrees_2018),
+  male_female(washu_ugrad_degrees_2018)) %>%
+  mutate(school = c("Brown", "Columbia", "Cornell", "Dartmouth",
+                    "Harvard", "UPenn", "Princeton", "Yale", 
+                    "Boston University", "CalTech", "UC Berkeley", 
+                    "Carnegie Mellon", "Duke", "Georgia Tech", 
+                    "Harvey Mudd", "Johns Hopkins", "MIT", "Northwestern", 
+                    "Tufts", "Vanderbilt", "University of Virginia", 
+                    "Washington University in St. Louis"))
+
+# Used ggplot() and geom_bar() to plot the gender data. Made the data
 # tidy using pivot_longer() in order to use ggplot() to plot the data.
 
 gender_ivy_league %>%
   pivot_longer(c("Male", "Female"), names_to = "gender", values_to = "values") %>%
-  ggplot(aes(x = school, y = values, fill = gender)) + 
+  ggplot(aes(x = reorder(school, -values), y = values, fill = gender)) + 
     geom_bar(position="dodge", stat="identity") +
     labs(title = "Total Students Receiving Engineering Degrees at Ivy League Schools in 2018", 
-         x = "Ivy League Schools", y = "Students", 
+         x = "Ivy League Schools", y = "Total Degree Earning Students", 
          caption = "Source: American Society for Engineering Education") + 
     scale_fill_discrete(name = "Gender") +
   theme_classic()
-```
 
+gender_all_schools %>%
+  pivot_longer(c("Male", "Female"), names_to = "gender", values_to = "values") %>%
+  ggplot(aes(x = reorder(school, values), y = values, fill = gender)) + 
+    geom_bar(position="dodge", stat="identity") +
+    labs(title = "Total Students Receiving Engineering Degrees
+    at Highly Ranked Institutions in 2018", 
+         x = "Schools", y = "Total Degree Earning Students", 
+         caption = "Source: American Society for Engineering Education") + 
+    scale_fill_discrete(name = "Gender") +
+  theme_classic() + coord_flip()
+```
+Compare the number of sophomores pursuing STEM degrees in 2016 versus those who received degrees in 2018
+
+```{r harvard plot}
+# harvard_ugrad_degrees_2018
+
+tables <- read_html("http://profiles.asee.org/profiles/7332/screen/20?school_name=Harvard+University") %>% 
+  html_nodes("table") 
+
+harvard_soph_2016 <- tables[[3]] %>% 
+  html_table(fill = TRUE) 
+
+harvard_soph_2016 <- harvard_soph_2016[-c(1, 32),] 
+
+harvard_soph_2016 <- harvard_soph_2016[ , colSums(is.na(harvard_soph_2016)) == 0]
+
+harvard_soph_2016 <- harvard_soph_2016 %>%
+  select(-ends_with("1"), -Total) %>%
+  mutate(major = c(rep("Applied Mathematics (A.B.)", 3),
+                   rep("Biomedical Engineering (A.B.)", 3),
+                   rep("Biomedical Engineering (S.B.)", 3),
+                   rep("Computer Science (A.B.)", 3),
+                   rep("Electrical Engineering (A.B)", 3),
+                   rep("Electrical Engineering (S.B.)", 3),
+                   rep("Engineering Sciences (A.B.)", 3),
+                   rep("Engineering Sciences (S.B.)", 3),
+                   rep("Mechanical Engineering (A.B)", 3),
+                   rep("Mechanical Engineering (S.B.)", 3))) %>%
+  rename(gender = Group,
+         Nra = `Nonresident Alien`,
+         Unk = Unknown,
+         His = Hispanic,
+         Ind = `American Indian`,
+         Asi = Asian,
+         Blk = Black,
+         Pac = `Pacific Islander`,
+         Wht = `White`,
+         Two = `Two or More`)
+
+harvard_soph_2016 <- harvard_soph_2016[-c(1, 4, 7, 10, 13, 16, 19, 22, 25, 28),] 
+
+harvard_soph_2016 <- harvard_soph_2016 %>%
+  mutate(gender = ifelse(gender == "Men", "Male", "Female")) %>%
+  pivot_longer(c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"), 
+               names_to = "race", values_to = "students") %>%
+  mutate(students = as.numeric(students)) %>%
+  filter(students != 0)
+
+# Electrical Engineering (S.B.)		
+# Engineering Sciences (A.B.)	
+# 
+# Engineering Sciences - Bioengineering (S.B.)
+# Engineering Sciences - Environmental Science and Engineering (S.B.)	
+# 
+# 
+# Engineering Sciences - Electrical and Computer Engineering (A.B.)	
+# Engineering Sciences - Environmental Science and Engineering (A.B.)	
+# 
+# Engineering Sciences - Mechanical and Materials Science and Engineering (A.B.)	
+
+gender_2016 <- harvard_soph_2016 %>%
+  group_by(gender, major) %>%
+  summarize(students = sum(students))
+
+race_2016 <- harvard_soph_2016 %>%
+  group_by(race, major) %>%
+  summarize(students = sum(students))
+
+gender_2018 <- harvard_ugrad_degrees_2018 %>%
+  select(`Bachelor's Degree Program(s)`, Male, Female) %>%
+  rename(major = `Bachelor's Degree Program(s)`
+         ) %>%
+  pivot_longer(c("Male", "Female"), names_to = "gender", values_to = "students") %>%
+  filter(students != 0)
+
+race_2018 <- harvard_ugrad_degrees_2018 %>%
+  select(-Male, -Female) %>%
+  rename(major = `Bachelor's Degree Program(s)`) %>%
+  pivot_longer(c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"), 
+               names_to = "race", values_to = "students") %>%
+  filter(students != 0)
+
+female_2016 <- gender_2016 %>%
+  filter(gender == "Female")
+
+female_2018 <- gender_2018 %>%
+  filter(gender == "Female")
+
+female_2016
+female_2018
+
+```
 
 
 
