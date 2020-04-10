@@ -586,7 +586,6 @@ harvard_soph_2016 <- harvard_soph_2016 %>%
 # 
 # Engineering Sciences - Electrical and Computer Engineering (A.B.)	
 # Engineering Sciences - Environmental Science and Engineering (A.B.)	
-# 
 # Engineering Sciences - Mechanical and Materials Science and Engineering (A.B.)	
 
 gender_2016 <- harvard_soph_2016 %>%
@@ -599,17 +598,44 @@ race_2016 <- harvard_soph_2016 %>%
 
 gender_2018 <- harvard_ugrad_degrees_2018 %>%
   select(`Bachelor's Degree Program(s)`, Male, Female) %>%
-  rename(major = `Bachelor's Degree Program(s)`
-         ) %>%
+  rename(major = `Bachelor's Degree Program(s)`) %>%
   pivot_longer(c("Male", "Female"), names_to = "gender", values_to = "students") %>%
-  filter(students != 0)
+  filter(students != 0) %>%
+  mutate(major = case_when(
+    major == "Engineering Sciences - Bioengineering (S.B.)" ~ "Engineering Sciences (S.B.)",
+    major == "Engineering Sciences - Environmental Science and Engineering (S.B.)" 
+    ~ "Engineering Sciences (S.B.)",
+    major == "Engineering Sciences - Electrical and Computer Engineering (A.B.)" 
+    ~ "Engineering Sciences (A.B.)",
+    major == "Engineering Sciences - Mechanical and Materials Science and Engineering (A.B.)" ~ "Engineering Sciences (A.B.)",
+    major == "Engineering Sciences - Environmental Science and Engineering (A.B.)" ~ 
+    "Engineering Sciences (A.B.)",
+    major == "Engineering Sciences - Biomedical Sciences and Engineering (A.B.)" ~ 
+    "Engineering Sciences (A.B.)",
+    TRUE ~ major
+  ))
 
 race_2018 <- harvard_ugrad_degrees_2018 %>%
   select(-Male, -Female) %>%
   rename(major = `Bachelor's Degree Program(s)`) %>%
   pivot_longer(c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"), 
                names_to = "race", values_to = "students") %>%
-  filter(students != 0)
+  filter(students != 0) %>%
+  mutate(major = case_when(
+    major == "Engineering Sciences - Bioengineering (S.B.)" ~ "Engineering Sciences (S.B.)",
+    major == "Engineering Sciences - Environmental Science and Engineering (S.B.)" 
+    ~ "Engineering Sciences (S.B.)",
+    major == "Engineering Sciences - Electrical and Computer Engineering (A.B.)" 
+    ~ "Engineering Sciences (A.B.)",
+    major == "Engineering Sciences - Mechanical and Materials Science and Engineering (A.B.)" ~ "Engineering Sciences (A.B.)",
+    major == "Engineering Sciences - Environmental Science and Engineering (A.B.)" ~ 
+    "Engineering Sciences (A.B.)",
+    major == "Engineering Sciences - Biomedical Sciences and Engineering (A.B.)" ~ 
+    "Engineering Sciences (A.B.)",
+    TRUE ~ major
+  ))
+
+race_2018
 
 female_2016 <- gender_2016 %>%
   filter(gender == "Female")
@@ -617,8 +643,9 @@ female_2016 <- gender_2016 %>%
 female_2018 <- gender_2018 %>%
   filter(gender == "Female")
 
-female_2016
-female_2018
+female_2016 
+
+female_2018 
 
 ```
 
