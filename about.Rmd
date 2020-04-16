@@ -92,8 +92,6 @@ Brown University
 brown_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8107/screen/21?school_name=Brown+University")
 
-brown_ugrad_degrees_2018 
-
 ```
 
 Columbia University
@@ -103,8 +101,6 @@ Columbia University
 
 columbia_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8224/screen/21?school_name=Columbia+University")
-
-columbia_ugrad_degrees_2018
 ```
 
 Cornell University
@@ -115,7 +111,6 @@ Cornell University
 cornell_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8046/screen/21?school_name=Cornell+University")
 
-cornell_ugrad_degrees_2018
 ```
 
 Dartmouth College
@@ -126,7 +121,6 @@ Dartmouth College
 dartmouth_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8085/screen/21?school_name=Dartmouth+College")
 
-dartmouth_ugrad_degrees_2018
 ```
 
 Harvard University
@@ -137,7 +131,7 @@ Harvard University
 harvard_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8130/screen/21?school_name=Harvard+University")
 
-harvard_ugrad_degrees_2018
+
 ```
 
 University of Pennsylvania
@@ -148,7 +142,7 @@ University of Pennsylvania
 penn_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8116/screen/21?school_name=University+of+Pennsylvania")
 
-penn_ugrad_degrees_2018
+
 ```
 
 Princeton University
@@ -159,7 +153,6 @@ Princeton University
 princeton_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8068/screen/21?school_name=Princeton+University") 
 
-princeton_ugrad_degrees_2018
 ```
 
 Yale School of Engineering & Applied Science
@@ -170,7 +163,6 @@ Yale School of Engineering & Applied Science
 yale_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8218/screen/21?school_name=Yale+School+of+Engineering+%26+Applied+Science") 
 
-yale_ugrad_degrees_2018
 ```
 
 Boston University
@@ -181,7 +173,6 @@ Boston University
 boston_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8150/screen/21?school_name=Boston+University")
 
-boston_ugrad_degrees_2018
 ```
 
 California Institute of Technology
@@ -194,7 +185,7 @@ caltech_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8089/screen/21?school_name=California+Institute+of+Technology")
 
 
-caltech_ugrad_degrees_2018 
+ 
 ```
 
 University of California, Berkeley
@@ -205,7 +196,6 @@ University of California, Berkeley
 berkeley_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8005/screen/21?school_name=University+of+California%2C+Berkeley")
 
-berkeley_ugrad_degrees_2018 
 ```
 
 Carnegie Mellon University
@@ -217,8 +207,6 @@ Carnegie Mellon University
 cmu_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8163/screen/21?school_name=Carnegie+Mellon+University")
 
-
-cmu_ugrad_degrees_2018 
 ```
 
 Duke University
@@ -230,7 +218,6 @@ duke_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8113/screen/21?school_name=Duke+University+")
 
 
-duke_ugrad_degrees_2018
 ```
 
 Georgia Institute of Technology
@@ -242,7 +229,6 @@ gt_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8138/screen/21?school_name=Georgia+Institute+of+Technology")
 
 
-gt_ugrad_degrees_2018
 ```
 
 Harvey Mudd College
@@ -254,7 +240,6 @@ Harvey Mudd College
 mudd_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8242/screen/21?school_name=Harvey+Mudd+College")
 
-mudd_ugrad_degrees_2018
 ```
 
 Johns Hopkins University
@@ -266,7 +251,7 @@ Johns Hopkins University
 jhu_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8145/screen/21?school_name=The+Johns+Hopkins+University")
 
-jhu_ugrad_degrees_2018
+
 ```
 
 Massachusetts Institute of Technology
@@ -277,7 +262,7 @@ Massachusetts Institute of Technology
 mit_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8024/screen/21?school_name=Massachusetts+Institute+of+Technology")
 
-mit_ugrad_degrees_2018
+
 ```
 
 Northwestern University
@@ -288,8 +273,6 @@ Northwestern University
 nw_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8194/screen/21?school_name=Northwestern+University")
 
-
-nw_ugrad_degrees_2018
 ```
 
 Tufts University
@@ -300,8 +283,6 @@ Tufts University
 tufts_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8000/screen/21?school_name=Tufts+University")
 
-
-tufts_ugrad_degrees_2018
 ```
 
 Vanderbilt University
@@ -313,7 +294,6 @@ vanderbilt_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8048/screen/21?school_name=Vanderbilt+University")
 
 
-vanderbilt_ugrad_degrees_2018
 ```
 
 University of Virginia
@@ -324,8 +304,6 @@ University of Virginia
 uva_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8008/screen/21?school_name=University+of+Virginia")
 
-
-uva_ugrad_degrees_2018
 ```
 
 Washington University in St. Louis
@@ -337,7 +315,6 @@ Washington University in St. Louis
 washu_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8088/screen/21?school_name=Washington+University+in+St.+Louis")
 
-washu_ugrad_degrees_2018
 ```
 
 ## Visualizations
@@ -532,7 +509,7 @@ gender_all_schools %>%
 ```
 Compare the number of sophomores pursuing STEM degrees in 2016 versus those who received degrees in 2018
 
-```{r harvard plot}
+```{r harvard plot, echo = FALSE}
 # harvard_ugrad_degrees_2018
 
 tables <- read_html("http://profiles.asee.org/profiles/7332/screen/20?school_name=Harvard+University") %>% 
@@ -574,19 +551,7 @@ harvard_soph_2016 <- harvard_soph_2016 %>%
   mutate(gender = ifelse(gender == "Men", "Male", "Female")) %>%
   pivot_longer(c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"), 
                names_to = "race", values_to = "students") %>%
-  mutate(students = as.numeric(students)) %>%
-  filter(students != 0)
-
-# Electrical Engineering (S.B.)		
-# Engineering Sciences (A.B.)	
-# 
-# Engineering Sciences - Bioengineering (S.B.)
-# Engineering Sciences - Environmental Science and Engineering (S.B.)	
-# 
-# 
-# Engineering Sciences - Electrical and Computer Engineering (A.B.)	
-# Engineering Sciences - Environmental Science and Engineering (A.B.)	
-# Engineering Sciences - Mechanical and Materials Science and Engineering (A.B.)	
+  mutate(students = as.numeric(students))
 
 gender_2016 <- harvard_soph_2016 %>%
   group_by(gender, major) %>%
@@ -600,7 +565,6 @@ gender_2018 <- harvard_ugrad_degrees_2018 %>%
   select(`Bachelor's Degree Program(s)`, Male, Female) %>%
   rename(major = `Bachelor's Degree Program(s)`) %>%
   pivot_longer(c("Male", "Female"), names_to = "gender", values_to = "students") %>%
-  filter(students != 0) %>%
   mutate(major = case_when(
     major == "Engineering Sciences - Bioengineering (S.B.)" ~ "Engineering Sciences (S.B.)",
     major == "Engineering Sciences - Environmental Science and Engineering (S.B.)" 
@@ -620,7 +584,6 @@ race_2018 <- harvard_ugrad_degrees_2018 %>%
   rename(major = `Bachelor's Degree Program(s)`) %>%
   pivot_longer(c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"), 
                names_to = "race", values_to = "students") %>%
-  filter(students != 0) %>%
   mutate(major = case_when(
     major == "Engineering Sciences - Bioengineering (S.B.)" ~ "Engineering Sciences (S.B.)",
     major == "Engineering Sciences - Environmental Science and Engineering (S.B.)" 
@@ -635,17 +598,53 @@ race_2018 <- harvard_ugrad_degrees_2018 %>%
     TRUE ~ major
   ))
 
-race_2018
+blk_his_2016 <- race_2016 %>%
+  filter(race == "Blk" | race == "His") %>%
+  group_by(major) %>%
+  summarize(students_2016 = sum(students)) %>%
+  filter(students_2016 != 0)
+
+blk_his_2018 <- race_2018 %>%
+  filter(race == "Blk" | race == "His") %>%
+  group_by(major) %>%
+  summarize(students_2018 = sum(students))
+
+blk_his_2016_2018 <- blk_his_2016 %>%
+  left_join(blk_his_2018, by = "major") %>%
+  pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
+
+blk_his_2016_2018 %>%
+  ggplot(aes(x = reorder(major, students), y = students, fill = year)) + 
+    geom_bar(position=position_dodge2(reverse = TRUE), stat="identity") +
+    labs(title = "Black and Hispanic Sophomore Students Declaring SEAS Concentrations in 2016 \n Compared to Seniors Receiving Degrees from SEAS in 2018",
+         subtitle = "Comparing the Retention of Harvard SEAS Black and Hispanic Students from Sophomore to Senior Year",
+         x = "Major", y = "Students") + 
+    theme_classic() + coord_flip() +
+    scale_fill_discrete(name = "Year")
 
 female_2016 <- gender_2016 %>%
-  filter(gender == "Female")
+  filter(gender == "Female" & students != 0) %>%
+  group_by(major, gender) %>%
+  summarize(students_2016 = sum(students))
 
 female_2018 <- gender_2018 %>%
-  filter(gender == "Female")
+  filter(gender == "Female") %>%
+  group_by(major, gender) %>%
+  summarize(students_2018 = sum(students))
 
-female_2016 
+female_2016_2018 <- female_2016 %>%
+  left_join(female_2018, by = c("major", "gender")) %>%
+  select(major, students_2016, students_2018) %>%
+  pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
 
-female_2018 
+female_2016_2018 %>%
+  ggplot(aes(x = reorder(major, students), y = students, fill = year)) + 
+    geom_bar(position=position_dodge2(reverse = TRUE), stat="identity") +
+    labs(title = "Female Sophomore Students Declaring SEAS Concentrations in 2016 \n Compared to Seniors Receiving Degrees from SEAS in 2018",
+         subtitle = "Comparing the Retention of Harvard SEAS Female Students from Sophomore to Senior Year",
+         x = "Major", y = "Students") + 
+    theme_classic() + coord_flip() +
+    scale_fill_discrete(name = "Year")
 
 ```
 
