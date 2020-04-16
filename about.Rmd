@@ -616,8 +616,8 @@ blk_his_2016_2018 <- blk_his_2016 %>%
 blk_his_2016_2018 %>%
   ggplot(aes(x = reorder(major, students), y = students, fill = year)) + 
     geom_bar(position=position_dodge2(reverse = TRUE), stat="identity") +
-    labs(title = "Black and Hispanic Sophomore Students Declaring SEAS Concentrations in 2016 \n Compared to Seniors Receiving Degrees from SEAS in 2018",
-         subtitle = "Comparing the Retention of Harvard SEAS Black and Hispanic Students from Sophomore to Senior Year",
+    labs(title = "Black and Hispanic Sophomores in SEAS in 2016 Compared to \n Students Receiving Degrees in 2018",
+         subtitle = "Comparing the Retention of Harvard SEAS Black and Hispanic Students \n from 2016 to 2018",
          x = "Major", y = "Students") + 
     theme_classic() + coord_flip() +
     scale_fill_discrete(name = "Year")
@@ -640,8 +640,8 @@ female_2016_2018 <- female_2016 %>%
 female_2016_2018 %>%
   ggplot(aes(x = reorder(major, students), y = students, fill = year)) + 
     geom_bar(position=position_dodge2(reverse = TRUE), stat="identity") +
-    labs(title = "Female Sophomore Students Declaring SEAS Concentrations in 2016 \n Compared to Seniors Receiving Degrees from SEAS in 2018",
-         subtitle = "Comparing the Retention of Harvard SEAS Female Students from Sophomore to Senior Year",
+    labs(title = "Female Sophmores in SEAS in 2016 Compared to \n Seniors Receiving Degrees from SEAS in 2018",
+         subtitle = "Comparing the Retention of Harvard SEAS Female Students \n from 2016 to 2018",
          x = "Major", y = "Students") + 
     theme_classic() + coord_flip() +
     scale_fill_discrete(name = "Year")
