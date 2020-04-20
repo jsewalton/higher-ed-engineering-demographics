@@ -11,24 +11,6 @@ library(tidyverse)
 library(rvest)
 library(janitor)
 ```
-## Milestone 4 Update
-
-I have found and cleaned data tables for more than twenty schools on Degrees Awarded by Program in 2018. These tables provide the racial and gender breakdowns within STEM degrees awarded at each school. The schools included are all eight Ivy Leagues as well as the following institutions: 
-
-Boston University,
-California Institute of Technology,
-University of California, Berkeley,
-Carnegie Mellon University,
-Duke University,
-Georgia Institute of Technology,
-Harvey Mudd College,
-Johns Hopkins University,
-Massachusetts Institute of Technology,
-Northwestern University,
-Tufts University,
-Vanderbilt University,
-University of Virginia,
-Washington University in St. Louis
 
 ## Summary and Goals
 
@@ -348,7 +330,10 @@ race_ivy_league <- rbind(
   race(princeton_ugrad_degrees_2018),
   race(yale_ugrad_degrees_2018)) %>%
   mutate(school = c("Brown", "Columbia", "Cornell", "Dartmouth",
-                    "Harvard", "UPenn", "Princeton", "Yale"))
+                    "Harvard", "UPenn", "Princeton", "Yale")) %>%
+  pivot_longer(c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"), 
+               names_to = "race", values_to = "values") %>%
+  mutate(perc = (values / Total) * 100)
 
 race_all_schools <- rbind (
   race(brown_ugrad_degrees_2018),
@@ -379,15 +364,16 @@ race_all_schools <- rbind (
                     "Carnegie Mellon", "Duke", "Georgia Tech", 
                     "Harvey Mudd", "Johns Hopkins", "MIT", "Northwestern", 
                     "Tufts", "Vanderbilt", "University of Virginia", 
-                    "Washington University in St. Louis"))
+                    "Washington University in St. Louis")) %>%
+  pivot_longer(c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"), 
+               names_to = "race", values_to = "values") %>%
+  mutate(perc = (values / Total) * 100)
 
 # Used ggplot() and geom_bar() to plot the race data. Had to tidy the
 # data using pivot_longer() in order to use ggplot() to plot it. Used
 # ColorBrewer to change the colors of the stacked bar chart.
 
 race_ivy_league %>%
-  pivot_longer(c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"), 
-               names_to = "race", values_to = "values") %>%
   ggplot(aes(x = reorder(school, -values), y = values, fill = race)) + 
     geom_bar(position="stack", stat="identity") +
     labs(title = "Total Students Receiving Engineering Degrees at Ivy League Schools in 2018", 
@@ -404,15 +390,29 @@ race_ivy_league %>%
                       breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two")) + 
   theme_classic()
 
+# race_all_schools %>%
+#   ggplot(aes(x = reorder(school, values), y = values, fill = race)) + 
+#     geom_bar(position="stack", stat="identity") +
+#     labs(title = "Total Students Receiving Engineering Degrees 
+#     at Highly Ranked Institutions in 2018", 
+#          x = "Schools", y = "Total Degree Earning Students",
+#          caption = "Source: American Society for Engineering Education \n 
+#          Nra - Nonresident aliens, Asi - Asian American, Blk - Black, 
+#          His - Hispanic, Ind - American Indian, Pac - Pacific Islander, 
+#          Unk - Unknown, Wht - White, Tot - Program Totals, Two - Two or More") + 
+#     scale_fill_manual("Race", values = c("Nra" = "#a6cee3", "Unk" = "#1f78b4",
+#                                          "His" = "#b2df8a", "Ind" = "#33a02c",
+#                                          "Asi" = "#fb9a99", "Blk" = "#e31a1c",
+#                                          "Pac" = "#fdbf6f", "Wht" = "#ff7f00",
+#                                          "Two" = "#cab2d6"),
+#                       breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two")) + 
+#   theme_classic() + coord_flip()
 
 race_all_schools %>%
-  pivot_longer(c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"), 
-               names_to = "race", values_to = "values") %>%
-  ggplot(aes(x = reorder(school, values), y = values, fill = race)) + 
+  ggplot(aes(x = reorder(school, values), y = perc, fill = race)) + 
     geom_bar(position="stack", stat="identity") +
-    labs(title = "Total Students Receiving Engineering Degrees 
-    at Highly Ranked Institutions in 2018", 
-         x = "Schools", y = "Total Degree Earning Students",
+    labs(title = "Percentage of Students Receiving Engineering Degrees \nby Race at Highly Ranked Institutions in 2018", subtitle = "Schools Ranked in Descending Order by Engineering School Size",
+         x = "Schools", y = "Percent of Degree Earning Students",
          caption = "Source: American Society for Engineering Education \n 
          Nra - Nonresident aliens, Asi - Asian American, Blk - Black, 
          His - Hispanic, Ind - American Indian, Pac - Pacific Islander, 
@@ -434,7 +434,7 @@ race_all_schools %>%
 male_female <- function(tibble) {
   tibble %>%
   select(Male, Female) %>%
-  mutate(Male = sum(Male), Female = sum(Female)) %>%
+  mutate(Male = sum(Male), Female = sum(Female), Total = Male + Female) %>%
   slice(1)
 }
 
@@ -450,7 +450,9 @@ gender_ivy_league <- rbind(
   male_female(princeton_ugrad_degrees_2018),
   male_female(yale_ugrad_degrees_2018)) %>%
   mutate(school = c("Brown", "Columbia", "Cornell", "Dartmouth",
-                    "Harvard", "UPenn", "Princeton", "Yale"))
+                    "Harvard", "UPenn", "Princeton", "Yale")) %>%
+  pivot_longer(c("Male", "Female"), names_to = "gender", values_to = "values") %>%
+  mutate(perc = (values/Total) * 100)
 
 gender_all_schools <- rbind (
   male_female(brown_ugrad_degrees_2018),
@@ -481,13 +483,14 @@ gender_all_schools <- rbind (
                     "Carnegie Mellon", "Duke", "Georgia Tech", 
                     "Harvey Mudd", "Johns Hopkins", "MIT", "Northwestern", 
                     "Tufts", "Vanderbilt", "University of Virginia", 
-                    "Washington University in St. Louis"))
+                    "Washington University in St. Louis")) %>%
+  pivot_longer(c("Male", "Female"), names_to = "gender", values_to = "values") %>%
+  mutate(perc = (values/Total) * 100)
 
 # Used ggplot() and geom_bar() to plot the gender data. Made the data
 # tidy using pivot_longer() in order to use ggplot() to plot the data.
 
 gender_ivy_league %>%
-  pivot_longer(c("Male", "Female"), names_to = "gender", values_to = "values") %>%
   ggplot(aes(x = reorder(school, -values), y = values, fill = gender)) + 
     geom_bar(position="dodge", stat="identity") +
     labs(title = "Total Students Receiving Engineering Degrees at Ivy League Schools in 2018", 
@@ -496,18 +499,25 @@ gender_ivy_league %>%
     scale_fill_discrete(name = "Gender") +
   theme_classic()
 
+# gender_all_schools %>%
+#   ggplot(aes(x = reorder(school, values), y = values, fill = gender)) + 
+#     geom_bar(position="dodge", stat="identity") +
+#     labs(title = "Total Students Receiving Engineering Degrees
+#     at Highly Ranked Institutions in 2018", 
+#          x = "Schools", y = "Total Degree Earning Students", 
+#          caption = "Source: American Society for Engineering Education") + 
+#     scale_fill_discrete(name = "Gender") +
+#   theme_classic() + coord_flip()
+
 gender_all_schools %>%
-  pivot_longer(c("Male", "Female"), names_to = "gender", values_to = "values") %>%
-  ggplot(aes(x = reorder(school, values), y = values, fill = gender)) + 
-    geom_bar(position="dodge", stat="identity") +
-    labs(title = "Total Students Receiving Engineering Degrees
-    at Highly Ranked Institutions in 2018", 
-         x = "Schools", y = "Total Degree Earning Students", 
-         caption = "Source: American Society for Engineering Education") + 
+  ggplot(aes(x = reorder(school, values), y = perc, fill = gender)) +
+    geom_bar(position="stack", stat="identity") +
+    labs(title = "Percentage of Students Receiving Engineering Degrees \nby Gender at Highly Ranked Institutions in 2018", subtitle = "Schools Ranked in Descending Order by Engineering School Size",
+         x = "Schools", y = "Percent of Degree Earning Students",
+         caption = "Source: American Society for Engineering Education") +
     scale_fill_discrete(name = "Gender") +
   theme_classic() + coord_flip()
 ```
-Compare the number of sophomores pursuing STEM degrees in 2016 versus those who received degrees in 2018
 
 ```{r harvard plot, echo = FALSE}
 # harvard_ugrad_degrees_2018
@@ -597,30 +607,108 @@ race_2018 <- harvard_ugrad_degrees_2018 %>%
     "Engineering Sciences (A.B.)",
     TRUE ~ major
   ))
+```
 
-blk_his_2016 <- race_2016 %>%
-  filter(race == "Blk" | race == "His") %>%
+```{r race retention, echo = FALSE}
+
+blk_2016 <- race_2016 %>%
+  filter(race == "Blk") %>%
   group_by(major) %>%
   summarize(students_2016 = sum(students)) %>%
   filter(students_2016 != 0)
 
-blk_his_2018 <- race_2018 %>%
-  filter(race == "Blk" | race == "His") %>%
+blk_2018 <- race_2018 %>%
+  filter(race == "Blk") %>%
   group_by(major) %>%
   summarize(students_2018 = sum(students))
 
-blk_his_2016_2018 <- blk_his_2016 %>%
-  left_join(blk_his_2018, by = "major") %>%
+blk_2016_2018 <- blk_2016 %>%
+  left_join(blk_2018, by = "major") %>%
   pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
 
-blk_his_2016_2018 %>%
+blk_2016_2018 %>%
   ggplot(aes(x = reorder(major, students), y = students, fill = year)) + 
     geom_bar(position=position_dodge2(reverse = TRUE), stat="identity") +
-    labs(title = "Black and Hispanic Sophomores in SEAS in 2016 Compared to \n Students Receiving Degrees in 2018",
-         subtitle = "Comparing the Retention of Harvard SEAS Black and Hispanic Students \n from 2016 to 2018",
+    labs(title = "Black Sophomores in SEAS in 2016 Compared to \nStudents Receiving Degrees in 2018",
+         subtitle = "Retention of Harvard SEAS Black Undergrads \nfrom 2016 to 2018",
          x = "Major", y = "Students") + 
     theme_classic() + coord_flip() +
     scale_fill_discrete(name = "Year")
+
+his_2016 <- race_2016 %>%
+  filter(race == "His") %>%
+  group_by(major) %>%
+  summarize(students_2016 = sum(students)) %>%
+  filter(students_2016 != 0)
+
+his_2018 <- race_2018 %>%
+  filter(race == "His") %>%
+  group_by(major) %>%
+  summarize(students_2018 = sum(students))
+
+his_2016_2018 <- his_2016 %>%
+  left_join(his_2018, by = "major") %>%
+  pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
+
+his_2016_2018 %>%
+  ggplot(aes(x = reorder(major, students), y = students, fill = year)) + 
+    geom_bar(position=position_dodge2(reverse = TRUE), stat="identity") +
+    labs(title = "Hispanic Sophomores in SEAS in 2016 Compared to \nStudents Receiving Degrees in 2018",
+         subtitle = "Retention of Harvard SEAS Hispanic Undergrads \nfrom 2016 to 2018",
+         x = "Major", y = "Students") + 
+    theme_classic() + coord_flip() +
+    scale_fill_discrete(name = "Year")
+
+wht_2016 <- race_2016 %>%
+  filter(race == "Wht") %>%
+  group_by(major) %>%
+  summarize(students_2016 = sum(students)) %>%
+  filter(students_2016 != 0)
+
+wht_2018 <- race_2018 %>%
+  filter(race == "Wht") %>%
+  group_by(major) %>%
+  summarize(students_2018 = sum(students))
+
+wht_2016_2018 <- wht_2016 %>%
+  left_join(wht_2018, by = "major") %>%
+  pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
+
+wht_2016_2018 %>%
+  ggplot(aes(x = reorder(major, students), y = students, fill = year)) + 
+    geom_bar(position=position_dodge2(reverse = TRUE), stat="identity") +
+    labs(title = "White Sophomores in SEAS in 2016 Compared to \nStudents Receiving Degrees in 2018",
+         subtitle = "Retention of Harvard SEAS White Undergrads \nfrom 2016 to 2018",
+         x = "Major", y = "Students") + 
+    theme_classic() + coord_flip() +
+    scale_fill_discrete(name = "Year")
+
+asi_2016 <- race_2016 %>%
+  filter(race == "Asi") %>%
+  group_by(major) %>%
+  summarize(students_2016 = sum(students)) %>%
+  filter(students_2016 != 0)
+
+asi_2018 <- race_2018 %>%
+  filter(race == "Asi") %>%
+  group_by(major) %>%
+  summarize(students_2018 = sum(students))
+
+asi_2016_2018 <- asi_2016 %>%
+  left_join(asi_2018, by = "major") %>%
+  pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
+
+asi_2016_2018 %>%
+  ggplot(aes(x = reorder(major, students), y = students, fill = year)) + 
+    geom_bar(position=position_dodge2(reverse = TRUE), stat="identity") +
+    labs(title = "Asian Sophomores in SEAS in 2016 Compared to \nStudents Receiving Degrees in 2018",
+         subtitle = "Retention of Harvard SEAS Asian Undergrads \nfrom 2016 to 2018",
+         x = "Major", y = "Students") + 
+    theme_classic() + coord_flip() +
+    scale_fill_discrete(name = "Year")
+```
+
+```{r gender retention, echo = FALSE}
 
 female_2016 <- gender_2016 %>%
   filter(gender == "Female" & students != 0) %>%
@@ -640,14 +728,61 @@ female_2016_2018 <- female_2016 %>%
 female_2016_2018 %>%
   ggplot(aes(x = reorder(major, students), y = students, fill = year)) + 
     geom_bar(position=position_dodge2(reverse = TRUE), stat="identity") +
-    labs(title = "Female Sophmores in SEAS in 2016 Compared to \n Seniors Receiving Degrees from SEAS in 2018",
-         subtitle = "Comparing the Retention of Harvard SEAS Female Students \n from 2016 to 2018",
+    labs(title = "Female Sophmores in SEAS in 2016 Compared to \nSeniors Receiving Degrees from SEAS in 2018",
+         subtitle = "Retention of Harvard SEAS Female Undergrads \nfrom 2016 to 2018",
+         x = "Major", y = "Students") + 
+    theme_classic() + coord_flip() +
+    scale_fill_discrete(name = "Year")
+
+male_2016 <- gender_2016 %>%
+  filter(gender == "Male" & students != 0) %>%
+  group_by(major, gender) %>%
+  summarize(students_2016 = sum(students))
+
+male_2018 <- gender_2018 %>%
+  filter(gender == "Male") %>%
+  group_by(major, gender) %>%
+  summarize(students_2018 = sum(students))
+
+male_2016_2018 <- male_2016 %>%
+  left_join(male_2018, by = c("major", "gender")) %>%
+  select(major, students_2016, students_2018) %>%
+  pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
+
+male_2016_2018 %>%
+  ggplot(aes(x = reorder(major, students), y = students, fill = year)) + 
+    geom_bar(position=position_dodge2(reverse = TRUE), stat="identity") +
+    labs(title = "Male Sophmores in SEAS in 2016 Compared to \nSeniors Receiving Degrees from SEAS in 2018",
+         subtitle = "Retention of Harvard SEAS Male Undergrads \nfrom 2016 to 2018",
          x = "Major", y = "Students") + 
     theme_classic() + coord_flip() +
     scale_fill_discrete(name = "Year")
 
 ```
+```{r model}
 
+# Is a higher percentage of underrepresented minority students (Black and Hispanic) at a school
+# associated with more students graduating with engineering degrees in total?
+
+blk_his <- race_all_schools %>%
+  filter((perc != 0) & (race == "Blk" | race == "His")) %>%
+  group_by(school) %>%
+  summarize(total = mean(Total), perc = sum(perc)) 
+
+lm(total ~ perc, blk_his)
+ggplot(blk_his, aes(x = perc, y = total)) + geom_point() + theme_classic() + geom_smooth(method = "lm")
+
+# Is a higher percentage of female students at a school associated with more
+# students graduating with engineering degrees in total?
+
+fem <- gender_all_schools %>%
+  filter(gender == "Female")
+
+lm(Total ~ perc, fem)
+ggplot(fem, aes(x = perc, y = Total)) + geom_point() + theme_classic() + geom_smooth(method = "lm")
+
+
+```
 
 
 
