@@ -410,7 +410,7 @@ race_all_plot <- race_all_schools %>%
                                          "Two" = "#cab2d6"),
                       breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two")) + coord_polar() + theme_light() 
 
-race_all_plot
+ggsave(filename = "final_project_shiny/race_all_plot.png", plot = race_all_plot)
 ```
 
 ```{r gender ivy league, echo = FALSE}
@@ -495,7 +495,7 @@ gender_all_plot <- gender_all_schools %>%
     scale_fill_discrete(name = "Gender") +
   theme_light() + coord_polar()
 
-gender_all_plot
+ggsave(filename = "final_project_shiny/gender_all_plot.png", plot = gender_all_plot)
 ```
 
 ```{r harvard plot, echo = FALSE}
@@ -605,21 +605,15 @@ blk_2016_2018 <- blk_2016 %>%
   left_join(blk_2018, by = "major") %>%
   pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
 
-blk_2016_2018$year <- as.factor(blk_2016_2018$year)
-
 blk_plot <- blk_2016_2018 %>%
-  ggplot(aes(x = year, y = students, group = major, color = major)) + 
-    geom_line() + geom_point() +
+  ggplot(aes(x = year, y = students, color = major)) + 
+    geom_line(aes(group = major)) + geom_point() +
     labs(title = "Black Sophomores in SEAS in 2016 Compared to \nStudents Receiving Degrees in 2018",
          subtitle = "Retention of Harvard SEAS Black Undergrads \nfrom 2016 to 2018",
-         x = "Year", y = "Students", color = "Major") + theme_classic() +
-    transition_reveal(along = students)
+         x = "Year", y = "Students", color = "Major",
+         caption = "Source: American Society for Engineering Education") + theme_classic() 
 
-blk_plot
-
-# blk_2016_2018
-# blk_plot
-# gganimate(blk_plot)
+ggsave(filename = "final_project_shiny/blk_plot.png", plot = blk_plot)
 
 his_2016 <- race_2016 %>%
   filter(race == "His") %>%
@@ -636,14 +630,15 @@ his_2016_2018 <- his_2016 %>%
   left_join(his_2018, by = "major") %>%
   pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
 
-his_2016_2018 %>%
-  ggplot(aes(x = reorder(major, students), y = students, fill = year)) + 
-    geom_bar(position=position_dodge2(reverse = TRUE), stat="identity") +
+his_plot <- his_2016_2018 %>%
+  ggplot(aes(x = year, y = students, color = major)) + 
+    geom_line(aes(group = major)) + geom_point() +
     labs(title = "Hispanic Sophomores in SEAS in 2016 Compared to \nStudents Receiving Degrees in 2018",
          subtitle = "Retention of Harvard SEAS Hispanic Undergrads \nfrom 2016 to 2018",
-         x = "Major", y = "Students") + 
-    theme_classic() + coord_flip() +
-    scale_fill_discrete(name = "Year")
+         x = "Year", y = "Students", color = "Major",
+         caption = "Source: American Society for Engineering Education") + theme_classic()
+
+ggsave(filename = "final_project_shiny/his_plot.png", plot = his_plot)
 
 wht_2016 <- race_2016 %>%
   filter(race == "Wht") %>%
@@ -660,14 +655,15 @@ wht_2016_2018 <- wht_2016 %>%
   left_join(wht_2018, by = "major") %>%
   pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
 
-wht_2016_2018 %>%
-  ggplot(aes(x = reorder(major, students), y = students, fill = year)) + 
-    geom_bar(position=position_dodge2(reverse = TRUE), stat="identity") +
+wht_plot <- wht_2016_2018 %>%
+  ggplot(aes(x = year, y = students, color = major)) + 
+    geom_line(aes(group = major)) + geom_point() +
     labs(title = "White Sophomores in SEAS in 2016 Compared to \nStudents Receiving Degrees in 2018",
          subtitle = "Retention of Harvard SEAS White Undergrads \nfrom 2016 to 2018",
-         x = "Major", y = "Students") + 
-    theme_classic() + coord_flip() +
-    scale_fill_discrete(name = "Year")
+         x = "Year", y = "Students", color = "Major",
+         caption = "Source: American Society for Engineering Education") + theme_classic()
+
+ggsave(filename = "final_project_shiny/wht_plot.png", plot = wht_plot)
 
 asi_2016 <- race_2016 %>%
   filter(race == "Asi") %>%
@@ -684,14 +680,15 @@ asi_2016_2018 <- asi_2016 %>%
   left_join(asi_2018, by = "major") %>%
   pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
 
-asi_2016_2018 %>%
-  ggplot(aes(x = reorder(major, students), y = students, fill = year)) + 
-    geom_bar(position=position_dodge2(reverse = TRUE), stat="identity") +
+asi_plot <- asi_2016_2018 %>%
+  ggplot(aes(x = year, y = students, color = major)) + 
+    geom_line(aes(group = major)) + geom_point() +
     labs(title = "Asian Sophomores in SEAS in 2016 Compared to \nStudents Receiving Degrees in 2018",
          subtitle = "Retention of Harvard SEAS Asian Undergrads \nfrom 2016 to 2018",
-         x = "Major", y = "Students") + 
-    theme_classic() + coord_flip() +
-    scale_fill_discrete(name = "Year")
+         x = "Year", y = "Students", color = "Major",
+         caption = "Source: American Society for Engineering Education") + theme_classic()
+
+ggsave(filename = "final_project_shiny/asi_plot.png", plot = asi_plot)
 ```
 
 ```{r gender retention, echo = FALSE}
@@ -711,14 +708,15 @@ female_2016_2018 <- female_2016 %>%
   select(major, students_2016, students_2018) %>%
   pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
 
-female_2016_2018 %>%
-  ggplot(aes(x = reorder(major, students), y = students, fill = year)) + 
-    geom_bar(position=position_dodge2(reverse = TRUE), stat="identity") +
+female_plot <- female_2016_2018 %>%
+  ggplot(aes(x = year, y = students, color = major)) + 
+    geom_line(aes(group = major)) + geom_point() +
     labs(title = "Female Sophmores in SEAS in 2016 Compared to \nSeniors Receiving Degrees from SEAS in 2018",
          subtitle = "Retention of Harvard SEAS Female Undergrads \nfrom 2016 to 2018",
-         x = "Major", y = "Students") + 
-    theme_classic() + coord_flip() +
-    scale_fill_discrete(name = "Year")
+         x = "Major", y = "Students", color = "Year",
+         caption = "Source: American Society for Engineering Education") + theme_classic() 
+
+ggsave(filename = "final_project_shiny/female_plot.png", plot = female_plot)
 
 male_2016 <- gender_2016 %>%
   filter(gender == "Male" & students != 0) %>%
@@ -735,14 +733,15 @@ male_2016_2018 <- male_2016 %>%
   select(major, students_2016, students_2018) %>%
   pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
 
-male_2016_2018 %>%
-  ggplot(aes(x = reorder(major, students), y = students, fill = year)) + 
-    geom_bar(position=position_dodge2(reverse = TRUE), stat="identity") +
+male_plot <- male_2016_2018 %>%
+  ggplot(aes(x = year, y = students, color = major)) + 
+    geom_line(aes(group = major)) + geom_point() + 
     labs(title = "Male Sophmores in SEAS in 2016 Compared to \nSeniors Receiving Degrees from SEAS in 2018",
          subtitle = "Retention of Harvard SEAS Male Undergrads \nfrom 2016 to 2018",
-         x = "Major", y = "Students") + 
-    theme_classic() + coord_flip() +
-    scale_fill_discrete(name = "Year")
+         x = "Year", y = "Students", color = "Major",
+         caption = "Source: American Society for Engineering Education") + theme_classic() 
+
+ggsave(filename = "final_project_shiny/male_plot.png", plot = male_plot)
 
 ```
 ```{r model}
