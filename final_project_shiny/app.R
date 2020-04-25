@@ -1,19 +1,11 @@
 
 library(shiny)
+library(png)
 
 # Define UI for final project application
 
 ui <- navbarPage(
-    "Investigating Demographics within Higher Education STEM Programs ",
-    tabPanel("Models",
-             fluidPage(
-                 titlePanel("Models"),
-                 mainPanel(imageOutput("gender_plot"))
-             )),
-    tabPanel("Discussion",
-             titlePanel("Discussion Title"),
-             p("Tour of the modeling choices you made and 
-              an explanation of why you made them")),
+    "Investigating Demographics within Higher Education STEM Programs",
     tabPanel("About", 
              titlePanel("About"),
              h3("Project Background and Motivations"),
@@ -27,7 +19,47 @@ ui <- navbarPage(
                interested in STEM fields."),
              h3("About Me"),
              p("My name is Jessica Edwards and I study Computer Science and Education. 
-             You can reach me at jedwards@college.harvard.edu.")))
+             You can reach me at jedwards@college.harvard.edu.")),
+    tabPanel("School Demographics",
+             fluidPage(
+                 titlePanel("School Demographics"),
+                 sidebarLayout(
+                     sidebarPanel(
+                         selectInput("demographic", label = "Demographic categories", 
+                                     choices = c("Race", "Gender"))
+                     ),
+                     mainPanel(
+                         imageOutput("demographic_plot")
+                     )
+                 )
+             )),
+    tabPanel("Retention at Harvard",
+             fluidPage(
+                 titlePanel("Retention at Harvard"),
+                 sidebarLayout(
+                     sidebarPanel(
+                         selectInput("retention", label = "Demographic categories", 
+                                     choices = c("Black", "Hispanic", "White", "Asian", 
+                                                 "Female", "Male"))
+                     ),
+                     mainPanel(
+                         imageOutput("retention_plot")
+                     )
+                 )
+             )),
+    tabPanel("Effect of Percentage of Minority Students on School Size",
+             fluidPage(
+                 titlePanel("Effect of Percentage of Minority Students on School Size"),
+                 sidebarLayout(
+                     sidebarPanel(
+                         selectInput("regression", label = "Demographic categories", 
+                                     choices = c("Race", "Gender"))
+                     ),
+                     mainPanel(
+                         imageOutput("regression_plot")
+                     )
+                 )
+             )))
 
 # Define server logic
 
@@ -35,16 +67,88 @@ server <- function(input, output) {
     
     # Send a pre-rendered image, and don't delete the image after sending it
     
-    output$gender_plot <- renderImage({
-        
-        # Return a list containing the filename and alt text
-        
-        list(src = 'gender_plot.png',
-             width = 750,
-             height = 600,
-             alt = "This is alternate text")
-        
+    output$demographic_plot <- renderImage({
+        if (input$demographic == "Race") {
+            return(list(
+                src = 'race_all_plot.png',
+                width = 900,
+                height = 600,
+                alt = "Race"
+            ))
+        } else if (input$demographic == "Gender") {
+            return(list(
+                src = 'gender_all_plot.png',
+                width = 900,
+                height = 600,
+                alt = "Gender"
+            ))
+        }
+    }, deleteFile = FALSE)
+    
+    output$retention_plot <- renderImage({
+        if (input$retention == "Black") {
+            return(list(
+                src = 'blk_plot.png',
+                width = 900,
+                height = 600,
+                alt = "Black"
+            ))
+        } else if (input$retention == "Hispanic") {
+            return(list(
+                src = 'his_plot.png',
+                width = 900,
+                height = 600,
+                alt = "Hispanic"
+            ))
+        } else if (input$retention == "White") {
+            return(list(
+                src = 'wht_plot.png',
+                width = 900,
+                height = 600,
+                alt = "White"
+            ))
+        } else if (input$retention == "Asian") {
+            return(list(
+                src = 'asi_plot.png',
+                width = 900,
+                height = 600,
+                alt = "Asian"
+            ))
+        } else if (input$retention == "Female") {
+            return(list(
+                src = 'female_plot.png',
+                width = 900,
+                height = 600,
+                alt = "Female"
+            ))
+        } else if (input$retention == "Male") {
+            return(list(
+                src = 'male_plot.png',
+                width = 900,
+                height = 600,
+                alt = "Male"
+            ))
+        }
+    }, deleteFile = FALSE)
+    
+    output$regression_plot <- renderImage({
+        if (input$regression == "Race") {
+            return(list(
+                src = 'blk_his_reg_plot.png',
+                width = 500,
+                height = 500,
+                alt = "Race"
+            ))
+        } else if (input$regression == "Gender") {
+            return(list(
+                src = 'female_reg_plot.png',
+                width = 500,
+                height = 500,
+                alt = "Gender"
+            ))
+        }
     }, deleteFile = FALSE)
 }
+
 # Run the application 
 shinyApp(ui = ui, server = server)

@@ -12,6 +12,7 @@ library(rvest)
 library(janitor)
 library(plotly)
 library(gganimate)
+library(broom)
 ```
 
 ## Summary and Goals
@@ -754,8 +755,15 @@ blk_his <- race_all_schools %>%
   group_by(school) %>%
   summarize(total = mean(Total), perc = sum(perc)) 
 
-lm(total ~ perc, blk_his)
-ggplot(blk_his, aes(x = perc, y = total)) + geom_point() + theme_classic() + geom_smooth(method = "lm")
+lm(total ~ perc, blk_his) %>%
+  tidy(conf.int = TRUE)
+
+blk_his_reg_plot <- ggplot(blk_his, aes(x = perc, y = total)) + 
+  labs(title = "Comparing the Proportion of Black and Hispanic Students to School Size", 
+       x = "Percentage of Black and Hispanic Students", y = "Total Students") +
+  geom_point() + theme_classic() + geom_smooth(method = "lm")
+
+ggsave(filename = "final_project_shiny/blk_his_reg_plot.png", plot = blk_his_reg_plot)
 
 # Is a higher percentage of female students at a school associated with more
 # students graduating with engineering degrees in total?
@@ -763,10 +771,15 @@ ggplot(blk_his, aes(x = perc, y = total)) + geom_point() + theme_classic() + geo
 fem <- gender_all_schools %>%
   filter(gender == "Female")
 
-lm(Total ~ perc, fem)
-ggplot(fem, aes(x = perc, y = Total)) + geom_point() + theme_classic() + geom_smooth(method = "lm")
+lm(Total ~ perc, fem) %>%
+  tidy(conf.int = TRUE)
+ 
+female_reg_plot <- ggplot(fem, aes(x = perc, y = Total)) + 
+  labs(title = "Comparing the Proportion of Female Students to School Size",
+       x = "Percentage of Female Students", y = "Total Students") +
+  geom_point() + theme_classic() + geom_smooth(method = "lm")
 
-
+ggsave(filename = "final_project_shiny/female_reg_plot.png", plot = female_reg_plot)
 ```
 
 
