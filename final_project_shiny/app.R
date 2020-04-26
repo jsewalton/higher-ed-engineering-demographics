@@ -5,6 +5,9 @@ library(png)
 # Define UI for final project application
 
 ui <- navbarPage(
+    
+    # Formatting for the about page
+    
     "Investigating Demographics within Higher Education STEM Programs",
     tabPanel("About", 
              titlePanel("About"),
@@ -20,6 +23,9 @@ ui <- navbarPage(
              h3("About Me"),
              p("My name is Jessica Edwards and I study Computer Science and Education. 
              You can reach me at jedwards@college.harvard.edu.")),
+    
+    # Formatting for the school demographics page 
+    
     tabPanel("School Demographics",
              fluidPage(
                  titlePanel("School Demographics"),
@@ -33,6 +39,9 @@ ui <- navbarPage(
                      )
                  )
              )),
+    
+    # Formatting for the retention at Harvard page
+    
     tabPanel("Retention at Harvard",
              fluidPage(
                  titlePanel("Retention at Harvard"),
@@ -47,6 +56,9 @@ ui <- navbarPage(
                      )
                  )
              )),
+    
+    # Formatting for the regression page
+    
     tabPanel("Effect of Percentage of Minority Students on School Size",
              fluidPage(
                  titlePanel("Effect of Percentage of Minority Students on School Size"),
@@ -66,6 +78,7 @@ ui <- navbarPage(
 server <- function(input, output) {
     
     # Send a pre-rendered image, and don't delete the image after sending it
+    # Render race or gender image depending on dropdown menu selection
     
     output$demographic_plot <- renderImage({
         if (input$demographic == "Race") {
@@ -84,6 +97,9 @@ server <- function(input, output) {
             ))
         }
     }, deleteFile = FALSE)
+    
+    # Render different image depending on dropdown menu selection for retention
+    # plot
     
     output$retention_plot <- renderImage({
         if (input$retention == "Black") {
@@ -130,6 +146,9 @@ server <- function(input, output) {
             ))
         }
     }, deleteFile = FALSE)
+    
+    # Render race or gender image depending on dropdown menu selection for
+    # regression plot
     
     output$regression_plot <- renderImage({
         if (input$regression == "Race") {

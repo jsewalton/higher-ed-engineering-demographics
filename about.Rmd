@@ -7,6 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.width=12, fig.height=8)
+
 library(tidyverse)
 library(rvest)
 library(janitor)
@@ -15,25 +16,9 @@ library(gganimate)
 library(broom)
 ```
 
-## Summary and Goals
-
-This project's goal is to analyze students studying STEM at the university level and to break down and compare racial and gender demographics between highly ranked institutions within the United States. This data is collected from the [American Society for Engineering Education (ASEE)](https://www.asee.org/). 
-
-This investigation hopes to critique the current demographic breakdown of STEM fields and encourage higher institutions to think more about how they can help encourage underrepresented minorities to enter and remain interested in STEM fields. 
-
-So far in my project, I have currently found and cleaned data tables on Degrees Awarded by Program in 2018. These tables provide the racial and gender breakdowns within STEM degrees awarded at each school. 
-
-I would also like to analyze the number of students studying each field in total over a longer time span to see if the racial and gender breakdowns changes significantly over time. 
-
-Additionally, there are tables on the ASEE website that break down each field based on how many students identify as male or female within each race which may be interesting to incorporate in my project. 
-
-Finally, I may consider including data about K-12 STEM programs and career paths in my project in order to analyze if racial and gender breakdowns before and after college are similar.
-
-#### Github Link: https://github.com/jessie9111/gov1005-final-project
-
 ## The Data
 
-```{r ugrad_degrees function, echo=FALSE}
+```{r ugrad_degrees, echo=FALSE}
 
 # Wrote a function to scrap all of the tables more efficiently. Function takes
 # in a url and scrapes that page for tables using function in the rvest package.
@@ -76,7 +61,6 @@ Brown University
 
 brown_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8107/screen/21?school_name=Brown+University")
-
 ```
 
 Columbia University
@@ -95,7 +79,6 @@ Cornell University
 
 cornell_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8046/screen/21?school_name=Cornell+University")
-
 ```
 
 Dartmouth College
@@ -105,7 +88,6 @@ Dartmouth College
 
 dartmouth_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8085/screen/21?school_name=Dartmouth+College")
-
 ```
 
 Harvard University
@@ -115,8 +97,6 @@ Harvard University
 
 harvard_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8130/screen/21?school_name=Harvard+University")
-
-
 ```
 
 University of Pennsylvania
@@ -126,8 +106,6 @@ University of Pennsylvania
 
 penn_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8116/screen/21?school_name=University+of+Pennsylvania")
-
-
 ```
 
 Princeton University
@@ -137,7 +115,6 @@ Princeton University
 
 princeton_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8068/screen/21?school_name=Princeton+University") 
-
 ```
 
 Yale School of Engineering & Applied Science
@@ -147,7 +124,6 @@ Yale School of Engineering & Applied Science
 
 yale_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8218/screen/21?school_name=Yale+School+of+Engineering+%26+Applied+Science") 
-
 ```
 
 Boston University
@@ -157,7 +133,6 @@ Boston University
 
 boston_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8150/screen/21?school_name=Boston+University")
-
 ```
 
 California Institute of Technology
@@ -168,9 +143,6 @@ California Institute of Technology
 
 caltech_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8089/screen/21?school_name=California+Institute+of+Technology")
-
-
- 
 ```
 
 University of California, Berkeley
@@ -180,7 +152,6 @@ University of California, Berkeley
 
 berkeley_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8005/screen/21?school_name=University+of+California%2C+Berkeley")
-
 ```
 
 Carnegie Mellon University
@@ -191,7 +162,6 @@ Carnegie Mellon University
 
 cmu_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8163/screen/21?school_name=Carnegie+Mellon+University")
-
 ```
 
 Duke University
@@ -201,8 +171,6 @@ Duke University
 
 duke_ugrad_degrees_2018 <- 
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8113/screen/21?school_name=Duke+University+")
-
-
 ```
 
 Georgia Institute of Technology
@@ -212,8 +180,6 @@ Georgia Institute of Technology
 
 gt_ugrad_degrees_2018 <- 
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8138/screen/21?school_name=Georgia+Institute+of+Technology")
-
-
 ```
 
 Harvey Mudd College
@@ -224,7 +190,6 @@ Harvey Mudd College
 
 mudd_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8242/screen/21?school_name=Harvey+Mudd+College")
-
 ```
 
 Johns Hopkins University
@@ -235,8 +200,6 @@ Johns Hopkins University
 
 jhu_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8145/screen/21?school_name=The+Johns+Hopkins+University")
-
-
 ```
 
 Massachusetts Institute of Technology
@@ -246,8 +209,6 @@ Massachusetts Institute of Technology
 
 mit_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8024/screen/21?school_name=Massachusetts+Institute+of+Technology")
-
-
 ```
 
 Northwestern University
@@ -257,7 +218,6 @@ Northwestern University
 
 nw_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8194/screen/21?school_name=Northwestern+University")
-
 ```
 
 Tufts University
@@ -267,7 +227,6 @@ Tufts University
 
 tufts_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8000/screen/21?school_name=Tufts+University")
-
 ```
 
 Vanderbilt University
@@ -277,8 +236,6 @@ Vanderbilt University
 
 vanderbilt_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8048/screen/21?school_name=Vanderbilt+University")
-
-
 ```
 
 University of Virginia
@@ -288,7 +245,6 @@ University of Virginia
 
 uva_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8008/screen/21?school_name=University+of+Virginia")
-
 ```
 
 Washington University in St. Louis
@@ -299,12 +255,11 @@ Washington University in St. Louis
 
 washu_ugrad_degrees_2018 <-
   ugrad_degrees_2018("http://profiles.asee.org/profiles/8088/screen/21?school_name=Washington+University+in+St.+Louis")
-
 ```
 
 ## Visualizations
 
-```{r race ivy league, echo=FALSE}
+```{r race, echo=FALSE}
 
 # Made a function to get the total number of students of each race from each of
 # the tables
@@ -321,7 +276,11 @@ race <- function(tibble) {
   slice(1)
 }
 
-# Made a table with all of the schools for race
+# Made two tables, one for all Ivy Leagues school and another for all 20+
+# schools, according to racial demographics using the rbind function. Appended
+# the names of the schools using the mutate function and used pivot_longer to
+# allow me to be able to graph the table. Added the perc variable to calculate
+# the percentage of each race for each school
 
 race_ivy_league <- rbind(
   race(brown_ugrad_degrees_2018),
@@ -373,9 +332,8 @@ race_all_schools <- rbind (
   mutate(perc = (values / Total) * 100) %>%
   filter(school != "Yale" & school != "CalTech")
 
-# Used ggplot() and geom_bar() to plot the race data. Had to tidy the
-# data using pivot_longer() in order to use ggplot() to plot it. Used
-# ColorBrewer to change the colors of the stacked bar chart.
+# Used ggplot() and geom_bar() to plot the race data. Used ColorBrewer to change
+# the colors of the stacked bar chart.
 
 race_ivy_plot <- race_ivy_league %>%
   ggplot(aes(x = reorder(school, -values), y = values, fill = race)) + 
@@ -394,6 +352,9 @@ race_ivy_plot <- race_ivy_league %>%
                       breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two")) + 
   theme_classic()
 
+# Made the perc_wht variable to sort the polar graph based on the percentages of
+# White students
+
 race_all_plot <- race_all_schools %>%
   mutate(perc_wht = ifelse(race == "Wht", perc, 0)) %>%
   ggplot(aes(x = reorder(school, perc_wht), y = perc, fill = race)) + 
@@ -411,10 +372,12 @@ race_all_plot <- race_all_schools %>%
                                          "Two" = "#cab2d6"),
                       breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two")) + coord_polar() + theme_light() 
 
+# Saved the plot with all of the schools to include in my Shiny App
+
 ggsave(filename = "final_project_shiny/race_all_plot.png", plot = race_all_plot)
 ```
 
-```{r gender ivy league, echo = FALSE}
+```{r gender, echo = FALSE}
 # Made a function to get the total number of Male and Female students from each
 # of the tables
 
@@ -425,7 +388,11 @@ male_female <- function(tibble) {
   slice(1)
 }
 
-# Made a table with all of the schools for gender
+# Made two tables, one for all Ivy Leagues school and another for all 20+
+# schools, according to gender demographics using the rbind function. Appended
+# the names of the schools using the mutate function and used pivot_longer to
+# allow me to be able to graph the table. Added the perc variable to calculate
+# the percentage of each gender for each school
 
 gender_ivy_league <- rbind(
   male_female(brown_ugrad_degrees_2018),
@@ -474,8 +441,7 @@ gender_all_schools <- rbind (
   pivot_longer(c("Male", "Female"), names_to = "gender", values_to = "values") %>%
   mutate(perc = (values/Total) * 100)
 
-# Used ggplot() and geom_bar() to plot the gender data. Made the data
-# tidy using pivot_longer() in order to use ggplot() to plot the data.
+# Used ggplot() and geom_bar() to plot the gender data
 
 gender_ivy_plot <- gender_ivy_league %>%
   ggplot(aes(x = reorder(school, -values), y = values, fill = gender)) + 
@@ -486,6 +452,8 @@ gender_ivy_plot <- gender_ivy_league %>%
     scale_fill_discrete(name = "Gender") +
   theme_classic()
 
+# Made the perc_male variable to sort the polar graph based on the percentages
+# of male students
 
 gender_all_plot <- gender_all_schools %>%
   mutate(perc_male = ifelse(gender == "Male", perc, 0)) %>%
@@ -496,11 +464,15 @@ gender_all_plot <- gender_all_schools %>%
     scale_fill_discrete(name = "Gender") +
   theme_light() + coord_polar()
 
+# Saved the plot with all of the schools to include in my Shiny App
+
 ggsave(filename = "final_project_shiny/gender_all_plot.png", plot = gender_all_plot)
 ```
 
 ```{r harvard plot, echo = FALSE}
-# harvard_ugrad_degrees_2018
+
+# Pulled the data from the ASEE website of sophomores within Harvard SEAS in
+# 2016 to compare with the Harvard 2018 data of those who graduated with degrees
 
 tables <- read_html("http://profiles.asee.org/profiles/7332/screen/20?school_name=Harvard+University") %>% 
   html_nodes("table") 
@@ -543,13 +515,22 @@ harvard_soph_2016 <- harvard_soph_2016 %>%
                names_to = "race", values_to = "students") %>%
   mutate(students = as.numeric(students))
 
+# Pulled the gender data from the demographics on sophomores at Harvard studying
+# SEAS concentrations
+
 gender_2016 <- harvard_soph_2016 %>%
   group_by(gender, major) %>%
   summarize(students = sum(students))
 
+# Pulled the race data from the demographics on sophomores at Harvard studying
+# SEAS concentrations
+
 race_2016 <- harvard_soph_2016 %>%
   group_by(race, major) %>%
   summarize(students = sum(students))
+
+# Accounted for majors changing names or combining from 2016 to 2018 using the
+# mutate function and made the gender data tidy using pivot_longer
 
 gender_2018 <- harvard_ugrad_degrees_2018 %>%
   select(`Bachelor's Degree Program(s)`, Male, Female) %>%
@@ -568,6 +549,9 @@ gender_2018 <- harvard_ugrad_degrees_2018 %>%
     "Engineering Sciences (A.B.)",
     TRUE ~ major
   ))
+
+# Accounted for majors changing names or combining from 2016 to 2018 using the
+# mutate function and made the race data tidy using pivot_longer
 
 race_2018 <- harvard_ugrad_degrees_2018 %>%
   select(-Male, -Female) %>%
@@ -589,7 +573,12 @@ race_2018 <- harvard_ugrad_degrees_2018 %>%
   ))
 ```
 
-```{r race retention, echo = FALSE}
+```{r black retention, echo = FALSE}
+
+# Broke down retention data from 2016 to 2018 by race by filtering for Black
+# students in Harvard SEAS
+
+# Filtered for black sophomore students in 2016
 
 blk_2016 <- race_2016 %>%
   filter(race == "Blk") %>%
@@ -597,14 +586,20 @@ blk_2016 <- race_2016 %>%
   summarize(students_2016 = sum(students)) %>%
   filter(students_2016 != 0)
 
+# Filtered for black degrees receiving students in 2018
+
 blk_2018 <- race_2018 %>%
   filter(race == "Blk") %>%
   group_by(major) %>%
   summarize(students_2018 = sum(students))
 
+# Combined the 2016 and 2018 data
+
 blk_2016_2018 <- blk_2016 %>%
   left_join(blk_2018, by = "major") %>%
   pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
+
+# Created a plot using the combined 2016 and 2018 data
 
 blk_plot <- blk_2016_2018 %>%
   ggplot(aes(x = year, y = students, color = major)) + 
@@ -614,7 +609,17 @@ blk_plot <- blk_2016_2018 %>%
          x = "Year", y = "Students", color = "Major",
          caption = "Source: American Society for Engineering Education") + theme_classic() 
 
+# Saved the plot to include in my Shiny App
+
 ggsave(filename = "final_project_shiny/blk_plot.png", plot = blk_plot)
+```
+
+```{r hispanic retention, echo = FALSE}
+
+# Broke down retention data from 2016 to 2018 by race by filtering for Hispanic
+# students in Harvard SEAS
+
+# Filtered for hispanic sophomore students in 2016
 
 his_2016 <- race_2016 %>%
   filter(race == "His") %>%
@@ -622,14 +627,20 @@ his_2016 <- race_2016 %>%
   summarize(students_2016 = sum(students)) %>%
   filter(students_2016 != 0)
 
+# Filtered for hispanic degrees receiving students in 2018
+
 his_2018 <- race_2018 %>%
   filter(race == "His") %>%
   group_by(major) %>%
   summarize(students_2018 = sum(students))
 
+# Combined the 2016 and 2018 data
+
 his_2016_2018 <- his_2016 %>%
   left_join(his_2018, by = "major") %>%
   pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
+
+# Created a plot using the combined 2016 and 2018 data
 
 his_plot <- his_2016_2018 %>%
   ggplot(aes(x = year, y = students, color = major)) + 
@@ -639,7 +650,17 @@ his_plot <- his_2016_2018 %>%
          x = "Year", y = "Students", color = "Major",
          caption = "Source: American Society for Engineering Education") + theme_classic()
 
+# Saved the plot to include in my Shiny App
+
 ggsave(filename = "final_project_shiny/his_plot.png", plot = his_plot)
+```
+
+```{r white retention, echo = FALSE}
+
+# Broke down retention data from 2016 to 2018 by race by filtering for white
+# students in Harvard SEAS
+
+# Filtered for white sophomore students in 2016
 
 wht_2016 <- race_2016 %>%
   filter(race == "Wht") %>%
@@ -647,14 +668,20 @@ wht_2016 <- race_2016 %>%
   summarize(students_2016 = sum(students)) %>%
   filter(students_2016 != 0)
 
+# Filtered for white degree receiving students in 2018
+
 wht_2018 <- race_2018 %>%
   filter(race == "Wht") %>%
   group_by(major) %>%
   summarize(students_2018 = sum(students))
 
+# Combined the 2016 and 2018 data
+
 wht_2016_2018 <- wht_2016 %>%
   left_join(wht_2018, by = "major") %>%
   pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
+
+# Created a plot using the combined 2016 and 2018 data
 
 wht_plot <- wht_2016_2018 %>%
   ggplot(aes(x = year, y = students, color = major)) + 
@@ -664,7 +691,17 @@ wht_plot <- wht_2016_2018 %>%
          x = "Year", y = "Students", color = "Major",
          caption = "Source: American Society for Engineering Education") + theme_classic()
 
+# Saved the plot to include in my Shiny App
+
 ggsave(filename = "final_project_shiny/wht_plot.png", plot = wht_plot)
+```
+
+```{r asian retention, echo = FALSE}
+
+# Broke down retention data from 2016 to 2018 by race by filtering for Asian
+# students in Harvard SEAS
+
+# Filtered for Asian sophomore students in 2016
 
 asi_2016 <- race_2016 %>%
   filter(race == "Asi") %>%
@@ -672,14 +709,20 @@ asi_2016 <- race_2016 %>%
   summarize(students_2016 = sum(students)) %>%
   filter(students_2016 != 0)
 
+# Filtered for Asian degree receiving students in 2018
+
 asi_2018 <- race_2018 %>%
   filter(race == "Asi") %>%
   group_by(major) %>%
   summarize(students_2018 = sum(students))
 
+# Combined the 2016 and 2018 data
+
 asi_2016_2018 <- asi_2016 %>%
   left_join(asi_2018, by = "major") %>%
   pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
+
+# Made a plot using the combined 2016 and 2018 data
 
 asi_plot <- asi_2016_2018 %>%
   ggplot(aes(x = year, y = students, color = major)) + 
@@ -689,25 +732,38 @@ asi_plot <- asi_2016_2018 %>%
          x = "Year", y = "Students", color = "Major",
          caption = "Source: American Society for Engineering Education") + theme_classic()
 
+# Saved the plot to include in my Shiny App
+
 ggsave(filename = "final_project_shiny/asi_plot.png", plot = asi_plot)
 ```
 
-```{r gender retention, echo = FALSE}
+```{r female retention, echo = FALSE}
+
+# Broke down retention data from 2016 to 2018 by race by filtering for female
+# students in Harvard SEAS
+
+# Filtered for female sophomore students in 2016
 
 female_2016 <- gender_2016 %>%
   filter(gender == "Female" & students != 0) %>%
   group_by(major, gender) %>%
   summarize(students_2016 = sum(students))
 
+# Filtered for female degree receiving students in 2018
+
 female_2018 <- gender_2018 %>%
   filter(gender == "Female") %>%
   group_by(major, gender) %>%
   summarize(students_2018 = sum(students))
 
+# Combined 2016 and 2018 data
+
 female_2016_2018 <- female_2016 %>%
   left_join(female_2018, by = c("major", "gender")) %>%
   select(major, students_2016, students_2018) %>%
   pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
+
+# Made a plot using the combined 2016 and 2018 data
 
 female_plot <- female_2016_2018 %>%
   ggplot(aes(x = year, y = students, color = major)) + 
@@ -717,22 +773,38 @@ female_plot <- female_2016_2018 %>%
          x = "Major", y = "Students", color = "Year",
          caption = "Source: American Society for Engineering Education") + theme_classic() 
 
+# Saved the plot to include in my Shiny App
+
 ggsave(filename = "final_project_shiny/female_plot.png", plot = female_plot)
+```
+
+```{r male retention, echo = FALSE}
+
+# Broke down retention data from 2016 to 2018 by race by filtering for male
+# students in Harvard SEAS
+
+# Filtered for male sophomore students in 2016
 
 male_2016 <- gender_2016 %>%
   filter(gender == "Male" & students != 0) %>%
   group_by(major, gender) %>%
   summarize(students_2016 = sum(students))
 
+# Filtered for male degree receiving students in 2018
+
 male_2018 <- gender_2018 %>%
   filter(gender == "Male") %>%
   group_by(major, gender) %>%
   summarize(students_2018 = sum(students))
 
+# Combined the 2016 and 2018 data
+
 male_2016_2018 <- male_2016 %>%
   left_join(male_2018, by = c("major", "gender")) %>%
   select(major, students_2016, students_2018) %>%
   pivot_longer(students_2016:students_2018, names_to = "year", names_prefix = "students_", values_to = "students")
+
+# Made a plot using the combined 2016 and 2018 data
 
 male_plot <- male_2016_2018 %>%
   ggplot(aes(x = year, y = students, color = major)) + 
@@ -742,67 +814,69 @@ male_plot <- male_2016_2018 %>%
          x = "Year", y = "Students", color = "Major",
          caption = "Source: American Society for Engineering Education") + theme_classic() 
 
-ggsave(filename = "final_project_shiny/male_plot.png", plot = male_plot)
+# Saved the final plot to include in my Shiny App
 
+ggsave(filename = "final_project_shiny/male_plot.png", plot = male_plot)
 ```
-```{r model}
+
+```{r race model, echo = FALSE}
 
 # Is a higher percentage of underrepresented minority students (Black and Hispanic) at a school
 # associated with more students graduating with engineering degrees in total?
+
+# Used the all school race data to compare the percentages of black and hispanic
+# students receiving degrees to the total amount of students receiving
+# engineering degrees
 
 blk_his <- race_all_schools %>%
   filter((perc != 0) & (race == "Blk" | race == "His")) %>%
   group_by(school) %>%
   summarize(total = mean(Total), perc = sum(perc)) 
 
+# Made a model comparing total number of students receiving degrees and
+# percentage of black and hispanic students receiving degrees
+
 lm(total ~ perc, blk_his) %>%
   tidy(conf.int = TRUE)
+
+# Plotted the scatterplot showing the regression with a line of best fit
 
 blk_his_reg_plot <- ggplot(blk_his, aes(x = perc, y = total)) + 
   labs(title = "Comparing the Proportion of Black and Hispanic Students to School Size", 
        x = "Percentage of Black and Hispanic Students", y = "Total Students") +
   geom_point() + theme_classic() + geom_smooth(method = "lm")
 
+# Saved the plot to include in my Shiny App
+
 ggsave(filename = "final_project_shiny/blk_his_reg_plot.png", plot = blk_his_reg_plot)
+```
+
+```{r gender model, echo = FALSE}
 
 # Is a higher percentage of female students at a school associated with more
 # students graduating with engineering degrees in total?
 
+# Used the all school gender data to compare the percentages of female students
+# receiving degrees to the total amount of students receiving engineering
+# degrees
+
 fem <- gender_all_schools %>%
   filter(gender == "Female")
+
+# Made a model comparing total number of students receiving degrees and
+# percentage of black and hispanic students receiving degrees
 
 lm(Total ~ perc, fem) %>%
   tidy(conf.int = TRUE)
  
+# Plotted the scatterplot showing the regression with a line of best fit
+
 female_reg_plot <- ggplot(fem, aes(x = perc, y = Total)) + 
   labs(title = "Comparing the Proportion of Female Students to School Size",
        x = "Percentage of Female Students", y = "Total Students") +
   geom_point() + theme_classic() + geom_smooth(method = "lm")
 
+# Saved the plot to include in my Shiny App
+
 ggsave(filename = "final_project_shiny/female_reg_plot.png", plot = female_reg_plot)
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
