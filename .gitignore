@@ -3,5 +3,5 @@
 .RData
 .Ruserdata
 
-gov1005-final-project.Rproj
+*.Rproj
 rsconnect

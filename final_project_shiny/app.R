@@ -2,27 +2,14 @@
 library(shiny)
 library(png)
 
+
 # Define UI for final project application
 
 ui <- navbarPage(
     
     # Formatting for the about page
     
-    "Investigating Demographics within Higher Education STEM Programs",
-    tabPanel("About", 
-             titlePanel("About"),
-             h3("Project Background and Motivations"),
-             p("This project's goal is to analyze students studying STEM at the university level 
-             and to break down and compare racial and gender demographics between highly 
-             ranked institutions within the United States. This data is collected from the 
-             American Society for Engineering Education."),
-             p("This investigation hopes to critique the current demographic breakdown of 
-               STEM fields and encourage higher institutions to think more about how they
-               can help encourage underrepresented minorities to enter and remain
-               interested in STEM fields."),
-             h3("About Me"),
-             p("My name is Jessica Edwards and I study Computer Science and Education. 
-             You can reach me at jedwards@college.harvard.edu.")),
+    "Investigating Demographics within Higher Education Engineering Programs",
     
     # Formatting for the school demographics page 
     
@@ -71,7 +58,23 @@ ui <- navbarPage(
                          imageOutput("regression_plot")
                      )
                  )
-             )))
+             )),
+    tabPanel("About", 
+             titlePanel("About"),
+             h3("Project Background and Motivations"),
+             p("This project's goal is to analyze students studying STEM at the university level 
+             and to break down and compare racial and gender demographics between highly 
+             ranked institutions within the United States. This data is collected from the 
+             American Society for Engineering Education."),
+             p("This investigation hopes to critique the current demographic breakdown of 
+               STEM fields and encourage higher institutions to think more about how they
+               can help encourage underrepresented minorities to enter and remain
+               interested in STEM fields."),
+             h3("About Me"),
+             p("My name is Jessica Edwards and I study Computer Science and Education. 
+             You can reach me at jedwards@college.harvard.edu."))
+    )
+
 
 # Define server logic
 
