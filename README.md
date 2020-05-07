@@ -8,4 +8,4 @@ This investigation hopes to critique the current demographic breakdown of engine
 
 Data is collected from the [American Society for Engineering Education (ASEE)](https://www.asee.org/). 
 
-#### Shiny App Link: https://jessica-edwards.shinyapps.io/gov1005/
+#### Shiny App Link: https://jessica-edwards.shinyapps.io/higher-ed-engineering-demographics/
