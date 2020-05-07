@@ -1,7 +1,8 @@
 
 library(shiny)
 library(png)
-
+library(plotly)
+source("data.R")
 
 # Define UI for final project application
 
@@ -11,18 +12,58 @@ ui <- navbarPage(
     
     "Investigating Demographics within Higher Education Engineering Programs",
     
-    # Formatting for the school demographics page 
+    # Formatting for the race demographics page 
     
-    tabPanel("School Demographics",
+    tabPanel("Race",
              fluidPage(
-                 titlePanel("School Demographics"),
                  sidebarLayout(
                      sidebarPanel(
-                         selectInput("demographic", label = "Demographic categories", 
-                                     choices = c("Race", "Gender"))
+                         selectInput("school", label = "Schools", 
+                                     choices = c("All Schools",
+                                                 "Ivy Leagues",
+                                                 "Brown", "Columbia", 
+                                                 "Cornell", "Dartmouth",
+                                                 "Harvard", "UPenn", 
+                                                 "Princeton", "Yale", 
+                                                 "Boston University", 
+                                                 "CalTech", "UC Berkeley", 
+                                                 "Carnegie Mellon", 
+                                                 "Duke", "Georgia Tech", 
+                                                 "Harvey Mudd", "Johns Hopkins", 
+                                                 "MIT", "Northwestern", 
+                                                 "Tufts", "Vanderbilt", "UVA", 
+                                                 "WashU"))
                      ),
                      mainPanel(
-                         imageOutput("demographic_plot")
+                         plotOutput("race_plot")
+                     )
+                 )
+             )),
+    
+    # Formatting for the race demographics page 
+    
+    tabPanel("Gender",
+             fluidPage(
+                 sidebarLayout(
+                     sidebarPanel(
+                         selectInput("school", label = "Schools", 
+                                     choices = c("All Schools",
+                                                 "Ivy Leagues",
+                                                 "Brown", "Columbia", 
+                                                 "Cornell", "Dartmouth",
+                                                 "Harvard", "UPenn", 
+                                                 "Princeton", "Yale", 
+                                                 "Boston University", 
+                                                 "CalTech", "UC Berkeley", 
+                                                 "Carnegie Mellon", 
+                                                 "Duke", "Georgia Tech", 
+                                                 "Harvey Mudd", "Johns Hopkins", 
+                                                 "MIT", "Northwestern", 
+                                                 "Tufts", "Vanderbilt", "UVA", 
+                                                 "WashU"))
+                     ),
+                     mainPanel(
+                         plotOutput("gender_plot")
                      )
                  )
              )),
@@ -80,26 +121,230 @@ ui <- navbarPage(
 
 server <- function(input, output) {
     
+    output$race_plot <- renderPlot({
+        case_when(
+            input$school == "All Schools" ~ list(
+                race_all_plot,
+                width = "auto",
+                height = "auto"),
+            input$school == "Ivy Leagues" ~ list(
+                race_ivy_plot,
+                width = "auto",
+                height = "auto"),
+            input$school == "Brown" ~ list(
+                race_school_plot(brown_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Columbia" ~ list(
+                race_school_plot(columbia_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Cornell" ~ list(
+                race_school_plot(cornell_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Dartmouth" ~ list(
+                race_school_plot(dartmouth_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Harvard" ~ list(
+                race_school_plot(harvard_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "UPenn" ~ list(
+                race_school_plot(penn_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Princeton" ~ list(
+                race_school_plot(princeton_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Yale" ~ list(
+                race_school_plot(yale_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Boston University" ~ list(
+                race_school_plot(boston_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "CalTech" ~ list(
+                race_school_plot(caltech_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "UC Berkeley" ~ list(
+                race_school_plot(berkeley_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Carnegie Mellon" ~ list(
+                race_school_plot(cmu_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Duke" ~ list(
+                race_school_plot(duke_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Georgia Tech" ~ list(
+                race_school_plot(gt_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Harvey Mudd" ~ list(
+                race_school_plot(mudd_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Johns Hopkins" ~ list(
+                race_school_plot(jhu_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "MIT" ~ list(
+                race_school_plot(mit_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Northwestern" ~ list(
+                race_school_plot(nw_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Tufts" ~ list(
+                race_school_plot(tufts_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Vanderbilt" ~ list(
+                race_school_plot(vanderbilt_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "UVA" ~ list(
+                race_school_plot(uva_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "WashU" ~ list(
+                race_school_plot(washu_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto")
+        )
+    })
+    
+    output$gender_plot <- renderPlot({
+        case_when(
+            input$school == "All Schools" ~ list(
+                gender_all_plot,
+                width = "auto",
+                height = "auto"),
+            input$school == "Ivy Leagues" ~ list(
+                gender_ivy_plot,
+                width = "auto",
+                height = "auto"),
+            input$school == "Brown" ~ list(
+                gender_school_plot(brown_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Columbia" ~ list(
+                gender_school_plot(columbia_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Cornell" ~ list(
+                gender_school_plot(cornell_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Dartmouth" ~ list(
+                gender_school_plot(dartmouth_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Harvard" ~ list(
+                gender_school_plot(harvard_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "UPenn" ~ list(
+                gender_school_plot(penn_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Princeton" ~ list(
+                gender_school_plot(princeton_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Yale" ~ list(
+                gender_school_plot(yale_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Boston University" ~ list(
+                gender_school_plot(boston_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "CalTech" ~ list(
+                gender_school_plot(caltech_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "UC Berkeley" ~ list(
+                gender_school_plot(berkeley_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Carnegie Mellon" ~ list(
+                gender_school_plot(cmu_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Duke" ~ list(
+                gender_school_plot(duke_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Georgia Tech" ~ list(
+                gender_school_plot(gt_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Harvey Mudd" ~ list(
+                gender_school_plot(mudd_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Johns Hopkins" ~ list(
+                gender_school_plot(jhu_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "MIT" ~ list(
+                gender_school_plot(mit_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Northwestern" ~ list(
+                gender_school_plot(nw_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Tufts" ~ list(
+                gender_school_plot(tufts_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "Vanderbilt" ~ list(
+                gender_school_plot(vanderbilt_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "UVA" ~ list(
+                gender_school_plot(uva_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto"),
+            input$school == "WashU" ~ list(
+                gender_school_plot(washu_ugrad_degrees_2018),
+                width = "auto",
+                height = "auto")
+        )
+    })
+    
+    
+    
     # Send a pre-rendered image, and don't delete the image after sending it
     # Render race or gender image depending on dropdown menu selection
     
-    output$demographic_plot <- renderImage({
-        if (input$demographic == "Race") {
-            return(list(
-                src = 'race_all_plot.png',
-                width = 900,
-                height = 600,
-                alt = "Race"
-            ))
-        } else if (input$demographic == "Gender") {
-            return(list(
-                src = 'gender_all_plot.png',
-                width = 900,
-                height = 600,
-                alt = "Gender"
-            ))
-        }
-    }, deleteFile = FALSE)
+    # output$demographic_plot <- renderImage({
+    #     if (input$demographic == "Race") {
+    #         return(list(
+    #             src = 'race_all_plot.png',
+    #             width = 900,
+    #             height = 600,
+    #             alt = "Race"
+    #         ))
+    #     } else if (input$demographic == "Gender") {
+    #         return(list(
+    #             src = 'gender_all_plot.png',
+    #             width = 900,
+    #             height = 600,
+    #             alt = "Gender"
+    #         ))
+    #     }
+    # }, deleteFile = FALSE)
     
     # Render different image depending on dropdown menu selection for retention
     # plot

@@ -229,16 +229,16 @@ race_ivy_plot <- race_ivy_league %>%
   geom_bar(position="stack", stat="identity") +
   labs(title = "Total Students Receiving Engineering Degrees at Ivy League Schools in 2018", 
        x = "Ivy League Schools", y = "Total Degree Earning Students",
-       caption = "Source: American Society for Engineering Education \n 
-         Nra - Nonresident aliens, Asi - Asian American, Blk - Black, 
-         His - Hispanic, Ind - American Indian, Pac - Pacific Islander, 
-         Unk - Unknown, Wht - White, Tot - Program Totals, Two - Two or More") + 
+       caption = "Source: American Society for Engineering Education") + 
   scale_fill_manual("Race", values = c("Nra" = "#a6cee3", "Unk" = "#1f78b4",
                                        "His" = "#b2df8a", "Ind" = "#33a02c",
                                        "Asi" = "#fb9a99", "Blk" = "#e31a1c",
                                        "Pac" = "#fdbf6f", "Wht" = "#ff7f00",
                                        "Two" = "#cab2d6"),
-                    breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two")) + 
+                    breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"),
+                    labels = c("Nonresident aliens", "Unknown", "Hispanic", 
+                               "American Indian", "Asian American", "Black", 
+                               "Pacific Islander", "White", "Two or More")) + 
   theme_classic()
 
 # Made the perc_wht variable to sort the polar graph based on the percentages of
@@ -250,16 +250,42 @@ race_all_plot <- race_all_schools %>%
   geom_bar(position = "stack", stat="identity", width = 0.5) +
   labs(title = "Percentage of Students Receiving Engineering Degrees \nby Race at Highly Ranked Institutions in 2018",
        x = "Schools", y = "Percent of Degree Earning Students",
-       caption = "Source: American Society for Engineering Education \n
-         Nra - Nonresident aliens, Asi - Asian American, Blk - Black,
-         His - Hispanic, Ind - American Indian, Pac - Pacific Islander,
-         Unk - Unknown, Wht - White, Tot - Program Totals, Two - Two or More") +
+       caption = "Source: American Society for Engineering Education") +
   scale_fill_manual("Race", values = c("Nra" = "#a6cee3", "Unk" = "#1f78b4",
                                        "His" = "#b2df8a", "Ind" = "#33a02c",
                                        "Asi" = "#fb9a99", "Blk" = "#e31a1c",
                                        "Pac" = "#fdbf6f", "Wht" = "#ff7f00",
                                        "Two" = "#cab2d6"),
-                    breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two")) + coord_polar() + theme_light() 
+                    breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"),
+                    labels = c("Nonresident aliens", "Unknown", "Hispanic", 
+                               "American Indian", "Asian American", "Black", 
+                               "Pacific Islander", "White", "Two or More")) + coord_polar() + theme_light() 
+
+# Made a function to plot each school based on majors and total students grouped
+# by race in 2018
+
+race_school_plot <- function(tibble) {
+  tibble %>%
+  pivot_longer(c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"), 
+               names_to = "race", values_to = "values") %>%
+  rename(major = `Bachelor's Degree Program(s)`) %>%
+  select(major, race, values) %>%
+  ggplot(aes(x = reorder(major, values), y = values, fill = race)) + 
+    geom_bar(position="stack", stat="identity") +
+    labs(title = "Total Students Receiving Engineering Degrees in 2018", 
+         x = "Majors", y = "Total Degree Earning Students",
+         caption = "Source: American Society for Engineering Education") + 
+    scale_fill_manual("Race", values = c("Nra" = "#a6cee3", "Unk" = "#1f78b4",
+                                         "His" = "#b2df8a", "Ind" = "#33a02c",
+                                         "Asi" = "#fb9a99", "Blk" = "#e31a1c",
+                                         "Pac" = "#fdbf6f", "Wht" = "#ff7f00",
+                                         "Two" = "#cab2d6"),
+                      breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"),
+                      labels = c("Nonresident aliens", "Unknown", "Hispanic", 
+                                 "American Indian", "Asian American", "Black", 
+                                 "Pacific Islander", "White", "Two or More")) + 
+    theme_classic() + coord_flip()
+}
 
 # Made a function to get the total number of Male and Female students from each
 # of the tables
@@ -346,6 +372,23 @@ gender_all_plot <- gender_all_schools %>%
        caption = "Source: American Society for Engineering Education") +
   scale_fill_discrete(name = "Gender") +
   theme_light() + coord_polar()
+
+# Made a function to create plots for every school in the dataset by major and
+# total students grouped by gender in 2018
+
+gender_school_plot <- function(tibble) {
+  tibble %>%
+    pivot_longer(c("Male", "Female"), 
+                 names_to = "gender", values_to = "values") %>%
+    rename(major = `Bachelor's Degree Program(s)`) %>%
+    select(major, gender, values) %>%
+    ggplot(aes(x = reorder(major, values), y = values, fill = gender)) +
+    geom_bar(position="dodge", stat="identity") +
+    labs(title = "Total Students Receiving Engineering Degrees in 2018",
+         x = "Majors", y = "Total Degree Earning Students",
+         caption = "Source: American Society for Engineering Education") +
+    scale_fill_discrete(name = "Gender") + theme_classic() + coord_flip()
+}
 
 # Pulled the data from the ASEE website of sophomores within Harvard SEAS in
 # 2016 to compare with the Harvard 2018 data of those who graduated with degrees
