@@ -8,8 +8,6 @@ source("data.R")
 
 ui <- navbarPage(
     
-    # Formatting for the about page
-    
     "Investigating Demographics within Higher Education Engineering Programs",
     
     # Formatting for the demographics page 
@@ -66,24 +64,36 @@ ui <- navbarPage(
     
     # Formatting for the regression page
     
-    tabPanel("Effect of Percentage of Minority Students on School Size",
+    tabPanel("Effect of Percentage of Underrepresented Students on Engineering School Size",
              fluidPage(
                  sidebarLayout(
                      sidebarPanel(
                          radioButtons("regression", label = "Demographic", 
                                      choices = c("Race", "Gender")),
-                         p("Is the percentage of underrepresented students in an engineering school associated with the 
-                           total number of students enrolled in the program? For race, underrepresented students are defined
-                           as Black and Hispanic undergraudates. For gender, underrepresented students are females."),
+                         p("Is the percentage of underrepresented undergraduates in an engineering school associated with the 
+                           total number of undergraduates enrolled in the program? For race, underrepresented students are defined
+                           as Black and Hispanic undergraduates. For gender, underrepresented students are females."),
                          p("A positive correlation would suggest an association between larger engineering programs 
                            and a higher percentage of underrepresented students. A negative correlation
-                           would suggest that there is an association between smaller programs and ")
+                           would suggest that there is an association between smaller engineering programs and higher percentages of 
+                           underrepresented students pursuing engineering degrees."),
+                         p("We would assume that schools with more students should have more resources to 
+                           support a higher percentage of underrepresented minority students in pursuing 
+                           engineering degrees, resulting in a positive correlation."),
+                         p("However, for both race and gender, there is a very weak negative correlation between percentages of 
+                         underrepresented students and total students enrolled."),
+                         p("Given these regressions and the diversity issues in engineering fields, colleges and universities,
+                         particularly those with larger and more developed engineering programs, should
+                         work harder in recruiting and retaining talented, underrepresented students interested in engineering."),
                      ),
                      mainPanel(
                          plotOutput("regression_plot")
                      )
                  )
              )),
+    
+    # Formatting for the about page
+    
     tabPanel("About", 
              fluidPage(
                  h3("Project Background and Motivations"),
@@ -119,7 +129,11 @@ ui <- navbarPage(
 # Define server logic
 
 server <- function(input, output) {
+    
     output$demographic_plot <- renderPlot({
+        
+        # Plots for race data
+        
         if (input$demographic == "Race") {
             case_when(
                 input$school == "All Schools" ~ list(
@@ -218,6 +232,9 @@ server <- function(input, output) {
                     race_school_plot(washu_ugrad_degrees_2018),
                     width = "auto",
                     height = "auto")
+                
+            # Plots for gender data
+            
             )} else if (input$demographic == "Gender") {
             case_when(
                 input$school == "All Schools" ~ list(
@@ -319,7 +336,7 @@ server <- function(input, output) {
         )}
     })
     
-    # Render different image depending on selection for retention plot
+    # Render different plot depending on selection for retention plot
     
     output$retention_plot <- renderPlot({
         case_when(
@@ -350,7 +367,7 @@ server <- function(input, output) {
             )
         })
     
-    # Render race or gender image depending on selection for regression plot
+    # Render race or gender plot depending on selection for regression plot
     
     output$regression_plot <- renderPlot({
         case_when(
@@ -364,6 +381,8 @@ server <- function(input, output) {
                 height = "auto"),
         )
     })
+    
+    # Picture for about me section
     
     output$me <- renderImage({
         list(src = "me.jpeg",
