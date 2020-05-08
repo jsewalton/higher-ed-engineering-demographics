@@ -239,7 +239,7 @@ race_ivy_plot <- race_ivy_league %>%
                     labels = c("Nonresident aliens", "Unknown", "Hispanic", 
                                "American Indian", "Asian American", "Black", 
                                "Pacific Islander", "White", "Two or More")) + 
-  theme_classic()
+  theme_classic() + theme(text = element_text(size = 14))
 
 # Made the perc_wht variable to sort the polar graph based on the percentages of
 # White students
@@ -259,7 +259,9 @@ race_all_plot <- race_all_schools %>%
                     breaks = c("Nra", "Unk", "His", "Ind", "Asi", "Blk", "Pac", "Wht", "Two"),
                     labels = c("Nonresident aliens", "Unknown", "Hispanic", 
                                "American Indian", "Asian American", "Black", 
-                               "Pacific Islander", "White", "Two or More")) + coord_polar() + theme_light() 
+                               "Pacific Islander", "White", "Two or More")) + 
+  coord_polar(clip = "off") + 
+  theme(axis.text.x = element_text(angle = 10), text = element_text(size = 14))
 
 # Made a function to plot each school based on majors and total students grouped
 # by race in 2018
@@ -272,7 +274,7 @@ race_school_plot <- function(tibble) {
   select(major, race, values) %>%
   ggplot(aes(x = reorder(major, values), y = values, fill = race)) + 
     geom_bar(position="stack", stat="identity") +
-    labs(title = "Total Students Receiving Engineering Degrees in 2018", 
+    labs(title = "Total Students Receiving Engineering Degrees in 2018 by Race", 
          x = "Majors", y = "Total Degree Earning Students",
          caption = "Source: American Society for Engineering Education") + 
     scale_fill_manual("Race", values = c("Nra" = "#a6cee3", "Unk" = "#1f78b4",
@@ -284,7 +286,7 @@ race_school_plot <- function(tibble) {
                       labels = c("Nonresident aliens", "Unknown", "Hispanic", 
                                  "American Indian", "Asian American", "Black", 
                                  "Pacific Islander", "White", "Two or More")) + 
-    theme_classic() + coord_flip()
+    theme_classic() + coord_flip() + theme(text = element_text(size = 14))
 }
 
 # Made a function to get the total number of Male and Female students from each
@@ -359,7 +361,7 @@ gender_ivy_plot <- gender_ivy_league %>%
        x = "Ivy League Schools", y = "Total Degree Earning Students", 
        caption = "Source: American Society for Engineering Education") + 
   scale_fill_discrete(name = "Gender") +
-  theme_classic()
+  theme_classic() + theme(text = element_text(size = 14))
 
 # Made the perc_male variable to sort the polar graph based on the percentages
 # of male students
@@ -370,8 +372,8 @@ gender_all_plot <- gender_all_schools %>%
   geom_bar(position="stack", stat="identity", width = 0.5) +
   labs(title = "Percentage of Students Receiving Engineering Degrees \nby Gender at Highly Ranked Institutions in 2018", x = "Schools", y = "Percent of Degree Earning Students",
        caption = "Source: American Society for Engineering Education") +
-  scale_fill_discrete(name = "Gender") +
-  theme_light() + coord_polar()
+  scale_fill_discrete(name = "Gender") + coord_polar(clip = "off") +
+  theme(axis.text.x = element_text(angle = 10), text = element_text(size = 14))
 
 # Made a function to create plots for every school in the dataset by major and
 # total students grouped by gender in 2018
@@ -383,11 +385,11 @@ gender_school_plot <- function(tibble) {
     rename(major = `Bachelor's Degree Program(s)`) %>%
     select(major, gender, values) %>%
     ggplot(aes(x = reorder(major, values), y = values, fill = gender)) +
-    geom_bar(position="dodge", stat="identity") +
-    labs(title = "Total Students Receiving Engineering Degrees in 2018",
+    geom_bar(position="stack", stat="identity") +
+    labs(title = "Total Students Receiving Engineering Degrees in 2018 by Gender",
          x = "Majors", y = "Total Degree Earning Students",
          caption = "Source: American Society for Engineering Education") +
-    scale_fill_discrete(name = "Gender") + theme_classic() + coord_flip()
+    scale_fill_discrete(name = "Gender") + theme_classic() + coord_flip() + theme(text = element_text(size = 14))
 }
 
 # Pulled the data from the ASEE website of sophomores within Harvard SEAS in
@@ -523,7 +525,7 @@ blk_plot <- blk_2016_2018 %>%
   labs(title = "Black Sophomores in SEAS in 2016 Compared to \nStudents Receiving Degrees in 2018",
        subtitle = "Retention of Harvard SEAS Black Undergrads \nfrom 2016 to 2018",
        x = "Year", y = "Students", color = "Major",
-       caption = "Source: American Society for Engineering Education") + theme_classic() 
+       caption = "Source: American Society for Engineering Education") + theme_classic() + theme(text = element_text(size = 14))
 
 # Broke down retention data from 2016 to 2018 by race by filtering for Hispanic
 # students in Harvard SEAS
@@ -557,7 +559,7 @@ his_plot <- his_2016_2018 %>%
   labs(title = "Hispanic Sophomores in SEAS in 2016 Compared to \nStudents Receiving Degrees in 2018",
        subtitle = "Retention of Harvard SEAS Hispanic Undergrads \nfrom 2016 to 2018",
        x = "Year", y = "Students", color = "Major",
-       caption = "Source: American Society for Engineering Education") + theme_classic()
+       caption = "Source: American Society for Engineering Education") + theme_classic() + theme(text = element_text(size = 14))
 
 # Broke down retention data from 2016 to 2018 by race by filtering for white
 # students in Harvard SEAS
@@ -591,7 +593,7 @@ wht_plot <- wht_2016_2018 %>%
   labs(title = "White Sophomores in SEAS in 2016 Compared to \nStudents Receiving Degrees in 2018",
        subtitle = "Retention of Harvard SEAS White Undergrads \nfrom 2016 to 2018",
        x = "Year", y = "Students", color = "Major",
-       caption = "Source: American Society for Engineering Education") + theme_classic()
+       caption = "Source: American Society for Engineering Education") + theme_classic() + theme(text = element_text(size = 14))
 
 # Broke down retention data from 2016 to 2018 by race by filtering for Asian
 # students in Harvard SEAS
@@ -625,7 +627,7 @@ asi_plot <- asi_2016_2018 %>%
   labs(title = "Asian Sophomores in SEAS in 2016 Compared to \nStudents Receiving Degrees in 2018",
        subtitle = "Retention of Harvard SEAS Asian Undergrads \nfrom 2016 to 2018",
        x = "Year", y = "Students", color = "Major",
-       caption = "Source: American Society for Engineering Education") + theme_classic()
+       caption = "Source: American Society for Engineering Education") + theme_classic() + theme(text = element_text(size = 14))
 
 # Broke down retention data from 2016 to 2018 by race by filtering for female
 # students in Harvard SEAS
@@ -659,7 +661,7 @@ female_plot <- female_2016_2018 %>%
   labs(title = "Female Sophmores in SEAS in 2016 Compared to \nSeniors Receiving Degrees from SEAS in 2018",
        subtitle = "Retention of Harvard SEAS Female Undergrads \nfrom 2016 to 2018",
        x = "Major", y = "Students", color = "Year",
-       caption = "Source: American Society for Engineering Education") + theme_classic() 
+       caption = "Source: American Society for Engineering Education") + theme_classic() + theme(text = element_text(size = 14))
 
 # Broke down retention data from 2016 to 2018 by race by filtering for male
 # students in Harvard SEAS
@@ -693,7 +695,7 @@ male_plot <- male_2016_2018 %>%
   labs(title = "Male Sophmores in SEAS in 2016 Compared to \nSeniors Receiving Degrees from SEAS in 2018",
        subtitle = "Retention of Harvard SEAS Male Undergrads \nfrom 2016 to 2018",
        x = "Year", y = "Students", color = "Major",
-       caption = "Source: American Society for Engineering Education") + theme_classic() 
+       caption = "Source: American Society for Engineering Education") + theme_classic() + theme(text = element_text(size = 14))
 
 # Is a higher percentage of underrepresented minority students (Black and Hispanic) at a school
 # associated with more students graduating with engineering degrees in total?
@@ -718,7 +720,7 @@ lm(total ~ perc, blk_his) %>%
 blk_his_reg_plot <- ggplot(blk_his, aes(x = perc, y = total)) + 
   labs(title = "Comparing the Proportion of Black and Hispanic Students to School Size", 
        x = "Percentage of Black and Hispanic Students", y = "Total Students") +
-  geom_point() + theme_classic() + geom_smooth(method = "lm")
+  geom_point() + theme_classic() + geom_smooth(method = "lm") + theme(text = element_text(size = 14))
 
 # Is a higher percentage of female students at a school associated with more
 # students graduating with engineering degrees in total?
@@ -741,5 +743,5 @@ lm(Total ~ perc, fem) %>%
 female_reg_plot <- ggplot(fem, aes(x = perc, y = Total)) + 
   labs(title = "Comparing the Proportion of Female Students to School Size",
        x = "Percentage of Female Students", y = "Total Students") +
-  geom_point() + theme_classic() + geom_smooth(method = "lm")
+  geom_point() + theme_classic() + geom_smooth(method = "lm") + theme(text = element_text(size = 14))
 
